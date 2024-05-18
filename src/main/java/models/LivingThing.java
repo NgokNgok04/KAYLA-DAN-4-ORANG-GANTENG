@@ -48,8 +48,14 @@ public abstract class LivingThing extends GameObject {
 
     public void setItems(List<Item> items){
         for(int i = 0; i < items.size(); i++){
-            this.items.get(i).setTypeItem(items.get(i).getTypeItem());
+            // this.items.get(i).setTypeItem(items.get(i).getTypeItem());
         }
     }
+
+    public Product harvest(){
+        return new Product("DUMMY");
+    }
+
+    public void eat(Product product){};
 
 }
