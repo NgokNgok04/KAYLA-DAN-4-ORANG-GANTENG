@@ -1,5 +1,5 @@
 package models;
-import gameexception.GameException;
+import gamexception.GameException;
 
 import java.awt.*;
 import java.util.*;

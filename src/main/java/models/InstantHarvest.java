@@ -1,6 +1,16 @@
 package models;
 
+import icons.*;
+
 public class InstantHarvest extends Item{
+
+    public InstantHarvest() {
+        super("INSTANT_HARVEST", Icon.INSTANT_HARVEST);
+    }
+
+    public InstantHarvest(InstantHarvest other) {
+        super(other);
+    }
 
     @Override
     public void useEffect(Affectable affectable) {
@@ -8,8 +18,4 @@ public class InstantHarvest extends Item{
         affectable.addItem(this);
     }
 
-    @Override
-    public String getItemType() {
-        return "INSTANT_HARVEST";
-    }
 }

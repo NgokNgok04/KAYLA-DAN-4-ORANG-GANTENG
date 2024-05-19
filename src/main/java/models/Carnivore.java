@@ -1,11 +1,9 @@
 package models;
 
-import java.awt.*;
-import java.util.*;
 import java.util.List;
 import icons.Icon;
 
-import gameexception.GameException;
+import gamexception.GameException;
 
 
 public class Carnivore extends Animal{

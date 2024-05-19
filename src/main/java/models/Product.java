@@ -35,7 +35,7 @@ public class Product extends GameObject {
         this.price = price;
     }
 
-    private Product(Product other) {
+    public Product(Product other) {
         super(other);
         this.origin = other.origin;
         this.addedWeight = other.addedWeight;
