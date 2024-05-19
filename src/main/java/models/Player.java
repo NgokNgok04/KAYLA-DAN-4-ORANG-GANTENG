@@ -142,7 +142,7 @@ public class Player {
         if (this.getFieldItem(idx) == null){
             throw new GameException("Cant harvest a Empty Card");
         } else if (this.isActiveDeckFull()){
-            throw new GameException("Your Active Deck is full, Cant harvest");
+            throw new GameException("Player Active Deck is full, Cant harvest");
         } else {
             if (this.getFieldItem(idx).isInstantHarvest()){
                 int idxResultHarvest = findEmptyActiveDeckItem();
@@ -171,4 +171,30 @@ public class Player {
         throw new GameException("Card is not harvestable");
     }
 
+    public void buy(String name,int quantity) throws GameException{
+        if ((Shop.getItem(name).getPrice() * quantity) <= this.money){
+            if (this.isActiveDeckFull()){
+                throw new GameException("Player Active Deck is full, Cant harvest");
+            } else {
+                int idxResultBuy = findEmptyActiveDeckItem();
+                setActiveDeckItem(new Product(name), idxResultBuy);
+                Shop.itemSold(name, quantity);
+            }
+        } else {
+            throw new GameException("Player cant afford to buy it");
+        }
+    }
+
+    public void sold(int idx) throws GameException{
+        if (this.getActiveDeckItem(idx) == null){
+            throw new GameException("Cant Sell empty card");
+        } else if (!this.getActiveDeckItem(idx).getTypeObject().equals("PRODUCT")){
+            throw new GameException("Player only can sell Product Card");
+        } else {
+            Product product = (Product) this.getActiveDeckItem(idx);
+            Shop.itemBought(product.getName(), 1);
+            this.money += product.getPrice();
+            setActiveDeckItem(null, idx);
+        }
+    }
 }

@@ -16,6 +16,11 @@ public class Pair<A,B> {
         return this.second;
     }
 
+    public void setSecond(B value){
+        if (this.second instanceof Integer && value instanceof Integer){
+            this.second = value;
+        }
+    }
     public int convertPairToIdx(){
         if (this.first instanceof Integer && this.second instanceof Integer){
             int rowIdx = (Integer) this.first;
@@ -25,4 +30,5 @@ public class Pair<A,B> {
 
         return -1;
     }
+
 }
