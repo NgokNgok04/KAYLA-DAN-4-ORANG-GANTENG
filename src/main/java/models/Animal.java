@@ -2,7 +2,7 @@ package models;
 
 import java.awt.*;
 import java.util.List;
-import gameexception.GameException;
+import gamexception.GameException;
 
 public abstract class Animal extends LivingThing{
 

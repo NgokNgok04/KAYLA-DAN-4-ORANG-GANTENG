@@ -1,4 +1,4 @@
-package gameexception;
+package gamexception;
 
 public class GameException extends Exception{
 
