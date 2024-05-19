@@ -33,6 +33,7 @@ public class Icon {
     public static Image TRAP = getImage("trap.png");
     public static Image PLAYER1 = getImage("player1.jpg");
     public static Image PLAYER2 = getImage("player2.jpg");
+    public static Image NOTHING = getImage("nothing.png");
 
     private static Image getImage(String path) {
         try {

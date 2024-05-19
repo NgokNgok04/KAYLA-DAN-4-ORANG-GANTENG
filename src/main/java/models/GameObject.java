@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import javax.swing.JPanel;
 
 public class GameObject {
 
@@ -11,6 +12,7 @@ public class GameObject {
     private String name;
     private boolean active;
     private Image image;
+    private JPanel parent;
 
     public static final int CARNIVORE = 1;
     public static final int HERBIVORE = 2;
@@ -58,6 +60,7 @@ public class GameObject {
         name = "";
         active = false;
         image = null;
+        parent = null;
     }
 
     public GameObject(String typeObject, String name, boolean active, Image image) {
@@ -65,6 +68,7 @@ public class GameObject {
         this.name = name;
         this.active = active;
         this.image = image;
+        this.parent = null;
     }
 
     public GameObject(GameObject other) {
@@ -72,6 +76,7 @@ public class GameObject {
         this.name = other.name;
         this.active = other.active;
         this.image = other.image;
+        this.parent = null;
     }
 
     public String getTypeObject() {
@@ -104,6 +109,14 @@ public class GameObject {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+    
+    public JPanel getParent() {
+        return parent;
+    }
+    
+    public void setParent(JPanel parent) {
+        this.parent = parent;
     }
 
     @Override
