@@ -16,7 +16,7 @@ public class Omnivore extends Animal{
     }
 
     private Omnivore(String name, boolean active, Image image, boolean instantHarvest, boolean protection, boolean trap, Product product, int weightToHarvest, int weight) {
-        super(name, active, image, instantHarvest, protection, trap, product, weightToHarvest, weight, "OMNIVORES");
+        super(name, active, image, instantHarvest, protection, trap, product, weightToHarvest, weight, "OMNIVORE");
     }
 
     public Omnivore(Animal other) {
