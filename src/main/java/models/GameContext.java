@@ -1,12 +1,41 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.List;
 
 public class GameContext {
 
     private static final Map<String, GameObject> GAME_OBJECTS = new HashMap<String, GameObject>();
-
+    private static List<String> LIST_GAME_OBJECTS = new ArrayList<String>();
+    static {
+        LIST_GAME_OBJECTS.add("HIU_DARAT");
+        LIST_GAME_OBJECTS.add("SAPI");
+        LIST_GAME_OBJECTS.add("DOMBA");
+        LIST_GAME_OBJECTS.add("KUDA");
+        LIST_GAME_OBJECTS.add("AYAM");
+        LIST_GAME_OBJECTS.add("BERUANG");
+        LIST_GAME_OBJECTS.add("BIJI_JAGUNG");
+        LIST_GAME_OBJECTS.add("BIJI_LABU");
+        LIST_GAME_OBJECTS.add("BIJI_STROBERI");
+        LIST_GAME_OBJECTS.add("SIRIP_HIU");
+        LIST_GAME_OBJECTS.add("SUSU");
+        LIST_GAME_OBJECTS.add("DAGING_DOMBA");
+        LIST_GAME_OBJECTS.add("DAGING_KUDA");
+        LIST_GAME_OBJECTS.add("TELUR");
+        LIST_GAME_OBJECTS.add("DAGING_BERUANG");
+        LIST_GAME_OBJECTS.add("JAGUNG");
+        LIST_GAME_OBJECTS.add("LABU");
+        LIST_GAME_OBJECTS.add("STROBERI");
+        LIST_GAME_OBJECTS.add("ACCELERATE");
+        LIST_GAME_OBJECTS.add("DELAY");
+        LIST_GAME_OBJECTS.add("INSTANT_HARVEST");
+        LIST_GAME_OBJECTS.add("DESTROY");
+        LIST_GAME_OBJECTS.add("PROTECT");
+        LIST_GAME_OBJECTS.add("TRAP");
+    }
     static {
         GAME_OBJECTS.put("HIU_DARAT", new Carnivore());
         GAME_OBJECTS.put("SAPI", new Herbivore("SAPI"));
@@ -36,5 +65,11 @@ public class GameContext {
 
     public static GameObject getGameObject(String name) {
         return GAME_OBJECTS.get(name);
+    }
+
+    public static GameObject randomGameObject(){
+        Random random = new Random();
+        int randomGM = random.nextInt(GAME_OBJECTS.size());
+        return GAME_OBJECTS.get(LIST_GAME_OBJECTS.get(randomGM));
     }
 }

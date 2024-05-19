@@ -53,6 +53,10 @@ public class Plant extends LivingThing {
         this.age = age;
     }
 
+    public int getAgeToHarvest() {
+        return this.ageToHarvest;
+    }
+
     public void grow() {
         setAge(getAge()+1);
     }
