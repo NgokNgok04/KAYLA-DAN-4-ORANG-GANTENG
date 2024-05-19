@@ -1,49 +1,48 @@
 package models;
+import gameexception.GameException;
+
+import java.awt.*;
 import java.util.*;
+import java.util.List;
+import icons.Icon;
+
 public class Omnivore extends Animal{
-    private static final Omnivore AYAM = new Omnivore("AYAM","card_chicken.png",5,0,new Product("TELUR"));
-    private static final Omnivore BERUANG = new Omnivore("BERUANG","card_bear.png",25,0, new Product("DAGING_BERUANG"));
 
-    private Omnivore(String name, String image, int weightToHarvest, int weight, Product product){
-        this.setTypeObject("Animal");
-        this.setName(name);
-        this.setActive(true);
-        this.setImage(image);
+    private static Map<String, Omnivore> OMNIVORES = new HashMap<>();
 
-        this.setInstantHarvest(false);
-        this.setProtection(false);
-        this.setTrap(false);
-        this.setProduct(product);
-        // this.setItems(items);
-
-        this.setWeightToHarvest(weightToHarvest);
-        this.setWeight(weight);
-        this.setJenisHewan("Omnivore");
+    static {
+        OMNIVORES.put("AYAM", new Omnivore("AYAM", true, Icon.CHICKEN, false, false, false, new Product("TELUR"), 5, 0));
+        OMNIVORES.put("BERUANG", new Omnivore("BERUANG", true, Icon.BEAR, false, false, false, new Product("DAGING_BERUANG"), 25, 0));
     }
 
-    private Omnivore(Omnivore omnivore){
-        this.setTypeObject("Animal");
-        this.setName(omnivore.getName());
-        this.setActive(true);
-        this.setImage(omnivore.getImage());
-
-        this.setInstantHarvest(false);
-        this.setProtection(false);
-        this.setTrap(false);
-        this.setProduct(omnivore.getProduct());
-        // this.setItems(items);
-
-        this.setWeightToHarvest(omnivore.getWeightToHarvest());
-        this.setWeight(omnivore.getWeight());
-        this.setJenisHewan("Omnivore");
+    private Omnivore(String name, boolean active, Image image, boolean instantHarvest, boolean protection, boolean trap, Product product, int weightToHarvest, int weight) {
+        super(name, active, image, instantHarvest, protection, trap, product, weightToHarvest, weight, "OMNIVORES");
     }
 
-    public Omnivore(String name){
-        if (name.equals("AYAM")){
-            new Omnivore(Omnivore.AYAM);
-        } else if(name.equals("BERUANG")){
-            new Omnivore(Omnivore.BERUANG);
+    public Omnivore(Animal other) {
+        super(other);
+    }
+
+    public Omnivore(String name) {
+        this(OMNIVORES.get(name));
+    }
+
+    public Omnivore(String name, int weight, List<Item> items) {
+        this(OMNIVORES.get(name));
+        setWeight(weight);
+        for (Item item : items) {
+            if (!item.getName().equals("ACCELERATE") && !item.getName().equals("DELAY")) {
+                item.useEffect(this);
+            }
         }
     }
 
+    @Override
+    public void eat(GameObject eatable) throws GameException {
+        if (!(eatable instanceof Product product)) {
+            throw new GameException("Omnivore can only eat Product");
+        }
+        product.setActive(false);
+        setWeight(getWeight() + product.getAddedWeight());
+    }
 }

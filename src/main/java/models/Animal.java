@@ -1,54 +1,65 @@
 package models;
 
+import java.awt.*;
+import java.util.List;
+import gameexception.GameException;
+
 public abstract class Animal extends LivingThing{
+
     private int weightToHarvest;
     private int weight;
-    private String jenisHewan;
+    private String animalType;
 
-    public int getWeightToHarvest(){
-        return this.weightToHarvest;
-    }
-
-    public int getWeight(){
-        return this.weight;
-    }
-
-    public String getJenisHewan(){
-        return this.jenisHewan;
-    }
-
-    public void setWeightToHarvest(int weightToHarvest){
+    public Animal(String name, boolean active, Image image, boolean instantHarvest, boolean protection, boolean trap, Product product, List<Item> items, int weightToHarvest, int weight, String animalType) {
+        super("ANIMAL", name, active, image, instantHarvest, protection, trap, product, items);
         this.weightToHarvest = weightToHarvest;
+        this.weight = weight;
+        this.animalType = animalType;
     }
 
-    public void setWeight(int weight){
+    public Animal(String name, boolean active, Image image, boolean instantHarvest, boolean protection, boolean trap, Product product, int weightToHarvest, int weight, String animalType) {
+        super("ANIMAL", name, active, image, instantHarvest, protection, trap, product);
+        this.weightToHarvest = weightToHarvest;
+        this.weight = weight;
+        this.animalType = animalType;
+    }
+
+    public Animal(Animal other) {
+        super(other);
+        this.weightToHarvest = other.weightToHarvest;
+        this.weight = other.weight;
+        this.animalType = other.animalType;
+    }
+
+    public int getWeightToHarvest() {
+        return weightToHarvest;
+    }
+
+    public String getAnimalType() {
+        return animalType;
+    }
+
+    public void setAnimalType(String animalType) {
+        this.animalType = animalType;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public void setJenisHewan(String jenisHewan){
-        this.jenisHewan = jenisHewan;
+    public abstract void eat(GameObject eatable) throws GameException;
+
+    @Override
+    public void accelerate() {
+        weight = weight + 8;
     }
 
     @Override
-    public Product harvest(){
-        if (this.getWeightToHarvest() < this.getWeight()){
-            return new Product("DUMMY");
-        }
-
-        Product resultHarvest = new Product(this.getName());
-        this.setActive(false);
-        return resultHarvest;
+    public void delay() {
+        weight = weight > 8 ? weight - 8 : 0;
     }
-
-    @Override
-    public void eat(Product product){
-        if (this.getJenisHewan().equals("Carnivore") && product.getOrigin()){
-            this.setWeight(this.getWeight() + 1);
-        } else if (this.getJenisHewan().equals("Herbivore") && !product.getOrigin()){
-            this.setWeight(this.getWeight() + 1);
-        } else if (this.getJenisHewan().equals("Omnivore")){
-            this.setWeight(this.getWeight() + 1);
-        }
-    }
-
 }

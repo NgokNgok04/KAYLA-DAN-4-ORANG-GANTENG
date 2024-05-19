@@ -1,61 +1,117 @@
 package models;
 
+import java.awt.*;
 import java.util.*;
-public abstract class LivingThing extends GameObject {
+import java.util.List;
+
+public abstract class LivingThing extends GameObject implements Affectable{
+
     private boolean instantHarvest;
     private boolean protection;
     private boolean trap;
     private Product product;
     private List<Item> items;
 
-    public boolean getInstantHarvest(){
-        return this.instantHarvest;
+    public LivingThing(String typeObject, String name, boolean active, Image image, boolean instantHarvest, boolean protection, boolean trap, Product product, List<Item> items) {
+        super(typeObject, name, active, image);
+        this.instantHarvest = instantHarvest;
+        this.protection = protection;
+        this.trap = trap;
+        this.items = items;
+        this.product = product;
     }
 
-    public boolean getProtection(){
-        return this.protection;
+    public LivingThing(String typeObject, String name, boolean active, Image image, boolean instantHarvest, boolean protection, boolean trap, Product product) {
+        super(typeObject, name, active, image);
+        this.instantHarvest = instantHarvest;
+        this.product = product;
+        this.trap = trap;
+        this.protection = protection;
+        this.items = new ArrayList<>();
     }
 
-    public boolean getTrap(){
-        return this.trap;
-    }
-    
-    public Product getProduct(){
-        return this.product;
-    }
-
-    public List<Item> getItems(){
-        return this.items;
+    public LivingThing(LivingThing other) {
+        super(other);
+        this.instantHarvest = other.instantHarvest;
+        this.protection = other.protection;
+        this.trap = other.trap;
+        this.items = other.items;
+        this.product = other.product;
     }
 
-    public void setInstantHarvest(boolean isEffected){
-        this.instantHarvest = isEffected;
-    }
-    
-    public void setProtection(boolean isEffected){
-        this.protection = isEffected;
+    public boolean isInstantHarvest() {
+        return instantHarvest;
     }
 
-    public void setTrap(boolean isEffected){
-        this.trap = isEffected;
-    }
-    
-    public void setProduct(Product product){
-        this.product.setOrigin(product.getOrigin());
-        this.product.setAddedWeight(product.getAddedWeight());
-        this.product.setPrice(product.getPrice());
+    public void setInstantHarvest(boolean instantHarvest) {
+        this.instantHarvest = instantHarvest;
     }
 
-    public void setItems(List<Item> items){
-        for(int i = 0; i < items.size(); i++){
-            // this.items.get(i).setTypeItem(items.get(i).getTypeItem());
-        }
+    public boolean isProtection() {
+        return protection;
     }
 
-    public Product harvest(){
-        return new Product("DUMMY");
+    public void setProtection(boolean protection) {
+        this.protection = protection;
     }
 
-    public void eat(Product product){};
+    public boolean isTrap() {
+        return trap;
+    }
 
+    public void setTrap(boolean trap) {
+        this.trap = trap;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Product harvest() {
+        return getProduct();
+    }
+
+    @Override
+    public void instantHarvest() {
+        setInstantHarvest(true);
+    }
+
+    @Override
+    public void destroy() {
+        setActive(false);
+    }
+
+    @Override
+    public void protect() {
+        setProtection(true);
+    }
+
+    @Override
+    public void trap() {
+        setTrap(true);
+    }
+
+    @Override
+    public void addItem(Item item) {
+        items.add(item);
+    }
+
+    @Override
+    public void addItems(List<Item> items_) {
+        items.addAll(items_);
+    }
+
+    @Override
+    public List<Item> getItems() {
+        return items;
+    }
+
+    @Override
+    public Item getItem(int index) {
+        return items.get(index);
+    }
 }
