@@ -2,10 +2,12 @@ package models;
 import utils.*;
 import java.util.*;
 
-public class Shop {
-    private static List<Pair<Product,Integer>> availableItem = new ArrayList<Pair<Product,Integer>>();
+public final class Shop {
+    private static Shop instance;
+    private List<Pair<Product,Integer>> availableItem;
 
-    static {
+    private Shop(){
+        availableItem = new ArrayList<Pair<Product,Integer>>();
         availableItem.add(new Pair<Product,Integer>(new Product("SIRIP_HIU"),0));
         availableItem.add(new Pair<Product,Integer>(new Product("SUSU"),0));
         availableItem.add(new Pair<Product,Integer>(new Product("DAGING_DOMBA"),0));
@@ -16,20 +18,26 @@ public class Shop {
         availableItem.add(new Pair<Product,Integer>(new Product("STROBERI"),0));
     }
 
-    public static List<Pair<Product,Integer>> getAvailableItem(){
+    public static Shop getInstance(){
+        if (instance == null){
+            instance = new Shop();
+        }
+        return instance;
+    }
+
+    public List<Pair<Product,Integer>> getAvailableItem(){
         return availableItem;
     }
 
-    public static Pair<Product,Integer> getPair(int idx){
+    public Pair<Product,Integer> getPair(int idx){
         return availableItem.get(idx);
     }
-
     
-    public static Product getItem(int idx){
+    public Product getItem(int idx){
         return availableItem.get(idx).getFirst();
     }
 
-    public static Product getItem(String name){
+    public Product getItem(String name){
         for(int i = 0; i < availableItem.size(); i++){
             if(getItem(i).getName().equals(name)){
                 return getPair(i).getFirst();
@@ -38,11 +46,11 @@ public class Shop {
         return null;
     }
     
-    public static int getQuantity(int idx){
+    public int getQuantity(int idx){
         return availableItem.get(idx).getSecond();
     }
     
-    public static int getQuantity(String name){
+    public int getQuantity(String name){
         for(int i = 0; i < availableItem.size(); i++){
             if(getItem(i).getName().equals(name)){
                 return getPair(i).getSecond();
@@ -52,7 +60,7 @@ public class Shop {
     }
 
     
-    public static void itemBought(String name, int quantity){
+    public void itemBought(String name, int quantity){
         for(int i = 0; i < availableItem.size(); i++){
             if(getItem(i).getName().equals(name)){
                 int currentQuantity = getQuantity(i);
@@ -61,7 +69,7 @@ public class Shop {
         }
     }
 
-    public static void itemSold(String name, int quantity){
+    public void itemSold(String name, int quantity){
         for(int i = 0; i < availableItem.size(); i++){
             if(getItem(i).getName().equals(name)){
                 int currentQuantity = getQuantity(i);
