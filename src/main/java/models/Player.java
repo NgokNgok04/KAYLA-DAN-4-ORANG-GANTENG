@@ -172,13 +172,14 @@ public class Player {
     }
 
     public void buy(String name,int quantity) throws GameException{
-        if ((Shop.getItem(name).getPrice() * quantity) <= this.money){
+        Shop shop = Shop.getInstance();
+        if ((shop.getItem(name).getPrice() * quantity) <= this.money){
             if (this.isActiveDeckFull()){
                 throw new GameException("Player Active Deck is full, Cant harvest");
             } else {
                 int idxResultBuy = findEmptyActiveDeckItem();
                 setActiveDeckItem(new Product(name), idxResultBuy);
-                Shop.itemSold(name, quantity);
+                shop.itemSold(name, quantity);
             }
         } else {
             throw new GameException("Player cant afford to buy it");
@@ -186,13 +187,14 @@ public class Player {
     }
 
     public void sold(int idx) throws GameException{
+        Shop shop = Shop.getInstance();
         if (this.getActiveDeckItem(idx) == null){
             throw new GameException("Cant Sell empty card");
         } else if (!this.getActiveDeckItem(idx).getTypeObject().equals("PRODUCT")){
             throw new GameException("Player only can sell Product Card");
         } else {
             Product product = (Product) this.getActiveDeckItem(idx);
-            Shop.itemBought(product.getName(), 1);
+            shop.itemBought(product.getName(), 1);
             this.money += product.getPrice();
             setActiveDeckItem(null, idx);
         }
