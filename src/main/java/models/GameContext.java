@@ -16,7 +16,6 @@ public class GameContext {
         LIST_GAME_OBJECTS.add("DOMBA");
         LIST_GAME_OBJECTS.add("KUDA");
         LIST_GAME_OBJECTS.add("AYAM");
-        LIST_GAME_OBJECTS.add("BERUANG");
         LIST_GAME_OBJECTS.add("BIJI_JAGUNG");
         LIST_GAME_OBJECTS.add("BIJI_LABU");
         LIST_GAME_OBJECTS.add("BIJI_STROBERI");
@@ -69,7 +68,7 @@ public class GameContext {
 
     public static GameObject randomGameObject(){
         Random random = new Random();
-        int randomGM = random.nextInt(GAME_OBJECTS.size());
+        int randomGM = random.nextInt(LIST_GAME_OBJECTS.size());
         return GAME_OBJECTS.get(LIST_GAME_OBJECTS.get(randomGM));
     }
 }

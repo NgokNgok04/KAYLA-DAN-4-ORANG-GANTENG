@@ -27,42 +27,46 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-              <Component id="fieldItem5" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Component id="fieldItem4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Component id="fieldItem3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="113" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+              <Component id="cardItem1" min="-2" pref="97" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="cardItem2" min="-2" pref="99" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <Component id="cardItem3" min="-2" pref="97" max="-2" attributes="0"/>
+              <EmptySpace pref="131" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="fieldItem5" min="-2" max="-2" attributes="0"/>
-                  <Component id="fieldItem4" min="-2" max="-2" attributes="0"/>
-                  <Component id="fieldItem3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cardItem1" min="-2" pref="166" max="-2" attributes="0"/>
+                  <Component id="cardItem2" min="-2" pref="165" max="-2" attributes="0"/>
+                  <Component id="cardItem3" min="-2" pref="164" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="45" max="32767" attributes="0"/>
+              <EmptySpace pref="70" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="gui.CardItem" name="fieldItem3">
+    <Component class="gui.CardItem" name="cardItem1">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Herbivore(&quot;SAPI&quot;))"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0,0), this, true)"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="Animal anim = (Animal) cardItem1.getObject();&#xa;anim.setWeight(25);&#xa;cardItem1.refreshData();"/>
       </AuxValues>
     </Component>
-    <Component class="gui.CardItem" name="fieldItem4">
-    </Component>
-    <Component class="gui.CardItem" name="fieldItem5">
+    <Component class="gui.CardItem" name="cardItem2">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore())"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Omnivore(&quot;BERUANG&quot;), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0,0), this, true)"/>
+      </AuxValues>
+    </Component>
+    <Component class="gui.CardItem" name="cardItem3">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Destroy(), null, CardItem.DECK_CARD, new Pair&lt;Integer, Integer&gt;(0,0), this, false)"/>
       </AuxValues>
     </Component>
   </SubComponents>

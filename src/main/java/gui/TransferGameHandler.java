@@ -3,6 +3,8 @@ package gui;
 import java.awt.datatransfer.*;
 import java.io.IOException;
 import javax.swing.*;
+
+import gamexception.GameException;
 import models.*;
 
 public class TransferGameHandler extends TransferHandler {
@@ -36,27 +38,51 @@ public class TransferGameHandler extends TransferHandler {
 
         try {
             gameObject = (GameObject) transferable.getTransferData(GAMEOBJECT_FLAVOR);
-            System.out.println("Data received: "+gameObject.getName());
         } catch (UnsupportedFlavorException | IOException e) {
             return false;
         }
 
         CardItem target = (CardItem) supp.getComponent();
 
-        CardItem parent = (CardItem) gameObject.getParent();
+        CardItem source = (CardItem) gameObject.getParent();
 
-        System.out.println("Target: "+target.getObject().getName());
-        System.out.println("Parent: "+parent.getObject().getName());
-
-        if (parent == target) {
-            System.out.println("Sama");
-            return true;
+        if (source.equals(target)) {
+            return false;
         }
 
-        parent.setObject(target.getObject());
-        target.setObject(gameObject);
+        if (target.getField() == CardItem.DECK_CARD) {
+            return false;
+        }
+        if (source.getField() == CardItem.FIELD_CARD && target.isSwap()) {
+            // TODO : add swap field from player
+            if (source.getOwner() != null) {
+                source.getOwner().moveCardInField(source.getPosition(), target.getPosition());
+            }
+            source.setObject(target.getObject());
+            target.setObject(gameObject);
+            return true;
+        } else if (source.getField() == CardItem.DECK_CARD){
+            if (gameObject instanceof Product food && target.getObject() instanceof Animal animal) {
+                try {
+                    animal.eat(food);
+                    source.removeObject();
+                    if (source.getOwner() != null) {
+                        source.getOwner().removeCardInDeck(source.getPosition().getFirst()); // getFirst is the index, getSecond is always 0
+                    }
+                    return true;
+                } catch (GameException e) {
+                    e.printMessage();
+                    return false;
+                }
+            } else if (gameObject instanceof Item item) {
+                item.useEffect((LivingThing) target.getObject());
+                target.refreshData();
+                source.removeObject();
+                return true;
+            }
+        }
 
-        return true;
+        return false;
     }
 
     private static class ObjectTransferable implements Transferable {

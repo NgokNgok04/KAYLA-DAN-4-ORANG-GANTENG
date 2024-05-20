@@ -147,7 +147,7 @@ public class ButtonRounded extends JButton{
     private Color colorOver;
     private Color colorClick;
     private Color borderColor;
-    private int radius = 8;
+    private int radius = 20;
 
     @Override
     protected void paintComponent(Graphics grphcs) {
