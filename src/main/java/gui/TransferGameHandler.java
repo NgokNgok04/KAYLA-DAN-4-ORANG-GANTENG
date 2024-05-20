@@ -62,6 +62,9 @@ public class TransferGameHandler extends TransferHandler {
             target.setObject(gameObject);
             return true;
         } else if (source.getField() == CardItem.DECK_CARD){
+            if (!target.getObject().isActive()) {
+                return false;
+            }
             if (gameObject instanceof Product food && target.getObject() instanceof Animal animal) {
                 try {
                     animal.eat(food);

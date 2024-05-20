@@ -69,7 +69,7 @@ public class PopUpDetail extends javax.swing.JFrame {
         harvestLabel.setText("Umur Panen:");
         weightAmount.setText(Integer.toString(plant.getAge()));
         harvestAmount.setText(Integer.toString(plant.getAgeToHarvest()));
-        if (plant.getAge() >= plant.getAgeToHarvest()) {
+        if (plant.isInstantHarvest() || plant.getAge() >= plant.getAgeToHarvest()) {
             nameLabel.setText(plant.getProduct().getName());
             imageLabel.setIcon(new ImageIcon(plant.getProduct().getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
         } else {
@@ -85,13 +85,10 @@ public class PopUpDetail extends javax.swing.JFrame {
         harvestLabel.setText("Berat Panen:");
         weightAmount.setText(Integer.toString(animal.getWeight()));
         harvestAmount.setText(Integer.toString(animal.getWeightToHarvest()));
-        if (animal.getWeight() >= animal.getWeightToHarvest()) {
-            nameLabel.setText(animal.getProduct().getName());
-            imageLabel.setIcon(new ImageIcon(animal.getProduct().getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
-        } else {
+        nameLabel.setText(object.getName());
+        imageLabel.setIcon(new ImageIcon(animal.getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
+        if (!animal.isInstantHarvest() && animal.getWeight() < animal.getWeightToHarvest()) {
             panenButton.setEnabled(false);
-            nameLabel.setText(object.getName());
-            imageLabel.setIcon(new ImageIcon(animal.getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
         }
     }
     /**
@@ -165,7 +162,7 @@ public class PopUpDetail extends javax.swing.JFrame {
             }
         });
 
-        nameLabel.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
+        nameLabel.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
         nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nameLabel.setAlignmentX(1.0F);
         nameLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

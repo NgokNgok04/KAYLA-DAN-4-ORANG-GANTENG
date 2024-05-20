@@ -119,8 +119,10 @@ public class CardItem extends JPanel {
 
     public void initPreferredSize() {
         this.setSize(new Dimension(252, 368));
-        this.setMinimumSize(new Dimension(100, 150));
-        imageLabel.setSize(new Dimension(99, 130));
+        this.setPreferredSize(new Dimension(90,150));
+        this.setMinimumSize(new Dimension(90, 150));
+        imageLabel.setSize(new Dimension(89, 125));
+        imageLabel.setPreferredSize(new Dimension(89,125));
     }
 
     public void refreshData() {
@@ -130,12 +132,7 @@ public class CardItem extends JPanel {
             return;
         }
         if (getField() == FIELD_CARD) {
-            if (object instanceof Animal animal && animal.getWeight() >= animal.getWeightToHarvest()) {
-                imageLabel.setIcon(new ImageIcon(animal.getProduct().getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
-                nameLabel.setText(animal.getProduct().getName());
-                return;
-            }
-            if (object instanceof Plant plant && plant.getAge() >= plant.getAgeToHarvest()) {
+            if (object instanceof Plant plant && (plant.getAge() >= plant.getAgeToHarvest() || plant.isInstantHarvest())) {
                 imageLabel.setIcon(new ImageIcon(plant.getProduct().getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
                 nameLabel.setText(plant.getProduct().getName());
                 return;
@@ -203,9 +200,10 @@ public class CardItem extends JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

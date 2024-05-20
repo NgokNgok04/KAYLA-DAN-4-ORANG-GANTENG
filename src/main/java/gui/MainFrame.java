@@ -4,7 +4,10 @@
  */
 package gui;
 
+import java.awt.GridBagConstraints;
 import java.awt.Image;
+import java.awt.Insets;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import models.*;
@@ -16,12 +19,63 @@ import utils.*;
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    public static ArrayList<CardItem> field = new ArrayList<>();
+    public static ArrayList<CardItem> deck = new ArrayList<>();
+
     /**
      * Creates new form NewJFrame
      */
     public MainFrame() {
         initComponents();
         setLocationRelativeTo(null);
+        initiateCards();
+        placingCard();
+    }
+
+    public void initiateCards() {
+        field.clear();
+        int count = 0;
+        for (int i = 0; i < 20; i++) {
+            if (i < 9) {
+                field.add(new CardItem(new Plant("BIJI_JAGUNG"), null, CardItem.FIELD_CARD, new Pair<>(count/5,count%5), this, true));
+            } else {
+                field.add(new CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<>(count/5,count%5), this, true));
+            }
+            if (i%5 == 0) {
+                field.get(i).getObject().setActive(false);
+                field.get(i).refreshData();
+            }
+            count++;
+        }
+        for (int i = 0; i < 6; i++) {
+            if (i > 2) {
+                deck.add(new CardItem(new InstantHarvest(), null, CardItem.DECK_CARD, new Pair<>(i,0), null, false));
+                continue;
+            }
+            deck.add(new CardItem(new Accelerate(), null, CardItem.DECK_CARD, new Pair<>(i,0), null, false));
+        }
+    }
+
+    public void placingCard() {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(3, 10, 3, 10);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        
+        for (int i = 0; i < 20; i++) {
+            gbc.gridx = i%5;
+            gbc.gridy = i/5;
+            fieldPanel.add(field.get(i), gbc);
+        }
+        
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        
+        for (int i = 0; i < 6; i++) {
+            gbc.gridx = i;
+            deckPanel.add(deck.get(i), gbc);
+        }
     }
 
     /**
@@ -34,48 +88,186 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         softBevelBorder1 = new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED);
-        cardItem1 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0,0), this, true);
-        cardItem2 = new gui.CardItem(new Omnivore("BERUANG"), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0,0), this, true);
-        cardItem3 = new gui.CardItem(new Destroy(), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0,0), this, false);
+        jPanel1 = new javax.swing.JPanel();
+        enemyFieldButton1 = new gui.ButtonRounded();
+        loadButton = new gui.ButtonRounded();
+        nextButton = new gui.ButtonRounded();
+        pluginLoadButton = new gui.ButtonRounded();
+        shopButton = new gui.ButtonRounded();
+        saveButton = new gui.ButtonRounded();
+        myFieldButton = new gui.ButtonRounded();
+        fieldPanel = new javax.swing.JPanel();
+        deckPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Animal anim = (Animal) cardItem1.getObject();
-        anim.setWeight(25);
-        cardItem1.refreshData();
+        enemyFieldButton1.setText("Ladang Lawan");
+        enemyFieldButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enemyFieldButton1ActionPerformed(evt);
+            }
+        });
+
+        loadButton.setText("Load State");
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadButtonActionPerformed(evt);
+            }
+        });
+
+        nextButton.setText("NEXT");
+        nextButton.setRadius(40);
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextButtonActionPerformed(evt);
+            }
+        });
+
+        pluginLoadButton.setText("Load Plugin");
+        pluginLoadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pluginLoadButtonActionPerformed(evt);
+            }
+        });
+
+        shopButton.setText("Shop");
+        shopButton.setRadius(40);
+        shopButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shopButtonActionPerformed(evt);
+            }
+        });
+
+        saveButton.setText("Save State");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+
+        myFieldButton.setText("Ladangku");
+        myFieldButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myFieldButtonActionPerformed(evt);
+            }
+        });
+
+        fieldPanel.setLayout(new java.awt.GridBagLayout());
+
+        deckPanel.setLayout(new java.awt.GridBagLayout());
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(fieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(pluginLoadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(myFieldButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(enemyFieldButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(shopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(deckPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(400, 400, 400)
+                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64)
+                        .addComponent(pluginLoadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(shopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(enemyFieldButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(myFieldButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(5, 5, 5)
+                        .addComponent(fieldPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(deckPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(cardItem1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(cardItem2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(cardItem3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(131, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cardItem1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardItem2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardItem3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(70, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nextButtonActionPerformed
+
+    private void pluginLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pluginLoadButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pluginLoadButtonActionPerformed
+
+    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loadButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void shopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shopButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_shopButtonActionPerformed
+
+    private void enemyFieldButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enemyFieldButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enemyFieldButton1ActionPerformed
+
+    private void myFieldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myFieldButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myFieldButtonActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private gui.CardItem cardItem1;
-    private gui.CardItem cardItem2;
-    private gui.CardItem cardItem3;
+    private javax.swing.JPanel deckPanel;
+    private gui.ButtonRounded enemyFieldButton1;
+    private javax.swing.JPanel fieldPanel;
+    private javax.swing.JPanel jPanel1;
+    private gui.ButtonRounded loadButton;
+    private gui.ButtonRounded myFieldButton;
+    private gui.ButtonRounded nextButton;
+    private gui.ButtonRounded pluginLoadButton;
+    private gui.ButtonRounded saveButton;
+    private gui.ButtonRounded shopButton;
     private javax.swing.border.SoftBevelBorder softBevelBorder1;
     // End of variables declaration//GEN-END:variables
 }
