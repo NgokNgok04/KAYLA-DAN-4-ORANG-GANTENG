@@ -35,7 +35,7 @@ public abstract class LivingThing extends GameObject implements Affectable{
         this.instantHarvest = other.instantHarvest;
         this.protection = other.protection;
         this.trap = other.trap;
-        this.items = other.items;
+        this.items = new ArrayList<>(other.items);
         this.product = other.product;
     }
 
