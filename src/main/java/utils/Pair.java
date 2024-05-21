@@ -7,6 +7,18 @@ public class Pair<A,B> {
         this.first = first;
         this.second = second;
     }
+    
+    public static Pair<Integer, Integer> convertTokenToPair(String token) {
+        char letterPart = token.charAt(0);
+        String numberPart = token.substring(1);
+
+        int rowIndex = letterPart - 'A' + 1;
+        int colIndex = Integer.parseInt(numberPart);
+
+        return new Pair<>(rowIndex, colIndex);
+    }
+
+
 
     public A getFirst(){
         return this.first;
@@ -32,3 +44,8 @@ public class Pair<A,B> {
     }
 
 }
+
+/*
+ * Permintaan Bos
+ * 1. 
+ */
