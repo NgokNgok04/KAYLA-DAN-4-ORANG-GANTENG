@@ -13,6 +13,8 @@ public class Carnivore extends Animal{
         for (Item item : items) {
             if (!item.getName().equals("ACCELERATE") && !item.getName().equals("DELAY")) {
                 item.useEffect(this);
+            } else {
+                this.getItems().add(item);
             }
         }
     }
