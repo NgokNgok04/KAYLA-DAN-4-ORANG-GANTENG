@@ -5,6 +5,7 @@ import java.util.*;
 public final class Shop {
     private static Shop instance;
     private List<Pair<Product,Integer>> availableItem;
+    
 
     private Shop(){
         availableItem = new ArrayList<Pair<Product,Integer>>();
@@ -59,17 +60,30 @@ public final class Shop {
         return -1;
     }
 
-    
-    public void itemBought(String name, int quantity){
-        for(int i = 0; i < availableItem.size(); i++){
+    public void setQuantity(int idx, int quantity){
+        getPair(idx).setSecond(quantity);
+    }
+
+    public void setQuantity(String name, int quantity){
+        for(int i=0;i<availableItem.size();i++){
             if(getItem(i).getName().equals(name)){
-                int currentQuantity = getQuantity(i);
-                getPair(i).setSecond(currentQuantity + quantity);
+                getPair(i).setSecond(quantity);
+                return;
             }
         }
     }
 
-    public void itemSold(String name, int quantity){
+    public void addItem(String name, int quantity){
+        for(int i = 0; i < availableItem.size(); i++){
+            if(getItem(i).getName().equals(name)){
+                int currentQuantity = getQuantity(i);
+                getPair(i).setSecond(currentQuantity + quantity);
+                return;
+            }
+        }
+    }
+
+    public void removeItem(String name, int quantity){
         for(int i = 0; i < availableItem.size(); i++){
             if(getItem(i).getName().equals(name)){
                 int currentQuantity = getQuantity(i);
