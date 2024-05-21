@@ -10,7 +10,6 @@ import java.util.List;
 
 public class GameContext {
 
-    private static List<String> LIST_GAME_OBJECTS = new ArrayList<String>();
     public static Map<String, String> OBJECT_TYPE = new HashMap<>();
 
     static {
@@ -39,32 +38,6 @@ public class GameContext {
         OBJECT_TYPE.put("PROTECT", "models.Protect");
         OBJECT_TYPE.put("TRAP", "models.Trap");
     }
-    static {
-        LIST_GAME_OBJECTS.add("HIU_DARAT");
-        LIST_GAME_OBJECTS.add("SAPI");
-        LIST_GAME_OBJECTS.add("DOMBA");
-        LIST_GAME_OBJECTS.add("KUDA");
-        LIST_GAME_OBJECTS.add("AYAM");
-        LIST_GAME_OBJECTS.add("BERUANG");
-        LIST_GAME_OBJECTS.add("BIJI_JAGUNG");
-        LIST_GAME_OBJECTS.add("BIJI_LABU");
-        LIST_GAME_OBJECTS.add("BIJI_STROBERI");
-        LIST_GAME_OBJECTS.add("SIRIP_HIU");
-        LIST_GAME_OBJECTS.add("SUSU");
-        LIST_GAME_OBJECTS.add("DAGING_DOMBA");
-        LIST_GAME_OBJECTS.add("DAGING_KUDA");
-        LIST_GAME_OBJECTS.add("TELUR");
-        LIST_GAME_OBJECTS.add("DAGING_BERUANG");
-        LIST_GAME_OBJECTS.add("JAGUNG");
-        LIST_GAME_OBJECTS.add("LABU");
-        LIST_GAME_OBJECTS.add("STROBERI");
-        LIST_GAME_OBJECTS.add("ACCELERATE");
-        LIST_GAME_OBJECTS.add("DELAY");
-        LIST_GAME_OBJECTS.add("INSTANT_HARVEST");
-        LIST_GAME_OBJECTS.add("DESTROY");
-        LIST_GAME_OBJECTS.add("PROTECT");
-        LIST_GAME_OBJECTS.add("TRAP");
-    }
 
     public static GameObject createObject(String name){
         try{
@@ -86,11 +59,12 @@ public class GameContext {
     public static GameObject randomGameObject(){
         Random random = new Random();
         int randomGM;
+        List<String> listObjectName = new ArrayList<>(OBJECT_TYPE.keySet());
         do{
-            randomGM = random.nextInt(LIST_GAME_OBJECTS.size());
-        }while(LIST_GAME_OBJECTS.get(randomGM)=="BERUANG");
+            randomGM = random.nextInt(OBJECT_TYPE.size());
+        }while(listObjectName.get(randomGM)=="BERUANG");
 
-        return createObject(LIST_GAME_OBJECTS.get(randomGM));
+        return createObject(listObjectName.get(randomGM));
     }
     public static void main(String[] args) {
         GameObject tes = createObject("ACCELERATE");
