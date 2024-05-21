@@ -37,7 +37,7 @@ public class Pair<A,B> {
         if (this.first instanceof Integer && this.second instanceof Integer){
             int rowIdx = (Integer) this.first;
             int colIdx = (Integer) this.second;
-            return (rowIdx*4 + colIdx);
+            return (rowIdx*5 + colIdx);
         }
 
         return -1;

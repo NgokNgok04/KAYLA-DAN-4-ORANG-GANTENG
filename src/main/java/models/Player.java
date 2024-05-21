@@ -5,14 +5,22 @@ import gamexception.GameException;
 import utils.*;
 public class Player {
     private int money;
-    private List<LivingThing> field = new ArrayList<>(20);
-    private List<GameObject> activeDeck = new ArrayList<>(6);
+    private List<LivingThing> field;
+    private List<GameObject> activeDeck;
     private int deckSlot;
 
     public Player(){
         this.money = 0;
         this.field = new ArrayList<>(20);
+        for (int i = 0 ; i < 20; i++)  {
+            field.add(new Carnivore());
+//            field.get(i).setActive(false);
+        }
         this.activeDeck = new ArrayList<>(6);
+        for (int i = 0; i < 6; i++)  {
+            activeDeck.add(new Accelerate());
+            field.get(i).setActive(false);
+        }
         this.deckSlot = 40;
     }
 
