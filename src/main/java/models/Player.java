@@ -117,7 +117,6 @@ public class Player {
             int idx = findEmptyActiveDeckItem();
             addCardInDeck(obj, idx);
         }
-        deckSlot -= selected.size();
     }
 
     public void addCardInField(LivingThing card, Pair<Integer,Integer> pos){
