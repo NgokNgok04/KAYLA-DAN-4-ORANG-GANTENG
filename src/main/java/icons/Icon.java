@@ -34,6 +34,7 @@ public class Icon {
     public static Image PLAYER1 = getImage("player1.jpg");
     public static Image PLAYER2 = getImage("player2.jpg");
     public static Image NOTHING = getImage("nothing.png");
+    public static Image BACKGROUND = getImage("background.jpg");
 
     private static Image getImage(String path) {
         try {

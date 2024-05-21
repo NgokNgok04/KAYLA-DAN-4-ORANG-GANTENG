@@ -4,16 +4,16 @@
  */
 package gui;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Insets;
+import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import java.awt.Dimension;
+import java.util.Objects;
 import java.util.Random;
 
+import icons.Icon;
 import models.*;
 import utils.*;
 
@@ -30,6 +30,7 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public MainFrame() {
+        backGround = Icon.BACKGROUND;
         initComponents();
         setLocationRelativeTo(null);
         initiateCards();
@@ -62,7 +63,7 @@ public class MainFrame extends javax.swing.JFrame {
         for (int i = 0; i < 20; i ++) {
             field.get(i).setPosition(new Pair<>(i/5, i%5));
             if (i < 10) {
-                field.get(i).setObject(new Herbivore("DOMBA"));
+                field.get(i).setObject(new Herbivore("SAPI"));
             } else if (new Random().nextInt(2) == 0) {
                 field.get(i).setObject(new Carnivore());
             } else {
@@ -78,24 +79,6 @@ public class MainFrame extends javax.swing.JFrame {
         deck.add(cardItem26);
 
     }
-
-//    public void initiateGame() {
-//        for (int i = 0; i < field.size(); i++) {
-//            if (i % 4 == 0) {
-//                field.get(i).setCardItem(new Herbivore("SAPI"), null, CardItem.FIELD_CARD, new Pair<>(i/5, i%5), this, true);
-//            } else {
-//                field.get(i).setCardItem(new Omnivore("AYAM"), null, CardItem.FIELD_CARD, new Pair<>(i/5, i%5), this, true);
-//            }
-//            if (new Random().nextInt(4) == 0) {
-//                System.out.println(i);
-//                field.get(i).getObject().setActive(false);
-//            }
-//        }
-//
-//        for (int i = 0; i < deck.size(); i++) {
-//            deck.get(i).setCardItem(new GameObject(GameContext.randomGameObject()), null, CardItem.DECK_CARD, new Pair<>(i, 0), this, false);
-//        }
-//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,7 +89,15 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         softBevelBorder1 = new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED);
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if (backGround != null) {
+                    g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
+                }
+            }
+        };
         enemyFieldButton1 = new gui.ButtonRounded();
         loadButton = new gui.ButtonRounded();
         nextButton = new gui.ButtonRounded();
@@ -141,7 +132,7 @@ public class MainFrame extends javax.swing.JFrame {
         cardItem21 = new gui.CardItem(new InstantHarvest(), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0, 0), this, false);
         cardItem22 = new gui.CardItem(new Product("SUSU"), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0, 0), this, false);
         cardItem23 = new gui.CardItem(new Product("LABU"), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0, 0), this, false);
-        cardItem24 = new gui.CardItem(new Accelerate(), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0, 0), this, false);
+        cardItem24 = new gui.CardItem(new Destroy(), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0, 0), this, false);
         cardItem25 = new gui.CardItem(new Product("SIRIP_HIU"), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0, 0), this, false);
         cardItem26 = new gui.CardItem(new Trap(), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0, 0), this, false);
 
@@ -198,7 +189,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        fieldPanelParent.setBackground(new java.awt.Color(204, 255, 255));
+        fieldPanelParent.setBackground(new Color(0.0862f, 0.953f, 0.86f, 0.5f));
         fieldPanelParent.setRoundBottomLeft(25);
         fieldPanelParent.setRoundBottomRight(25);
         fieldPanelParent.setRoundTopLeft(25);
@@ -244,7 +235,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        deckPanelParent.setBackground(new java.awt.Color(255, 204, 255));
+        deckPanelParent.setBackground(new Color(0.89f, 0.086f, 0.9531f, 0.5f));
         deckPanelParent.setRoundBottomLeft(25);
         deckPanelParent.setRoundBottomRight(25);
         deckPanelParent.setRoundTopLeft(25);
@@ -328,7 +319,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(fieldPanelParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(20, 20, 20)
                 .addComponent(deckPanelParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -341,9 +332,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -377,7 +366,7 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_myFieldButtonActionPerformed
 
-    
+    private Image backGround;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.CardItem cardItem1;
     private gui.CardItem cardItem10;

@@ -207,7 +207,7 @@ public class CardItem extends JPanel {
         setOpaque(false);
         setLayout(new java.awt.BorderLayout());
 
-        roundedPane1.setBackground(new Color(0.392f, 0.2f, 0.0431f, 0.6f));
+        roundedPane1.setBackground(new Color(0.392f, 0.2f, 0.0431f, 0.97f));
         roundedPane1.setRoundBottomLeft(25);
         roundedPane1.setRoundBottomRight(25);
         roundedPane1.setRoundTopLeft(25);
@@ -216,6 +216,7 @@ public class CardItem extends JPanel {
         jPanel1.setOpaque(false);
 
         nameLabel.setFont(new java.awt.Font("Segoe Print", 0, 10)); // NOI18N
+        nameLabel.setForeground(new java.awt.Color(255, 255, 255));
         nameLabel.setText("jLabel2");
         jPanel1.add(nameLabel);
 

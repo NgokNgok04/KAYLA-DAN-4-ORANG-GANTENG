@@ -35,15 +35,15 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;        super.paintComponent(g);&#xa;        if (backGround != null) {&#xa;            g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);&#xa;        }&#xa;    }&#xa;}"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -108,7 +108,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="deckPanelParent" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="26" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -174,8 +174,8 @@
         </Component>
         <Container class="gui.RoundedPane" name="fieldPanelParent">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new Color(0.0862f, 0.953f, 0.86f, 0.5f)" type="code"/>
             </Property>
             <Property name="roundBottomLeft" type="int" value="25"/>
             <Property name="roundBottomRight" type="int" value="25"/>
@@ -320,8 +320,8 @@
         </Container>
         <Container class="gui.RoundedPane" name="deckPanelParent">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="cc" red="ff" type="rgb"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new Color(0.89f, 0.086f, 0.9531f, 0.5f)" type="code"/>
             </Property>
             <Property name="roundBottomLeft" type="int" value="25"/>
             <Property name="roundBottomRight" type="int" value="25"/>
@@ -374,7 +374,7 @@
                 </Component>
                 <Component class="gui.CardItem" name="cardItem24">
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Accelerate(), null, CardItem.DECK_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, false)"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Destroy(), null, CardItem.DECK_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, false)"/>
                   </AuxValues>
                 </Component>
                 <Component class="gui.CardItem" name="cardItem25">
