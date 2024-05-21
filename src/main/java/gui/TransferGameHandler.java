@@ -56,7 +56,7 @@ public class TransferGameHandler extends TransferHandler {
         if (source.getField() == CardItem.FIELD_CARD && target.isSwap()) {
             // TODO : add swap field from player
             if (source.getOwner() != null) {
-                source.getOwner().moveCardInField(source.getPosition(), target.getPosition());
+                source.getOwner().swapCardInField(source.getPosition(), target.getPosition());
             }
             source.setObject(target.getObject());
             target.setObject(gameObject);
