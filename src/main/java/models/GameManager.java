@@ -8,18 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameManager {
-    private int currentTurn;
+    private int curPlayer;
+    private int curTurn;
     private Player player1;
     private Player player2;
     private List<FileLoader> listFileLoader;
     private final String interfaceName = "FileLoader";
 
     public GameManager(Player p1, Player p2){
-        currentTurn = 1;
+        curTurn = 1;
+        curPlayer = 1;
         player1 = p1;
         player2 = p2;
         listFileLoader = new ArrayList<>();
-        // bearAttack = null;
     }
 
     public Player getPlayer1(){
@@ -31,21 +32,29 @@ public class GameManager {
     }
 
     public Player getCurPlayer(){
-        if(currentTurn==1){
+        if(curPlayer==1){
             return player1;
         }
         return player2;
     }
 
     public Player getEnemyPlayer(){
-        if(currentTurn==1){
+        if(curPlayer==1){
             return player2;
         }
         return player1;
     }
 
-    public void setCurTurn(int currentTurn){
-        this.currentTurn = currentTurn;
+    public void setCurTurn(int curTurn){
+        this.curTurn = curTurn;
+    }
+
+    public void updateCurPlayer(){
+        if(curPlayer==1){
+            curPlayer++;
+        }else{
+            curPlayer = 1;
+        }
     }
 
     public void agePlants(List<LivingThing> field){
@@ -57,8 +66,17 @@ public class GameManager {
     }
 
     public Player next(){
+        if(curPlayer==2){
+            curTurn++;
+        }
+
+        if(curTurn==10){
+            return null;
+        }
+
         agePlants(player1.getField());
         agePlants(player2.getField());
+        updateCurPlayer();
         return getCurPlayer();    
     }
 

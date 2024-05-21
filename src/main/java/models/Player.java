@@ -182,11 +182,34 @@ public class Player {
                 }
             }
             setActiveDeckItem(this.getFieldItem(idx).harvest(), idxResultHarvest);
-            this.removeCardInField(pos);   
+            removeCardInField(pos);   
         }
     }
 
-    public void buyCartRequest(List<Pair<String,Integer>> cart)throws GameException{
+    public List<Pair<String,Integer>> convertCartGUI(List<GameObject> cart){
+        List<String> validCartName = new ArrayList<>();
+        List<Integer> validQuantity = new ArrayList<>();
+
+        for(GameObject item:cart){
+            int idx = validCartName.indexOf(item.getName());
+            if(idx==-1){
+                validCartName.add(item.getName());
+                validQuantity.add(1);
+            }else{
+                int quantity = validQuantity.get(idx)+1;
+                validQuantity.set(idx, quantity);
+            }
+        }
+        List<Pair<String,Integer>> validCart = new ArrayList<>();
+        int size = validCartName.size();
+        for(int i=0;i<size;i++){
+            validCart.add(new Pair<String,Integer>(validCartName.get(i), validQuantity.get(i)));
+        }
+        return validCart;
+    }
+
+    public void buyCartRequest(List<GameObject> cartStack)throws GameException{
+        List<Pair<String,Integer>> cart = convertCartGUI(cartStack);
         Shop shop = Shop.getInstance();
         int total = 0;
         for(Pair<String,Integer> item: cart){
