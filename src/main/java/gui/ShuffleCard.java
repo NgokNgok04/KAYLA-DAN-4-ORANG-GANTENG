@@ -27,11 +27,7 @@ public class ShuffleCard extends javax.swing.JFrame {
         this.owner = owner;
         initComponents();
         maxCards = max;
-        cardShuffle1.setObject(cards.get(0));
-        cardShuffle2.setObject(cards.get(1));
-        cardShuffle3.setObject(cards.get(2));
-        cardShuffle4.setObject(cards.get(3));
-        updateLeftCards();
+        refreshItem(cards);
     }
 
     /**
@@ -170,13 +166,27 @@ public class ShuffleCard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void refreshItem(ArrayList<GameObject> list) {
+        cardShuffle1.setObject(list.get(0));
+        cardShuffle2.setObject(list.get(1));
+        cardShuffle3.setObject(list.get(2));
+        cardShuffle4.setObject(list.get(3));
+        updateLeftCards();
+    }
+    
     private void shuffleAgainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shuffleAgainButtonActionPerformed
         // TODO add your handling code here:
+        cardList.clear();
+        ArrayList<GameObject> newOne = new ArrayList<>();
+        newOne.addAll(owner.shuffleCard());
+        refreshItem(newOne);
     }//GEN-LAST:event_shuffleAgainButtonActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
-        
+        owner.updateSelectedDeck(cardList);
+        this.dispose();
+        parent.setEnabled(true);
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void updateLeftCards() {

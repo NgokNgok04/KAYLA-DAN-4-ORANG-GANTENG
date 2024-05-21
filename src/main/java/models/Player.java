@@ -100,7 +100,7 @@ public class Player {
         throw new GameException("Deck is full");
     }
 
-    public List<GameObject> shuffleCard() throws GameException{
+    public List<GameObject> shuffleCard(){
         int nCard = 4;
         if(getDeckSlot()<4){
             nCard = getDeckSlot();
@@ -112,10 +112,14 @@ public class Player {
         return resultShuffle;
     }
 
-    public void updateSelectedDeck(List<GameObject> selected) throws GameException{
+    public void updateSelectedDeck(List<GameObject> selected){
         for(GameObject obj:selected){
-            int idx = findEmptyActiveDeckItem();
-            addCardInDeck(obj, idx);
+            try {
+                int idx = findEmptyActiveDeckItem();
+                addCardInDeck(obj, idx);
+            }catch (GameException e){
+                e.printStackTrace();
+            }
         }
     }
 
