@@ -29,6 +29,11 @@ public class Player {
         this.deckSlot = player.deckSlot;
     }
 
+    public void resetPlayer(){
+        activeDeck.clear();
+        field.clear();
+    }
+
     public int getMoney(){
         return this.money;
     }
@@ -73,6 +78,10 @@ public class Player {
         this.activeDeck = new ArrayList<>(activeDeck);
     }
 
+    public void setDeckSlot(int slot){
+        deckSlot = slot;
+    }
+
     public boolean isActiveDeckFull(){
         for(int i = 0; i < 6; i++){
             if(this.activeDeck.get(i) == null){
@@ -84,20 +93,30 @@ public class Player {
 
     public int findEmptyActiveDeckItem() throws GameException{
         for(int i = 0; i < 6; i++){
-            if(this.activeDeck.get(i) == null){
+            if(this.activeDeck.get(i).isActive() == false){
                 return i;
             }
         }
         throw new GameException("Deck is full");
     }
 
-    public List<GameObject> shuffleCard(){
+    public List<GameObject> shuffleCard() throws GameException{
+        int nCard = 4;
+        if(getDeckSlot()<4){
+            nCard = getDeckSlot();
+        }
         List<GameObject> resultShuffle = new ArrayList<>();
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < nCard; i++){
             resultShuffle.add(GameContext.randomGameObject());
         }
-
         return resultShuffle;
+    }
+
+    public void updateSelectedDeck(List<GameObject> selected) throws GameException{
+        for(GameObject obj:selected){
+            int idx = findEmptyActiveDeckItem();
+            addCardInDeck(obj, idx);
+        }
     }
 
     public void addCardInField(LivingThing card, Pair<Integer,Integer> pos){
@@ -107,10 +126,10 @@ public class Player {
 
     public void removeCardInField(Pair<Integer,Integer> pos){
         int idx = pos.convertPairToIdx();
-        this.setFieldElement(null, idx);
+        field.get(idx).destroy();
     }
 
-    public void moveCardInField(Pair<Integer,Integer> posStart, Pair<Integer,Integer> posAfter){
+    public void swapCardInField(Pair<Integer,Integer> posStart, Pair<Integer,Integer> posAfter){
         int idxStart = posStart.convertPairToIdx();
         int idxAfter = posAfter.convertPairToIdx();
 
@@ -130,11 +149,11 @@ public class Player {
     }
 
     public void removeCardInDeck(int idx) throws GameException{
-        if (this.getActiveDeck().get(idx) == null){
+        GameObject obj = getActiveDeckItem(idx);
+        if (!obj.isActive()){
             throw new GameException("Index you want to remove Card is empty");
-        } else {
-            this.setActiveDeckItem(null, idx);
         }
+        getActiveDeck().get(idx).deactivate();
     }
 
     public void harvestField(Pair<Integer,Integer> pos) throws GameException{
@@ -144,31 +163,23 @@ public class Player {
         } else if (this.isActiveDeckFull()){
             throw new GameException("Player Active Deck is full, Cant harvest");
         } else {
-            if (this.getFieldItem(idx).isInstantHarvest()){
-                int idxResultHarvest = findEmptyActiveDeckItem();
-                setActiveDeckItem(this.getFieldItem(idx).harvest(), idxResultHarvest);
-                this.removeCardInField(pos);
-
-            } else if (this.getFieldItem(idx).getTypeObject().equals("ANIMAL")){
-                Animal animal = (Animal) this.getFieldItem(idx);
-
-                if (animal.getWeight() == animal.getWeightToHarvest()){
-                    int idxResultHarvest = findEmptyActiveDeckItem();
-                    setActiveDeckItem(this.getFieldItem(idx).harvest(), idxResultHarvest);
-                    this.removeCardInField(pos);
+            int idxResultHarvest = findEmptyActiveDeckItem();
+            if (!this.getFieldItem(idx).isInstantHarvest()){
+                if (this.getFieldItem(idx).getTypeObject().equals("ANIMAL")){
+                    Animal animal = (Animal) this.getFieldItem(idx);
+                    if (animal.getWeight() < animal.getWeightToHarvest()){
+                        throw new GameException("Card is not harvestable");
+                    }
+                } else{
+                    Plant plant = (Plant) this.getFieldItem(idx);
+                    if (plant.getAge() < plant.getAgeToHarvest()){
+                        throw new GameException("Card is not harvestable");
+                    }
                 }
-            } else if (this.getFieldItem(idx).getTypeObject().equals("PLANT")){
-                Plant plant = (Plant) this.getFieldItem(idx);
-
-                if (plant.getAge() == plant.getAgeToHarvest()){
-                    int idxResultHarvest = findEmptyActiveDeckItem();
-                    setActiveDeckItem(this.getFieldItem(idx).harvest(), idxResultHarvest);
-                    this.removeCardInField(pos);
-                }
-            }   
+            }
+            setActiveDeckItem(this.getFieldItem(idx).harvest(), idxResultHarvest);
+            this.removeCardInField(pos);   
         }
-
-        throw new GameException("Card is not harvestable");
     }
 
     public void buy(String name,int quantity) throws GameException{
@@ -179,7 +190,7 @@ public class Player {
             } else {
                 int idxResultBuy = findEmptyActiveDeckItem();
                 setActiveDeckItem(new Product(name), idxResultBuy);
-                shop.itemSold(name, quantity);
+                shop.removeItem(name, quantity);
             }
         } else {
             throw new GameException("Player cant afford to buy it");
@@ -194,9 +205,25 @@ public class Player {
             throw new GameException("Player only can sell Product Card");
         } else {
             Product product = (Product) this.getActiveDeckItem(idx);
-            shop.itemBought(product.getName(), 1);
+            shop.addItem(product.getName(), 1);
             this.money += product.getPrice();
             setActiveDeckItem(null, idx);
         }
+    }
+
+    public void placeLiving(int idxDeck,Pair<Integer,Integer> pos) throws GameException{
+        GameObject card = activeDeck.get(idxDeck);
+        if(!card.isActive()){
+            throw new GameException("The slot that you selected is empty!");
+        }
+        if(!field.get(pos.convertPairToIdx()).isActive()){
+            throw new GameException("The selected field slot is already filled!");
+        }
+        if(!(card instanceof Animal || card instanceof Plant)){
+            throw new GameException("The card that you selected isn't an Animal or a Plant");
+        }
+
+        addCardInField((LivingThing)card, pos);
+        removeCardInDeck(idxDeck);
     }
 }
