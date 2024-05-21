@@ -406,6 +406,7 @@ public class MainFrame extends javax.swing.JFrame {
     private gui.ButtonRounded pluginLoadButton;
     private gui.ButtonRounded saveButton;
     private gui.ButtonRounded shopButton;
+//    private gui
     private javax.swing.border.SoftBevelBorder softBevelBorder1;
     // End of variables declaration//GEN-END:variables
 }
