@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.border.SoftBevelBorder" name="softBevelBorder1">
     </Component>
@@ -27,12 +27,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -43,37 +49,31 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                  <Component id="fieldPanelParent" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="fieldPanel" min="-2" pref="571" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="loadButton" min="-2" pref="105" max="-2" attributes="0"/>
-                                      <Component id="pluginLoadButton" min="-2" pref="105" max="-2" attributes="0"/>
-                                      <Component id="saveButton" min="-2" pref="105" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="myFieldButton" min="-2" pref="111" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="enemyFieldButton1" min="-2" pref="105" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="shopButton" min="-2" pref="141" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="nextButton" min="-2" pref="141" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="deckPanel" min="-2" pref="720" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="saveButton" min="-2" pref="105" max="-2" attributes="0"/>
+                      <Component id="loadButton" min="-2" pref="105" max="-2" attributes="0"/>
+                      <Component id="pluginLoadButton" min="-2" pref="105" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="33" max="32767" attributes="0"/>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="deckPanelParent" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                  <Component id="myFieldButton" min="-2" pref="111" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="enemyFieldButton1" min="-2" pref="105" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="shopButton" min="-2" pref="141" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="nextButton" min="-2" pref="127" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -81,14 +81,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="nextButton" min="-2" pref="47" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="400" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="462" max="-2" attributes="0"/>
                           <Component id="saveButton" min="-2" pref="39" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="loadButton" min="-2" pref="39" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                           <Component id="pluginLoadButton" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -96,19 +95,20 @@
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="shopButton" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                                   <Component id="enemyFieldButton1" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="nextButton" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
                                   <Component id="myFieldButton" min="-2" pref="41" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                          <Component id="fieldPanel" max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="fieldPanelParent" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="deckPanel" min="-2" pref="155" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="deckPanelParent" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -172,13 +172,224 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myFieldButtonActionPerformed"/>
           </Events>
         </Component>
-        <Container class="javax.swing.JPanel" name="fieldPanel">
+        <Container class="gui.RoundedPane" name="fieldPanelParent">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="cc" type="rgb"/>
+            </Property>
+            <Property name="roundBottomLeft" type="int" value="25"/>
+            <Property name="roundBottomRight" type="int" value="25"/>
+            <Property name="roundTopLeft" type="int" value="25"/>
+            <Property name="roundTopRight" type="int" value="25"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="fieldPanelParent.setSize(new Dimension(592, 612));"/>
+          </AuxValues>
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="fieldPanel" min="-2" pref="580" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="fieldPanel" min="-2" pref="585" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="fieldPanel">
+              <Properties>
+                <Property name="opaque" type="boolean" value="false"/>
+              </Properties>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+              <SubComponents>
+                <Component class="gui.CardItem" name="cardItem1">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem2">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem3">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem4">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem5">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem6">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem7">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem8">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem9">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem10">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem11">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem12">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem13">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem14">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem15">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem16">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem17">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem18">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem19">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem20">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, true)"/>
+                  </AuxValues>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="deckPanel">
+        <Container class="gui.RoundedPane" name="deckPanelParent">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="cc" red="ff" type="rgb"/>
+            </Property>
+            <Property name="roundBottomLeft" type="int" value="25"/>
+            <Property name="roundBottomRight" type="int" value="25"/>
+            <Property name="roundTopLeft" type="int" value="25"/>
+            <Property name="roundTopRight" type="int" value="25"/>
+          </Properties>
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="deckPanel" min="-2" pref="696" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="deckPanel" min="-2" pref="150" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="deckPanel">
+              <Properties>
+                <Property name="opaque" type="boolean" value="false"/>
+              </Properties>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+              <SubComponents>
+                <Component class="gui.CardItem" name="cardItem21">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new InstantHarvest(), null, CardItem.DECK_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, false)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem22">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Product(&quot;SUSU&quot;), null, CardItem.DECK_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, false)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem23">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Product(&quot;LABU&quot;), null, CardItem.DECK_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, false)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem24">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Accelerate(), null, CardItem.DECK_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, false)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem25">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Product(&quot;SIRIP_HIU&quot;), null, CardItem.DECK_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, false)"/>
+                  </AuxValues>
+                </Component>
+                <Component class="gui.CardItem" name="cardItem26">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new gui.CardItem(new Trap(), null, CardItem.DECK_CARD, new Pair&lt;Integer, Integer&gt;(0, 0), this, false)"/>
+                  </AuxValues>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
         </Container>
       </SubComponents>
     </Container>

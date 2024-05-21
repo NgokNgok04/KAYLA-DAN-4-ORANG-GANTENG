@@ -78,6 +78,11 @@ public class TransferGameHandler extends TransferHandler {
                     return false;
                 }
             } else if (gameObject instanceof Item item) {
+                if (item.getName().equals("INSTANT_HARVEST")) {
+                    item.useEffect((LivingThing) target.getObject());
+                    System.out.println("Auto Harvest");
+                    // TODO: auto harvest
+                }
                 item.useEffect((LivingThing) target.getObject());
                 target.refreshData();
                 source.removeObject();

@@ -119,6 +119,10 @@ public class GameObject {
         this.parent = parent;
     }
 
+    public String getNameParsed() {
+        return name.replace("_", " ");
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
