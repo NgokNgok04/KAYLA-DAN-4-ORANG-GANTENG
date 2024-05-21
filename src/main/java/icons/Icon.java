@@ -33,6 +33,11 @@ public class Icon {
     public static Image TRAP = getImage("trap.png");
     public static Image PLAYER1 = getImage("player1.jpg");
     public static Image PLAYER2 = getImage("player2.jpg");
+<<<<<<< Updated upstream
+=======
+    public static Image NOTHING = getImage("nothing.png");
+    public static Image BACKGROUND = getImage("background.png");
+>>>>>>> Stashed changes
 
     private static Image getImage(String path) {
         try {

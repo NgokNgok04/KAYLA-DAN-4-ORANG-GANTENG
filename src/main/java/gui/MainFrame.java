@@ -36,35 +36,286 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         softBevelBorder1 = new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED);
+<<<<<<< Updated upstream
         jPanel1 = new javax.swing.JPanel();
         iconLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         showButton = new javax.swing.JButton();
         buttonRounded2 = new gui.ButtonRounded();
         kButton1 = new gui.KButton();
+=======
+        jPanel1 = new javax.swing.JPanel(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if (backGround != null) {
+                    g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
+                }
+            }
+        };
+        fieldPanelParent = new gui.RoundedPane();
+        fieldPanel = new javax.swing.JPanel();
+        cardItem1 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem2 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem3 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem4 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem5 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem6 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem7 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem8 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem9 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem10 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem11 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem12 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem14 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem13 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem15 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem16 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem17 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem18 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem19 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        cardItem20 = new gui.CardItem(new Carnivore(), null, CardItem.FIELD_CARD, new Pair<Integer, Integer>(0, 0), this, true);
+        enemyFieldButton1 = new gui.ButtonRounded();
+        loadButton = new gui.ButtonRounded();
+        nextButton = new gui.ButtonRounded();
+        pluginLoadButton = new gui.ButtonRounded();
+        shopButton = new gui.ButtonRounded();
+        saveButton = new gui.ButtonRounded();
+        myFieldButton = new gui.ButtonRounded();
+        deckPanelParent = new gui.RoundedPane();
+        deckPanel = new javax.swing.JPanel();
+        cardItem21 = new gui.CardItem(new InstantHarvest(), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0, 0), this, false);
+        cardItem22 = new gui.CardItem(new Product("SUSU"), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0, 0), this, false);
+        cardItem23 = new gui.CardItem(new Product("LABU"), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0, 0), this, false);
+        cardItem24 = new gui.CardItem(new Destroy(), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0, 0), this, false);
+        cardItem25 = new gui.CardItem(new Product("SIRIP_HIU"), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0, 0), this, false);
+        cardItem26 = new gui.CardItem(new Trap(), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0, 0), this, false);
+>>>>>>> Stashed changes
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1200, 720));
+        setMinimumSize(new java.awt.Dimension(1200, 720));
+        setSize(new java.awt.Dimension(1200, 720));
 
+        jPanel1.setMaximumSize(new java.awt.Dimension(1200, 720));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1200, 720));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1200, 720));
+
+        fieldPanelParent.setBackground(new Color(0.454f, 0.470f, 0.454f, 0.8f));
+        fieldPanelParent.setForeground(new java.awt.Color(118, 120, 116));
+        fieldPanelParent.setMaximumSize(new java.awt.Dimension(630, 697));
+        fieldPanelParent.setMinimumSize(new java.awt.Dimension(630, 697));
+        fieldPanelParent.setPreferredSize(new java.awt.Dimension(630, 697));
+        fieldPanelParent.setRoundBottomLeft(10);
+        fieldPanelParent.setRoundBottomRight(10);
+        fieldPanelParent.setRoundTopLeft(10);
+        fieldPanelParent.setRoundTopRight(10);
+        fieldPanelParent.setSize(new Dimension(592, 612));
+
+        fieldPanel.setBackground(new java.awt.Color(118, 120, 116));
+        fieldPanel.setAlignmentX(0.0F);
+        fieldPanel.setAlignmentY(0.0F);
+        fieldPanel.setMaximumSize(new java.awt.Dimension(630, 697));
+        fieldPanel.setMinimumSize(new java.awt.Dimension(630, 697));
+        fieldPanel.setOpaque(false);
+        fieldPanel.setPreferredSize(new java.awt.Dimension(630, 697));
+        fieldPanel.add(cardItem1);
+        fieldPanel.add(cardItem2);
+        fieldPanel.add(cardItem3);
+
+        cardItem4.setBackground(new java.awt.Color(118, 120, 116));
+        fieldPanel.add(cardItem4);
+        fieldPanel.add(cardItem5);
+        fieldPanel.add(cardItem6);
+        fieldPanel.add(cardItem7);
+        fieldPanel.add(cardItem8);
+        fieldPanel.add(cardItem9);
+        fieldPanel.add(cardItem10);
+        fieldPanel.add(cardItem11);
+        fieldPanel.add(cardItem12);
+        fieldPanel.add(cardItem14);
+        fieldPanel.add(cardItem13);
+        fieldPanel.add(cardItem15);
+        fieldPanel.add(cardItem16);
+        fieldPanel.add(cardItem17);
+        fieldPanel.add(cardItem18);
+        fieldPanel.add(cardItem19);
+        fieldPanel.add(cardItem20);
+
+        javax.swing.GroupLayout fieldPanelParentLayout = new javax.swing.GroupLayout(fieldPanelParent);
+        fieldPanelParent.setLayout(fieldPanelParentLayout);
+        fieldPanelParentLayout.setHorizontalGroup(
+            fieldPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(fieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        fieldPanelParentLayout.setVerticalGroup(
+            fieldPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fieldPanelParentLayout.createSequentialGroup()
+                .addGap(0, 7, Short.MAX_VALUE)
+                .addComponent(fieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+<<<<<<< Updated upstream
+=======
+        enemyFieldButton1.setText("Ladang Lawan");
+        enemyFieldButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enemyFieldButton1ActionPerformed(evt);
+            }
+        });
+
+        loadButton.setText("Load State");
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadButtonActionPerformed(evt);
+            }
+        });
+
+        nextButton.setText("NEXT");
+        nextButton.setRadius(40);
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextButtonActionPerformed(evt);
+            }
+        });
+
+        pluginLoadButton.setText("Load Plugin");
+        pluginLoadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pluginLoadButtonActionPerformed(evt);
+            }
+        });
+
+        shopButton.setText("Shop");
+        shopButton.setRadius(40);
+        shopButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shopButtonActionPerformed(evt);
+            }
+        });
+
+        saveButton.setText("Save State");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+
+        myFieldButton.setText("Ladangku");
+        myFieldButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myFieldButtonActionPerformed(evt);
+            }
+        });
+
+        deckPanelParent.setBackground(new Color(0.462f, 0.470f, 0.454f, 0.8f));
+        deckPanelParent.setRoundBottomLeft(25);
+        deckPanelParent.setRoundBottomRight(25);
+        deckPanelParent.setRoundTopLeft(25);
+        deckPanelParent.setRoundTopRight(25);
+
+        deckPanel.setOpaque(false);
+        deckPanel.add(cardItem21);
+        deckPanel.add(cardItem22);
+        deckPanel.add(cardItem23);
+        deckPanel.add(cardItem24);
+        deckPanel.add(cardItem25);
+        deckPanel.add(cardItem26);
+
+        javax.swing.GroupLayout deckPanelParentLayout = new javax.swing.GroupLayout(deckPanelParent);
+        deckPanelParent.setLayout(deckPanelParentLayout);
+        deckPanelParentLayout.setHorizontalGroup(
+            deckPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(deckPanelParentLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(deckPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        deckPanelParentLayout.setVerticalGroup(
+            deckPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(deckPanelParentLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(deckPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+>>>>>>> Stashed changes
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 441, Short.MAX_VALUE)
+                .addComponent(deckPanelParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
             .addGroup(jPanel1Layout.createSequentialGroup()
+<<<<<<< Updated upstream
                 .addGap(24, 24, 24)
                 .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(iconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 257, Short.MAX_VALUE))
+=======
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pluginLoadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(myFieldButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(enemyFieldButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(shopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(fieldPanelParent, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+>>>>>>> Stashed changes
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+<<<<<<< Updated upstream
                 .addContainerGap()
                 .addComponent(iconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
+=======
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(enemyFieldButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(myFieldButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(23, 23, 23)
+                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(shopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(fieldPanelParent, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(78, 78, 78)
+                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(pluginLoadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(412, 412, 412)
+                .addComponent(deckPanelParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+>>>>>>> Stashed changes
         );
 
         showButton.setText("Show Me");
@@ -104,6 +355,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -121,6 +373,9 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(kButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40))))
+=======
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+>>>>>>> Stashed changes
         );
 
         pack();
