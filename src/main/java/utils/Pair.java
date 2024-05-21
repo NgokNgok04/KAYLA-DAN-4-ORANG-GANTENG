@@ -44,8 +44,3 @@ public class Pair<A,B> {
     }
 
 }
-
-/*
- * Permintaan Bos
- * 1. 
- */

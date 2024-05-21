@@ -117,6 +117,7 @@ public class Player {
             int idx = findEmptyActiveDeckItem();
             addCardInDeck(obj, idx);
         }
+        deckSlot -= selected.size();
     }
 
     public void addCardInField(LivingThing card, Pair<Integer,Integer> pos){
@@ -182,33 +183,39 @@ public class Player {
         }
     }
 
-    public void buy(String name,int quantity) throws GameException{
+    public void buyCartRequest(List<Pair<String,Integer>> cart)throws GameException{
         Shop shop = Shop.getInstance();
-        if ((shop.getItem(name).getPrice() * quantity) <= this.money){
-            if (this.isActiveDeckFull()){
-                throw new GameException("Player Active Deck is full, Cant harvest");
-            } else {
-                int idxResultBuy = findEmptyActiveDeckItem();
-                setActiveDeckItem(new Product(name), idxResultBuy);
-                shop.removeItem(name, quantity);
+        int total = 0;
+        for(Pair<String,Integer> item: cart){
+            if(!shop.checkStock(item.getFirst(), item.getSecond())){
+                throw new GameException("Requested item's stock insufficient");
             }
-        } else {
-            throw new GameException("Player cant afford to buy it");
+            total += shop.getItem(item.getFirst()).getPrice()*item.getSecond();
         }
+        if(money<total){
+            throw new GameException("Player's money not enough");
+        }
+        for(Pair<String,Integer> item:cart){
+            buy(item.getFirst(), item.getSecond());
+        }
+        money -= total;
     }
 
-    public void sold(int idx) throws GameException{
+    public void buy(String name,int quantity) throws GameException{
+        Shop shop = Shop.getInstance();        
+        int idxResultBuy = findEmptyActiveDeckItem();
+        addCardInDeck(new Product(name), idxResultBuy);
+        shop.removeItem(name, quantity);
+    }
+
+    public void sell(int idx) throws GameException{
         Shop shop = Shop.getInstance();
-        if (this.getActiveDeckItem(idx) == null){
-            throw new GameException("Cant Sell empty card");
-        } else if (!this.getActiveDeckItem(idx).getTypeObject().equals("PRODUCT")){
-            throw new GameException("Player only can sell Product Card");
-        } else {
-            Product product = (Product) this.getActiveDeckItem(idx);
-            shop.addItem(product.getName(), 1);
-            this.money += product.getPrice();
-            setActiveDeckItem(null, idx);
-        }
+
+        Product product = (Product) this.getActiveDeckItem(idx);
+        shop.addItem(product.getName(), 1);
+        this.money += product.getPrice();
+
+        removeCardInDeck(idx);
     }
 
     public void placeLiving(int idxDeck,Pair<Integer,Integer> pos) throws GameException{

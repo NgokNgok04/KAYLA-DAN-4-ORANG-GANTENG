@@ -5,7 +5,7 @@ import java.util.*;
 public final class Shop {
     private static Shop instance;
     private List<Pair<Product,Integer>> availableItem;
-    
+
 
     private Shop(){
         availableItem = new ArrayList<Pair<Product,Integer>>();
@@ -71,6 +71,10 @@ public final class Shop {
                 return;
             }
         }
+    }
+
+    public boolean checkStock(String name,int quantity){
+        return quantity<=getQuantity(name);
     }
 
     public void addItem(String name, int quantity){
