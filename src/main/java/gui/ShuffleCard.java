@@ -4,6 +4,7 @@
  */
 package gui;
 
+import com.sun.source.tree.ParenthesizedTree;
 import java.awt.*;
 import java.util.ArrayList;
 import models.*;
@@ -16,10 +17,14 @@ public class ShuffleCard extends javax.swing.JFrame {
 
     private ArrayList<GameObject> cardList = new ArrayList<>();
     private int maxCards;
+    private MainFrame parent;
+    private Player owner;
     /**
      * Creates new form ShuffleCard
      */
-    public ShuffleCard(ArrayList<GameObject> cards, int max) {
+    public ShuffleCard(ArrayList<GameObject> cards, int max, MainFrame parent, Player owner) {
+        this.parent = parent;
+        this.owner = owner;
         initComponents();
         maxCards = max;
         cardShuffle1.setObject(cards.get(0));
@@ -50,6 +55,7 @@ public class ShuffleCard extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
 
         roundedPane1.setBackground(new java.awt.Color(153, 204, 255));
@@ -170,6 +176,7 @@ public class ShuffleCard extends javax.swing.JFrame {
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void updateLeftCards() {
@@ -272,7 +279,7 @@ public class ShuffleCard extends javax.swing.JFrame {
                 anjing.add(new Trap());
                 anjing.add(new Omnivore("BERUANG"));
                 anjing.add(new Destroy());
-                new ShuffleCard(anjing, 4).setVisible(true);
+//                new ShuffleCard(anjing, 4).setVisible(true);
             }
         });
     }
