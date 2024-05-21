@@ -64,6 +64,27 @@ public final class Shop {
         getPair(idx).setSecond(quantity);
     }
 
+    public boolean isEmpty(){
+        for(Pair<Product,Integer>item:availableItem){
+            if(item.getSecond()>0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int getMinPriceAvailable(){
+        int min = Integer.MAX_VALUE;
+        for(Pair<Product,Integer> item: availableItem){
+            int quantity = item.getSecond();
+            int price = item.getFirst().getPrice();
+            if(quantity>0 && price<min){
+                min = price;
+            }
+        }
+        return min;
+    }
+
     public void setQuantity(String name, int quantity){
         for(int i=0;i<availableItem.size();i++){
             if(getItem(i).getName().equals(name)){
