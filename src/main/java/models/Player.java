@@ -186,7 +186,7 @@ public class Player {
         }
     }
 
-    public List<Pair<String,Integer>> convertCartGUI(List<GameObject> cart){
+    public List<Pair<String,Integer>> convertCartGUI(List<Product> cart){
         List<String> validCartName = new ArrayList<>();
         List<Integer> validQuantity = new ArrayList<>();
 
@@ -208,7 +208,7 @@ public class Player {
         return validCart;
     }
 
-    public void buyCartRequest(List<GameObject> cartStack)throws GameException{
+    public void buyCartRequest(List<Product> cartStack)throws GameException{
         List<Pair<String,Integer>> cart = convertCartGUI(cartStack);
         Shop shop = Shop.getInstance();
         int total = 0;

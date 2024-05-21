@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import models.Player;
 import models.Product;
 import java.util.List;
+import javax.swing.JOptionPane;
 import utils.Pair;
+
 
 /**
  *
@@ -18,13 +20,16 @@ public class GameShop extends javax.swing.JFrame {
     
     private ArrayList<Product> cart = new ArrayList<>();
     private Player owner;
+    private MainFrame parent;
 
     /**
      * Creates new form GameShop
      */
-    public GameShop(Player owner, List<Pair<Product, Integer>> shops) {
+    public GameShop(Player owner, List<Pair<Product, Integer>> shops, MainFrame parent) {
         this.owner = owner;
+        this.parent = parent;
         initComponents();
+        this.setLocationRelativeTo(parent);
         for (Pair<Product, Integer> item : shops) {
             if (item.getSecond() > 0) {
                 shopList.add(new ShopItem(this, item.getFirst(), item.getSecond()));
@@ -121,7 +126,11 @@ public class GameShop extends javax.swing.JFrame {
     private void buyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyButtonActionPerformed
         // TODO add your handling code here:
         // do buying item
-        
+        try {
+            owner.buyCartRequest(cart);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Komposisi barang yang dibeli atau jumlah Uang tidak cukup.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_buyButtonActionPerformed
 
     public void addProductCart(Product product) {
@@ -138,42 +147,7 @@ public class GameShop extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GameShop.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GameShop.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GameShop.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GameShop.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                List<Pair<Product, Integer>> anjing = new ArrayList<>();
-                anjing.add(new Pair<>(new Product("SIRIP_HIU"), 2));
-                anjing.add(new Pair<>(new Product("JAGUNG"), 4));
-                anjing.add(new Pair<>(new Product("LABU"), 3));
-                anjing.add(new Pair<>(new Product("DAGING_DOMBA"), 1));
-                new GameShop(null, anjing).setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.ButtonRounded buyButton;
