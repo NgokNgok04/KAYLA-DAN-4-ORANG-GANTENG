@@ -78,6 +78,8 @@ public class MainFrame extends javax.swing.JFrame {
         deck.add(cardItem25);
         deck.add(cardItem26);
 
+        new CardShuffle();
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
