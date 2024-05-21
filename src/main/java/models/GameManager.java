@@ -11,15 +11,13 @@ public class GameManager {
     private int currentTurn;
     private Player player1;
     private Player player2;
-    private Shop shop;
     private List<FileLoader> listFileLoader;
     private final String interfaceName = "FileLoader";
 
-    public GameManager(Player p1, Player p2, Shop shop){
+    public GameManager(Player p1, Player p2){
         currentTurn = 1;
         player1 = p1;
         player2 = p2;
-        this.shop = shop;
         listFileLoader = new ArrayList<>();
         // bearAttack = null;
     }
@@ -44,10 +42,6 @@ public class GameManager {
             return player2;
         }
         return player1;
-    }
-
-    public Shop getShop(){
-        return shop;
     }
 
     public void setCurTurn(int currentTurn){
