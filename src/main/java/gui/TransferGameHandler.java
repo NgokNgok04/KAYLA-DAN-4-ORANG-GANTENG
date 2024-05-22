@@ -154,45 +154,6 @@ public class TransferGameHandler extends TransferHandler {
                 }
                 return true;
             }
-//            if (source.getOwner() == target.getOwner() && gameObject instanceof LivingThing thing && !target.getObject().isActive()) {
-//                int posInDeck = source.getPosition().getSecond();
-//                target.getOwner().addCardInField((LivingThing) GameContext.createObject(gameObject.getName()), target.getPosition());
-//                target.setObject(target.getOwner().getFieldItem(target.getPosition().convertPairToIdx()));
-//                target.getObject().setActive(true);
-//                System.out.println("Menanam =============== "+ target.getObject().isActive());
-//                try {
-//                    source.getOwner().removeCardInDeck(posInDeck);
-//                    source.getsParent().refreshActiveDeck();
-//                    return true;
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    return false;
-//                }
-//            }
-//            // Memberi makan
-//            if (gameObject instanceof Product food && target.getObject() instanceof Animal animal && animal.isActive()) {
-//                try {
-//                    animal.eat(food);
-//                    source.removeObject();
-//                    if (source.getOwner() != null) {
-//                        source.getOwner().removeCardInDeck(source.getPosition().getFirst()); // getFirst is the index, getSecond is always 0
-//                    }
-//                    return true;
-//                } catch (GameException e) {
-//                    e.printMessage();
-//                    return false;
-//                }
-//            } else if (gameObject instanceof Item item && target.getObject().isActive()) {
-//                if (item.getName().equals("INSTANT_HARVEST")) {
-//                    item.useEffect((LivingThing) target.getObject());
-//                    System.out.println("Auto Harvest");
-//                    // TODO: auto harvest
-//                }
-//                item.useEffect((LivingThing) target.getObject());
-//                target.refreshData();
-//                source.removeObject();
-//                return true;
-//            }
         }
 
         return false;

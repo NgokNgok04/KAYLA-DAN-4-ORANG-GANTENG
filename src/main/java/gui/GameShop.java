@@ -76,7 +76,7 @@ public class GameShop extends javax.swing.JFrame {
 
         shopList.setMaximumSize(new java.awt.Dimension(596, 32767));
         shopList.setOpaque(false);
-        shopList.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 10));
+        shopList.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 10));
         jScrollPane1.setViewportView(shopList);
 
         buyButton.setText("BELI");
