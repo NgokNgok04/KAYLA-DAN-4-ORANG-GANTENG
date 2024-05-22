@@ -240,19 +240,39 @@ public class Player {
         removeCardInDeck(idx);
     }
 
-    public void placeLiving(int idxDeck,Pair<Integer,Integer> pos) throws GameException{
-        GameObject card = activeDeck.get(idxDeck);
-        if(!card.isActive()){
-            throw new GameException("The slot that you selected is empty!");
+    public void placeItem(Item item,Pair<Integer,Integer> pos, List<LivingThing> fieldTarget) throws GameException{
+        if(fieldTarget!=field && (item.getName()!="DESTROY" || item.getName()!="DELAY")){
+            throw new GameException("Can't place items other than Destroy and Delay to enemy's field");
         }
-        if(!field.get(pos.convertPairToIdx()).isActive()){
-            throw new GameException("The selected field slot is already filled!");
-        }
-        if(!(card instanceof Animal || card instanceof Plant)){
-            throw new GameException("The card that you selected isn't an Animal or a Plant");
+        if(fieldTarget==field && (item.getName()=="DESTROY" || item.getName()=="DELAY")){
+            throw new GameException("Can't place Destroy and Delay to your own field");
         }
 
-        addCardInField((LivingThing)card, pos);
-        removeCardInDeck(idxDeck);
+        LivingThing target = fieldTarget.get(pos.convertPairToIdx());
+        target.addItem(item);
+    }
+
+    public void placeProduct(Product product,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
+        Animal target = (Animal)fieldTarget.get(pos.convertPairToIdx());
+        target.eat(product);
+    }
+
+    public void placeLiving(LivingThing living,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
+        if(fieldTarget!=this.field){
+            throw new GameException("Can't place Living Things to Enemey's field");
+        }
+        addCardInField((LivingThing)living, pos);
+    }
+
+    public void placeDeckToField(int idx,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
+        GameObject itemDeck = activeDeck.get(idx);
+        if(itemDeck instanceof LivingThing living){
+            placeLiving(living, pos, fieldTarget);
+        }else if(itemDeck instanceof Product product){
+            placeProduct(product, pos, fieldTarget);
+        }else{
+            placeItem((Item)itemDeck, pos, fieldTarget);
+        }
+        removeCardInDeck(idx);
     }
 }
