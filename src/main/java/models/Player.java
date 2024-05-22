@@ -14,14 +14,26 @@ public class Player {
         this.field = new ArrayList<>(20);
         for (int i = 0 ; i < 20; i++)  {
             field.add(new Carnivore());
-//            field.get(i).setActive(false);
+            field.get(i).setActive(false);
         }
         this.activeDeck = new ArrayList<>(6);
         for (int i = 0; i < 6; i++)  {
             activeDeck.add(new Accelerate());
-            field.get(i).setActive(false);
+            activeDeck.get(i).setActive(false);
+            System.out.println(field.get(i).isActive());
         }
         this.deckSlot = 40;
+    }
+
+    public int getMaxShuflleCount() {
+        int count = 0;
+        for (int i = 0 ; i < 6; i++)  {
+            if (!activeDeck.get(i).isActive()) count++;
+        }
+        if (count > 4) {
+            count = 4;
+        }
+        return count;
     }
 
     public Player(int money, List<LivingThing> field, List<GameObject> activeDeck, int deckSlot){
@@ -133,6 +145,7 @@ public class Player {
 
     public void addCardInField(LivingThing card, Pair<Integer,Integer> pos){
         int idx = pos.convertPairToIdx();
+        System.out.println(idx);
         this.setFieldElement(card, idx);
     }
 
@@ -267,4 +280,6 @@ public class Player {
         addCardInField((LivingThing)card, pos);
         removeCardInDeck(idxDeck);
     }
+
+
 }

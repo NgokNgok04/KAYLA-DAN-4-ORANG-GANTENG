@@ -26,6 +26,8 @@ public class ShuffleCard extends javax.swing.JFrame {
         this.parent = parent;
         this.owner = owner;
         initComponents();
+        setLocationRelativeTo(parent);
+        setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f));
         maxCards = max;
         refreshItem(cards);
     }
@@ -51,6 +53,7 @@ public class ShuffleCard extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 255, 255));
         setUndecorated(true);
         setResizable(false);
 
@@ -177,16 +180,16 @@ public class ShuffleCard extends javax.swing.JFrame {
     private void shuffleAgainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shuffleAgainButtonActionPerformed
         // TODO add your handling code here:
         cardList.clear();
-        ArrayList<GameObject> newOne = new ArrayList<>();
-        newOne.addAll(owner.shuffleCard());
+        ArrayList<GameObject> newOne = new ArrayList<>(owner.shuffleCard());
         refreshItem(newOne);
     }//GEN-LAST:event_shuffleAgainButtonActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
         owner.updateSelectedDeck(cardList);
-        this.dispose();
+        parent.refreshActiveDeck();
         parent.setEnabled(true);
+        this.dispose();
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void updateLeftCards() {
@@ -254,45 +257,45 @@ public class ShuffleCard extends javax.swing.JFrame {
     }//GEN-LAST:event_cardShuffle4MouseClicked
 
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ShuffleCard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ShuffleCard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ShuffleCard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ShuffleCard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ArrayList<GameObject> anjing = new ArrayList<>();
-                anjing.add(new Carnivore());
-                anjing.add(new Trap());
-                anjing.add(new Omnivore("BERUANG"));
-                anjing.add(new Destroy());
-//                new ShuffleCard(anjing, 4).setVisible(true);
-            }
-        });
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ShuffleCard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ShuffleCard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ShuffleCard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ShuffleCard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                ArrayList<GameObject> anjing = new ArrayList<>();
+//                anjing.add(new Carnivore());
+//                anjing.add(new Trap());
+//                anjing.add(new Omnivore("BERUANG"));
+//                anjing.add(new Destroy());
+////                new ShuffleCard(anjing, 4).setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.CardShuffle cardShuffle1;

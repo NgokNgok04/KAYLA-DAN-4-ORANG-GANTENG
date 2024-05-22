@@ -28,6 +28,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private GameManager game;
     private Player currPlayer;
+//    private Shop shop;
 
     /**
      * Creates new form NewJFrame
@@ -83,7 +84,9 @@ public class MainFrame extends javax.swing.JFrame {
         deck.add(cardItem25);
         deck.add(cardItem26);
 
-        new CardShuffle();
+        for (int i = 0; i < 6; i++) {
+            deck.get(i).setPosition(new Pair<>(0, i%6));
+        }
 
     }
 
@@ -97,15 +100,32 @@ public class MainFrame extends javax.swing.JFrame {
             field.get(i).setObject(thing);
             field.get(i).setOwner(game.getCurPlayer());
             field.get(i).setSwap(true);
-            System.out.println(field.get(i).getObject().getName());
             i++;
         }
         i = 0;
         System.out.println("Current player: " + game.getCurPlayer());
         for (GameObject thing : game.getCurPlayer().getActiveDeck()) {
             deck.get(i).setObject(thing);
+            deck.get(i).setOwner(game.getCurPlayer());
+            System.out.println(deck.get(i).getObject().isActive());
             i++;
         }
+        shuffle();
+    }
+
+    public void refreshActiveDeck() {
+        int i = 0;
+        for (GameObject thing : game.getCurPlayer().getActiveDeck()) {
+            deck.get(i).setObject(thing);
+            deck.get(i).setOwner(game.getCurPlayer());
+            System.out.println(deck.get(i).getObject().isActive());
+            i++;
+        }
+    }
+
+    public void shuffle() {
+        this.setEnabled(false);
+        new ShuffleCard((ArrayList<GameObject>) game.getCurPlayer().shuffleCard(), game.getCurPlayer().getMaxShuflleCount(), this, game.getCurPlayer()).setVisible(true);
     }
 
     public void changeFieldToEnemy() {
@@ -410,6 +430,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void shopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shopButtonActionPerformed
         // TODO add your handling code here:
+        System.out.println("Welcome to Shop");
+        this.setEnabled(false);
+        if (Shop.getInstance().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Toko sedang kosong");
+            this.setEnabled(true);
+            return;
+        }
+        new GameShop(game.getCurPlayer(), this).setVisible(true);
     }//GEN-LAST:event_shopButtonActionPerformed
 
     private void enemyFieldButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enemyFieldButton1ActionPerformed

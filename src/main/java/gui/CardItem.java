@@ -45,7 +45,7 @@ public class CardItem extends JPanel {
         setTransferHandler(new TransferGameHandler());
     }
 
-    public CardItem(GameObject object, Player owner, boolean field, Pair<Integer, Integer> position, Component parent, boolean swap) {
+    public CardItem(GameObject object, Player owner, boolean field, Pair<Integer, Integer> position, MainFrame parent, boolean swap) {
         initComponents();
         initPreferredSize();
         this.owner = owner;
@@ -59,7 +59,7 @@ public class CardItem extends JPanel {
         setTransferHandler(new TransferGameHandler());
     }
 
-    public void setCardItem(GameObject object, Player owner, boolean field, Pair<Integer, Integer> position, Component parent, boolean swap) {
+    public void setCardItem(GameObject object, Player owner, boolean field, Pair<Integer, Integer> position, MainFrame parent, boolean swap) {
         initComponents();
         initPreferredSize();
         this.owner = owner;
@@ -96,11 +96,11 @@ public class CardItem extends JPanel {
         this.field = field;
     }
     
-    public Component getsParent() {
+    public MainFrame getsParent() {
         return parent;
     }
 
-    public void setParent(JFrame parent) {
+    public void setParent(MainFrame parent) {
         this.parent = parent;
     }
 
@@ -259,7 +259,7 @@ public class CardItem extends JPanel {
     private boolean swap;
     private Pair<Integer, Integer> position;
     private Player owner;
-    private Component parent;
+    private MainFrame parent;
     private boolean field;
     private GameObject object;
     // Variables declaration - do not modify//GEN-BEGIN:variables

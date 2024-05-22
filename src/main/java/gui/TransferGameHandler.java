@@ -63,10 +63,20 @@ public class TransferGameHandler extends TransferHandler {
             target.setObject(gameObject);
             return true;
         } else if (source.getField() == CardItem.DECK_CARD){
-            if (!target.getObject().isActive()) {
-                return false;
+            if (source.getOwner() == target.getOwner() && gameObject instanceof LivingThing thing && !target.getObject().isActive()) {
+                int posInDeck = source.getPosition().getSecond();
+                target.getOwner().addCardInField((LivingThing) GameContext.createObject(gameObject.getName()), target.getPosition());
+                target.setObject(thing);
+                try {
+                    source.getOwner().removeCardInDeck(posInDeck);
+                    source.getsParent().refreshActiveDeck();
+                    return true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return false;
+                }
             }
-            if (gameObject instanceof Product food && target.getObject() instanceof Animal animal) {
+            if (gameObject instanceof Product food && target.getObject() instanceof Animal animal && animal.isActive()) {
                 try {
                     animal.eat(food);
                     source.removeObject();
@@ -78,7 +88,7 @@ public class TransferGameHandler extends TransferHandler {
                     e.printMessage();
                     return false;
                 }
-            } else if (gameObject instanceof Item item) {
+            } else if (gameObject instanceof Item item && target.getObject().isActive()) {
                 if (item.getName().equals("INSTANT_HARVEST")) {
                     item.useEffect((LivingThing) target.getObject());
                     System.out.println("Auto Harvest");

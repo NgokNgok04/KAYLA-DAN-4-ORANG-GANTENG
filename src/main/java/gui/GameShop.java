@@ -4,11 +4,14 @@
  */
 package gui;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import models.Player;
 import models.Product;
 import java.util.List;
 import javax.swing.JOptionPane;
+
+import models.Shop;
 import utils.Pair;
 
 
@@ -21,16 +24,19 @@ public class GameShop extends javax.swing.JFrame {
     private ArrayList<Product> cart = new ArrayList<>();
     private Player owner;
     private MainFrame parent;
+    private Shop shop;
 
     /**
      * Creates new form GameShop
      */
-    public GameShop(Player owner, List<Pair<Product, Integer>> shops, MainFrame parent) {
+    public GameShop(Player owner, MainFrame parent) {
         this.owner = owner;
         this.parent = parent;
+        this.shop = Shop.getInstance();
         initComponents();
+        setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f));
         this.setLocationRelativeTo(parent);
-        for (Pair<Product, Integer> item : shops) {
+        for (Pair<Product, Integer> item : shop.getAvailableItem()) {
             if (item.getSecond() > 0) {
                 shopList.add(new ShopItem(this, item.getFirst(), item.getSecond()));
             }
@@ -51,6 +57,7 @@ public class GameShop extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         shopList = new javax.swing.JPanel();
         buyButton = new gui.ButtonRounded();
+        buttonRounded1 = new gui.ButtonRounded();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -79,23 +86,31 @@ public class GameShop extends javax.swing.JFrame {
             }
         });
 
+        buttonRounded1.setText("Cancel");
+        buttonRounded1.setRadius(40);
+        buttonRounded1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRounded1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout roundedPane1Layout = new javax.swing.GroupLayout(roundedPane1);
         roundedPane1.setLayout(roundedPane1Layout);
         roundedPane1Layout.setHorizontalGroup(
             roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roundedPane1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedPane1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedPane1Layout.createSequentialGroup()
-                        .addComponent(buyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(249, 249, 249))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(191, 191, 191))))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(191, 191, 191))
+            .addGroup(roundedPane1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(roundedPane1Layout.createSequentialGroup()
+                        .addComponent(buttonRounded1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         roundedPane1Layout.setVerticalGroup(
             roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,8 +120,10 @@ public class GameShop extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonRounded1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -128,10 +145,19 @@ public class GameShop extends javax.swing.JFrame {
         // do buying item
         try {
             owner.buyCartRequest(cart);
+            parent.setEnabled(true);
+            this.dispose();
+            parent.refreshActiveDeck();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Komposisi barang yang dibeli atau jumlah Uang tidak cukup.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_buyButtonActionPerformed
+
+    private void buttonRounded1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRounded1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        parent.setEnabled(true);
+    }//GEN-LAST:event_buttonRounded1ActionPerformed
 
     public void addProductCart(Product product) {
         cart.add(product);
@@ -150,6 +176,7 @@ public class GameShop extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private gui.ButtonRounded buttonRounded1;
     private gui.ButtonRounded buyButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
