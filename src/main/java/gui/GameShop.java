@@ -63,7 +63,7 @@ public class GameShop extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        roundedPane1.setBackground(new java.awt.Color(51, 51, 255));
+        roundedPane1.setBackground(new java.awt.Color(0.6f, 0.8f, 1.0f, 0.85f));
         roundedPane1.setRoundBottomLeft(30);
         roundedPane1.setRoundBottomRight(30);
         roundedPane1.setRoundTopLeft(30);
@@ -72,8 +72,10 @@ public class GameShop extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Serif", 3, 36)); // NOI18N
         jLabel1.setText("GAME SHOP");
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 51, 102));
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
+        shopList.setBackground(new java.awt.Color(255, 0, 255));
         shopList.setMaximumSize(new java.awt.Dimension(596, 32767));
         shopList.setOpaque(false);
         shopList.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 10));
@@ -147,6 +149,7 @@ public class GameShop extends javax.swing.JFrame {
         try {
             owner.buyCartRequest(cart);
             parent.setEnabled(true);
+            parent.refreshCoin();
             this.dispose();
             parent.refreshActiveDeck();
         } catch (Exception e) {

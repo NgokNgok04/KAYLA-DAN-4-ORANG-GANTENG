@@ -13,8 +13,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.TransferHandler;
@@ -192,6 +190,7 @@ public class CardItem extends JPanel {
                         try {
                             owner.sell(position.getSecond());
                             parent.refreshActiveDeck();
+                            parent.refreshCoin();
                         } catch (Exception exp) {
                             JOptionPane.showMessageDialog(parent, "Maaf, terjadi error");
                         }

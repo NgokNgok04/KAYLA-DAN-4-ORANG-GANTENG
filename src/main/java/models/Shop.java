@@ -17,6 +17,7 @@ public final class Shop {
         availableItem.add(new Pair<Product,Integer>(new Product("DAGING_BERUANG"),0));
         availableItem.add(new Pair<Product,Integer>(new Product("JAGUNG"),0));
         availableItem.add(new Pair<Product,Integer>(new Product("STROBERI"),0));
+        availableItem.add(new Pair<Product,Integer>(new Product("LABU"), 0));
     }
 
     public static Shop getInstance(){
