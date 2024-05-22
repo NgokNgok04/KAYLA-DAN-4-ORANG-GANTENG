@@ -181,6 +181,7 @@ public class ShuffleCard extends javax.swing.JFrame {
         // TODO add your handling code here:
         cardList.clear();
         ArrayList<GameObject> newOne = new ArrayList<>(owner.shuffleCard());
+        
         refreshItem(newOne);
     }//GEN-LAST:event_shuffleAgainButtonActionPerformed
 

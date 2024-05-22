@@ -5,10 +5,9 @@
 package gui;
 
 import java.awt.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import models.*;
-
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -36,6 +35,9 @@ public class PopUpDetail extends javax.swing.JFrame {
             setDataPlant();
         }
         setLocationRelativeTo(parent.getsParent());
+        if (!parent.isSwap()) {
+            panenButton.setVisible(false);
+        }
     }
     
     private void setEffectTable() {
@@ -287,6 +289,20 @@ public class PopUpDetail extends javax.swing.JFrame {
     private void panenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_panenButtonActionPerformed
         // TODO add your handling code here:
         System.out.println("Harvesttt!!!");
+        if (!parent.getOwner().isActiveDeckFull()) {
+            try {
+                parent.getOwner().harvestField(parent.getPosition());
+                parent.getsParent().refreshActiveDeck();
+                parent.getsParent().changeFieldToPlayer();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(parent.getsParent(), "Erorr...", "Warning", JOptionPane.WARNING_MESSAGE);
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(parent.getsParent(), "Tidak dapat memanen. Deck aktif penuh.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        parent.getsParent().setEnabled(true);
+        this.dispose();
     }//GEN-LAST:event_panenButtonActionPerformed
 
     private void buttonRounded1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRounded1ActionPerformed

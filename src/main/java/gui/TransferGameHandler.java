@@ -90,6 +90,10 @@ public class TransferGameHandler extends TransferHandler {
                     JOptionPane.showMessageDialog(source.getsParent(), "Tidak dapat dilakukan pada ladang lawan.", "Warning", JOptionPane.WARNING_MESSAGE);
                     return false;
                 }
+                if (!target.getObject().isActive()) {
+                    JOptionPane.showMessageDialog(source.getsParent(), "Kartunya masih kosongg..", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return false;
+                }
                 if (target.getObject() instanceof Animal animal) {
                     try {
                         animal.eat(food);
@@ -112,6 +116,10 @@ public class TransferGameHandler extends TransferHandler {
                         JOptionPane.showMessageDialog(source.getsParent(), "Pakai ke ladang lawan yaa...", "Warning", JOptionPane.WARNING_MESSAGE);
                         return false;
                     }
+                    if (!target.getObject().isActive()) {
+                        JOptionPane.showMessageDialog(source.getsParent(), "Kartunya masih kosongg..", "Warning", JOptionPane.WARNING_MESSAGE);
+                        return false;
+                    }
                     item.useEffect((LivingThing) target.getObject());
                     source.getsParent().changeFieldToEnemy();
                     try {
@@ -127,6 +135,10 @@ public class TransferGameHandler extends TransferHandler {
                     JOptionPane.showMessageDialog(source.getsParent(), "Rugi dong kalau dipakai ke ladang lawan...", "Warning", JOptionPane.WARNING_MESSAGE);
                     return false;
                 }
+                if (!target.getObject().isActive()) {
+                    JOptionPane.showMessageDialog(source.getsParent(), "Kartunya masih kosongg..", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return false;
+                }g
                 if (item.getName().equals("INSTANT_HARVEST")) {
                     try {
                         source.getOwner().removeCardInDeck(source.getPosition().convertPairToIdx());
