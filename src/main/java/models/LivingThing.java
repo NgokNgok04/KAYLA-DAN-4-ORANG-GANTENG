@@ -82,7 +82,9 @@ public abstract class LivingThing extends GameObject implements Affectable{
 
     @Override
     public void destroy() {
-        setActive(false);
+        if (!isProtection()) {
+            setActive(false);
+        }
     }
 
     @Override
