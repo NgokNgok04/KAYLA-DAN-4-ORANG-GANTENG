@@ -57,7 +57,7 @@ public class ShuffleCard extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        roundedPane1.setBackground(new java.awt.Color(153, 204, 255));
+        roundedPane1.setBackground(new java.awt.Color(0.6f, 0.8f, 1.0f, 0.85f));
         roundedPane1.setRoundBottomLeft(30);
         roundedPane1.setRoundBottomRight(30);
         roundedPane1.setRoundTopLeft(30);
