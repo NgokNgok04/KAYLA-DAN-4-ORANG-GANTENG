@@ -692,6 +692,7 @@ public class MainFrame extends javax.swing.JFrame {
     private gui.RoundedPane roundedPane5;
     private gui.ButtonRounded saveButton;
     private gui.ButtonRounded shopButton;
+//    private gui
     private javax.swing.border.SoftBevelBorder softBevelBorder1;
     // End of variables declaration//GEN-END:variables
 }
