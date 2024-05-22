@@ -11,9 +11,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import gamexception.GameException;
-import utils.Pair;
-
 public class GameManager {
     private static GameManager instance;
     private int curTurn;
@@ -84,7 +81,7 @@ public class GameManager {
     }
 
     public Player next(){
-        if(curTurn==40){
+        if(curTurn==20){
             return null;
         }
         curTurn++;
