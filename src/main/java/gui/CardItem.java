@@ -135,9 +135,7 @@ public class CardItem extends JPanel {
     }
 
     public void refreshData() {
-//        System.out.println("Masukk");
         if (!object.isActive()) {
-//            System.out.println("Kosong");
             imageLabel.setIcon(new ImageIcon(icons.Icon.NOTHING.getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
             nameLabel.setText(" ");
             return;
@@ -149,7 +147,6 @@ public class CardItem extends JPanel {
                 return;
             }
         }
-        System.out.println("Active Baby");
         imageLabel.setIcon(new ImageIcon(object.getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
         nameLabel.setText(object.getNameParsed());
 //        System.out.println("Settled");

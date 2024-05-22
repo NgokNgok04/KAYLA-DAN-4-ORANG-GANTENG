@@ -68,6 +68,7 @@ public class GameShop extends javax.swing.JFrame {
         roundedPane1.setRoundBottomRight(30);
         roundedPane1.setRoundTopLeft(30);
         roundedPane1.setRoundTopRight(30);
+        roundedPane1.setBordered(false);
 
         jLabel1.setFont(new java.awt.Font("Serif", 3, 36)); // NOI18N
         jLabel1.setText("GAME SHOP");

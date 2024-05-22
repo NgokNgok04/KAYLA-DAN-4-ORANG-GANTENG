@@ -128,6 +128,7 @@ public class PopUpDetail extends javax.swing.JFrame {
         roundedPane1.setRoundBottomRight(30);
         roundedPane1.setRoundTopLeft(30);
         roundedPane1.setRoundTopRight(30);
+        roundedPane1.setBordered(false);
 
         harvestLabel.setText("jLabel1");
 
@@ -281,9 +282,9 @@ public class PopUpDetail extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        this.dispose();
         parent.getsParent().setEnabled(true);
         parent.getsParent().setFocusable(true);
+        this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void panenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_panenButtonActionPerformed
@@ -293,6 +294,7 @@ public class PopUpDetail extends javax.swing.JFrame {
                 parent.getOwner().harvestField(parent.getPosition());
                 parent.getsParent().refreshActiveDeck();
                 parent.getsParent().changeFieldToPlayer();
+                System.out.println(parent.getPosition().getFirst()+", "+parent.getPosition().getSecond()+": "+parent.getObject().getName());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(parent.getsParent(), "Erorr...", "Warning", JOptionPane.WARNING_MESSAGE);
                 e.printStackTrace();

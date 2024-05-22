@@ -43,6 +43,9 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;        super.paintComponent(g);&#xa;        if (backGround != null) {&#xa;            g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);&#xa;        }&#xa;    }&#xa;}"/>
       </AuxValues>
@@ -73,15 +76,10 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="1" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                                                  <Component id="roundedPane2" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                                  <Component id="roundedPane4" min="-2" max="-2" attributes="0"/>
-                                              </Group>
+                                              <Component id="roundedPane2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="roundedPane4" alignment="1" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -234,6 +232,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="fieldPanelParent.setSize(new Dimension(592, 612));"/>
+            <AuxValue name="JavaCodeGenerator_LayoutCodePre" type="java.lang.String" value="fieldPanelParent.setBordered(false);"/>
           </AuxValues>
 
           <Layout>
@@ -378,6 +377,9 @@
             <Property name="roundTopLeft" type="int" value="25"/>
             <Property name="roundTopRight" type="int" value="25"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="deckPanelParent.setBordered(false);"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -446,6 +448,9 @@
             <Property name="roundTopLeft" type="int" value="80"/>
             <Property name="roundTopRight" type="int" value="80"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="roundedPane1.setBordered(false);"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -485,6 +490,9 @@
             <Property name="roundTopLeft" type="int" value="30"/>
             <Property name="roundTopRight" type="int" value="30"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="roundedPane2.setBordered(false);"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -524,6 +532,9 @@
             <Property name="roundTopLeft" type="int" value="30"/>
             <Property name="roundTopRight" type="int" value="30"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="roundedPane4.setBordered(false);"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -563,6 +574,9 @@
             <Property name="roundTopLeft" type="int" value="30"/>
             <Property name="roundTopRight" type="int" value="30"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="roundedPane3.setBordered(false);"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -605,6 +619,9 @@
             <Property name="roundTopLeft" type="int" value="30"/>
             <Property name="roundTopRight" type="int" value="30"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="roundedPane5.setBordered(false);"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">

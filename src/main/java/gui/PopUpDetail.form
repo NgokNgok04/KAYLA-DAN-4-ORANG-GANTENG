@@ -45,6 +45,9 @@
         <Property name="roundTopLeft" type="int" value="30"/>
         <Property name="roundTopRight" type="int" value="30"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="roundedPane1.setBordered(false);"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">

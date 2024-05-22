@@ -20,7 +20,6 @@ public class Player {
         for (int i = 0; i < 6; i++)  {
             activeDeck.add(new Accelerate());
             activeDeck.get(i).setActive(false);
-            System.out.println(field.get(i).isActive());
         }
         this.deckSlot = 40;
     }
@@ -145,13 +144,12 @@ public class Player {
 
     public void addCardInField(LivingThing card, Pair<Integer,Integer> pos){
         int idx = pos.convertPairToIdx();
-        System.out.println(idx);
         this.setFieldElement(card, idx);
     }
 
     public void removeCardInField(Pair<Integer,Integer> pos){
         int idx = pos.convertPairToIdx();
-        field.get(idx).destroy();
+        field.get(idx).setActive(false);
     }
 
     public void swapCardInField(Pair<Integer,Integer> posStart, Pair<Integer,Integer> posAfter){
@@ -202,8 +200,8 @@ public class Player {
                     }
                 }
             }
-            setActiveDeckItem(this.getFieldItem(idx).harvest(), idxResultHarvest);
-            removeCardInField(pos);   
+            setActiveDeckItem(new Product(this.getFieldItem(idx).harvest().getName()), idxResultHarvest);
+            removeCardInField(pos);
         }
     }
 

@@ -129,7 +129,6 @@ public class ShopItem extends javax.swing.JPanel {
             }
         }
         currentN = newNum;
-//        System.out.println("Quantity of "+product.getNameParsed()+" changed, becomes " + shop.getCart().size());
     }//GEN-LAST:event_quantitySpinnerStateChanged
 
 

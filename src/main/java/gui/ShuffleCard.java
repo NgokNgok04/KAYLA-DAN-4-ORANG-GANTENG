@@ -62,6 +62,7 @@ public class ShuffleCard extends javax.swing.JFrame {
         roundedPane1.setRoundBottomRight(30);
         roundedPane1.setRoundTopLeft(30);
         roundedPane1.setRoundTopRight(30);
+        roundedPane1.setBordered(false);
 
         shuffleAgainButton.setBackground(new Color(0.96f, 0.953f, 0.9f, 0.1f));
         shuffleAgainButton.setBackground(new Color(0.2f, 0.8f, 0.9f, 0.1f));

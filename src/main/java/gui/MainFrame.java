@@ -105,11 +105,9 @@ public class MainFrame extends javax.swing.JFrame {
             i++;
         }
         i = 0;
-        System.out.println("Current player: " + game.getCurPlayer());
         for (GameObject thing : game.getCurPlayer().getActiveDeck()) {
             deck.get(i).setObject(thing);
             deck.get(i).setOwner(game.getCurPlayer());
-            System.out.println(deck.get(i).getObject().isActive());
             i++;
         }
         refreshCoin();
@@ -121,7 +119,6 @@ public class MainFrame extends javax.swing.JFrame {
         for (GameObject thing : game.getCurPlayer().getActiveDeck()) {
             deck.get(i).setObject(thing);
             deck.get(i).setOwner(game.getCurPlayer());
-            System.out.println(deck.get(i).getObject().isActive());
             i++;
         }
     }
@@ -227,6 +224,9 @@ public class MainFrame extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
+
+        jPanel1.setOpaque(false);
+
         enemyFieldButton1.setText("Ladang Lawan");
         enemyFieldButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,6 +307,8 @@ public class MainFrame extends javax.swing.JFrame {
         fieldPanel.add(cardItem19);
         fieldPanel.add(cardItem20);
 
+        fieldPanelParent.setBordered(false);
+
         javax.swing.GroupLayout fieldPanelParentLayout = new javax.swing.GroupLayout(fieldPanelParent);
         fieldPanelParent.setLayout(fieldPanelParentLayout);
         fieldPanelParentLayout.setHorizontalGroup(
@@ -329,6 +331,7 @@ public class MainFrame extends javax.swing.JFrame {
         deckPanelParent.setRoundBottomRight(25);
         deckPanelParent.setRoundTopLeft(25);
         deckPanelParent.setRoundTopRight(25);
+        deckPanelParent.setBordered(false);
 
         deckPanel.setOpaque(false);
         deckPanel.add(cardItem21);
@@ -356,6 +359,7 @@ public class MainFrame extends javax.swing.JFrame {
         roundedPane1.setRoundBottomRight(80);
         roundedPane1.setRoundTopLeft(80);
         roundedPane1.setRoundTopRight(80);
+        roundedPane1.setBordered(false);
 
         jLabel1.setText("TURN");
 
@@ -381,6 +385,7 @@ public class MainFrame extends javax.swing.JFrame {
         roundedPane2.setRoundBottomRight(30);
         roundedPane2.setRoundTopLeft(30);
         roundedPane2.setRoundTopRight(30);
+        roundedPane2.setBordered(false);
 
         jLabel4.setText("Player 1");
 
@@ -406,6 +411,7 @@ public class MainFrame extends javax.swing.JFrame {
         roundedPane4.setRoundBottomRight(30);
         roundedPane4.setRoundTopLeft(30);
         roundedPane4.setRoundTopRight(30);
+        roundedPane4.setBordered(false);
 
         jLabel5.setText("Player 2");
 
@@ -431,6 +437,7 @@ public class MainFrame extends javax.swing.JFrame {
         roundedPane3.setRoundBottomRight(30);
         roundedPane3.setRoundTopLeft(30);
         roundedPane3.setRoundTopRight(30);
+        roundedPane3.setBordered(false);
 
         player1Coin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicon/Dollar Coin_1.png"))); // NOI18N
         player1Coin.setText("jLabel2");
@@ -457,6 +464,7 @@ public class MainFrame extends javax.swing.JFrame {
         roundedPane5.setRoundBottomRight(30);
         roundedPane5.setRoundTopLeft(30);
         roundedPane5.setRoundTopRight(30);
+        roundedPane5.setBordered(false);
 
         player2Coin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicon/Dollar Coin_1.png"))); // NOI18N
         player2Coin.setText("jLabel3");
@@ -516,13 +524,10 @@ public class MainFrame extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(96, 96, 96)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(96, 96, 96)
-                                                .addComponent(roundedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(24, 24, 24)
-                                                .addComponent(roundedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(roundedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(roundedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(roundedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

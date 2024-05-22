@@ -18,21 +18,7 @@ import javax.swing.JPanel;
  *
  * @author Suthasoma
  */
-public class RoundedPane extends  JPanel{
-
-    /**
-     * @return the bordered
-     */
-    public boolean isBordered() {
-        return bordered;
-    }
-
-    /**
-     * @param bordered the bordered to set
-     */
-    public void setBordered(boolean bordered) {
-        this.bordered = bordered;
-    }
+public class RoundedPanenBordered extends  JPanel{
 
     /**
      * @return the roundTopLeft
@@ -98,9 +84,8 @@ public class RoundedPane extends  JPanel{
     private int roundTopRight = 0;
     private int roundBottomLeft = 0;
     private int roundBottomRight = 0;
-    private boolean bordered = true;
     
-    public RoundedPane() {
+    public RoundedPanenBordered() {
         setOpaque(false);
     }
 
@@ -120,12 +105,10 @@ public class RoundedPane extends  JPanel{
             area.intersect(new Area(createRoundBottomRight()));
         }
         g2.fill(area);
-        if (bordered){
-            g2.setColor(Color.BLACK);
-            g2.drawRoundRect(0, 0, getWidth(), getHeight(), roundTopLeft, roundTopLeft);
-            g2.drawRoundRect(1, 1, getWidth()-2, getHeight()-2, roundTopLeft-2, roundTopLeft-2);
-            g2.drawRoundRect(2, 2, getWidth()-4, getHeight()-4, roundTopLeft-4, roundTopLeft-4);
-        }
+        g2.setColor(Color.BLACK);
+        g2.drawRoundRect(0, 0, getWidth(), getHeight(), roundTopLeft, roundTopLeft);
+        g2.drawRoundRect(1, 1, getWidth()-2, getHeight()-2, roundTopLeft-2, roundTopLeft-2);
+        g2.drawRoundRect(2, 2, getWidth()-4, getHeight()-4, roundTopLeft-4, roundTopLeft-4);
         g2.dispose();
         super.paintComponent(g); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
