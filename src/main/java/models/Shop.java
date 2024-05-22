@@ -99,6 +99,26 @@ public final class Shop {
         return quantity<=getQuantity(name);
     }
 
+    public int getCountItemsReady(){
+        int total = 0;
+        for(Pair<Product,Integer> item:availableItem){
+            if(item.getSecond()!=0){
+                total++;
+            }
+        }
+        return total;
+    }
+
+    public ArrayList<Pair<String,Integer>> getItemsReady(){
+        ArrayList<Pair<String,Integer>> items = new ArrayList<>();
+        for(Pair<Product,Integer> item: availableItem){
+            if(item.getSecond()>0){
+                items.add(new Pair<String,Integer>(item.getFirst().getName(), item.getSecond()));
+            }
+        }
+        return items;
+    } 
+
     public void addItem(String name, int quantity){
         for(int i = 0; i < availableItem.size(); i++){
             if(getItem(i).getName().equals(name)){

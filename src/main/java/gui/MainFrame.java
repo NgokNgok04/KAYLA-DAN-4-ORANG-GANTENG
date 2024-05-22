@@ -93,7 +93,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void initGameManager() {
-        this.game = new GameManager(new Player(), new Player());
+        this.game = GameManager.getInstance();
     }
 
     public void refreshGame() {
