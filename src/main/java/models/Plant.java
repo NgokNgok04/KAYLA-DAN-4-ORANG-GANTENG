@@ -70,7 +70,7 @@ public class Plant extends LivingThing {
 
     @Override
     public void delay() {
-        age = age > 2 ? age - 2 : 0;
+        if (!isProtection()) age = age > 2 ? age - 2 : 0;
     }
 
 }

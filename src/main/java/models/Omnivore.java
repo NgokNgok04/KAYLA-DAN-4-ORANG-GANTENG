@@ -44,7 +44,7 @@ public class Omnivore extends Animal{
         if (!(eatable instanceof Product product)) {
             throw new GameException("Omnivore can only eat Product");
         }
-        product.setActive(false);
+//        product.setActive(false);
         setWeight(getWeight() + product.getAddedWeight());
     }
 }

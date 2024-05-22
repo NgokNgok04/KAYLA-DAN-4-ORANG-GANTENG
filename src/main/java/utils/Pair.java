@@ -7,6 +7,18 @@ public class Pair<A,B> {
         this.first = first;
         this.second = second;
     }
+    
+    public static Pair<Integer, Integer> convertTokenToPair(String token) {
+        char letterPart = token.charAt(0);
+        String numberPart = token.substring(1);
+
+        int rowIndex = letterPart - 'A' + 1;
+        int colIndex = Integer.parseInt(numberPart);
+
+        return new Pair<>(rowIndex, colIndex);
+    }
+
+
 
     public A getFirst(){
         return this.first;
@@ -25,7 +37,7 @@ public class Pair<A,B> {
         if (this.first instanceof Integer && this.second instanceof Integer){
             int rowIdx = (Integer) this.first;
             int colIdx = (Integer) this.second;
-            return (rowIdx*4 + colIdx);
+            return (rowIdx*5 + colIdx);
         }
 
         return -1;

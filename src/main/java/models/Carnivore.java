@@ -35,7 +35,7 @@ public class Carnivore extends Animal{
         if (product.getOrigin() != Product.PRODUCT_ANIMAL) {
             throw new GameException("Carnivore can only eat Animal Product");
         }
-        product.setActive(false);
+//        product.setActive(false);
         setWeight(getWeight() + product.getAddedWeight());
     }
 }

@@ -5,10 +5,9 @@
 package gui;
 
 import java.awt.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import models.*;
-
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -29,38 +28,40 @@ public class PopUpDetail extends javax.swing.JFrame {
         this.object = (LivingThing) parent.getObject();
         setEffectTable();
         setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f));
-        roundedPane1.setBackground(new Color(0.9f, 0.9f, 0.8f, 0.8f));
+        roundedPane1.setBackground(new Color(0.9f, 0.9f, 0.8f, 0.9f));
         if (object instanceof Animal) {
             setDataAnimal();
         } else {
             setDataPlant();
         }
         setLocationRelativeTo(parent.getsParent());
+        if (!parent.isSwap()) {
+            panenButton.setVisible(false);
+        }
     }
     
     private void setEffectTable() {
-        String data[][] = new String[5][2];
+        String data[][] = new String[4][2];
         data[0][0] = "ACCELERATE";
-        data[1][0] = "INSTANT_HARVEST";
-        data[2][0] = "DELAY";
-        data[3][0] = "PROTECT";
-        data[4][0] = "TRAP";
+        data[1][0] = "DELAY";
+        data[2][0] = "PROTECT";
+        data[3][0] = "TRAP";
         data[0][1] = "0";
         data[1][1] = "0";
         data[2][1] = "0";
         data[3][1] = "0";
-        data[4][1] = "0";
         for (Item item : object.getItems()) {
-            for (int i = 0; i < 5; i++) {
-                if (item.getName().equals(data[i][0])) {
+            for (int i = 0; i < 4; i++) {
+                if (item.getNameParsed().equals(data[i][0])) {
                     data[i][1] = Integer.toString(Integer.parseInt(data[i][1])+1);
                     break;
                 }
             }
         }
-        DefaultTableModel table = (DefaultTableModel) effectTable.getModel();
-        String[] columnName = new String[]{"Item", "Jumlah"};
-        table.setDataVector(data, columnName);
+        caccelerate.setText(data[0][1]);
+        cdelay.setText(data[1][1]);
+        cprotect.setText(data[2][1]);
+        ctrap.setText(data[3][1]);
     }
 
     private void setDataPlant() {
@@ -70,11 +71,11 @@ public class PopUpDetail extends javax.swing.JFrame {
         weightAmount.setText(Integer.toString(plant.getAge()));
         harvestAmount.setText(Integer.toString(plant.getAgeToHarvest()));
         if (plant.isInstantHarvest() || plant.getAge() >= plant.getAgeToHarvest()) {
-            nameLabel.setText(plant.getProduct().getName());
+            nameLabel.setText(plant.getProduct().getNameParsed());
             imageLabel.setIcon(new ImageIcon(plant.getProduct().getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
         } else {
             panenButton.setEnabled(false);
-            nameLabel.setText(plant.getName());
+            nameLabel.setText(plant.getNameParsed());
             imageLabel.setIcon(new ImageIcon(plant.getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
         }
     }
@@ -85,7 +86,7 @@ public class PopUpDetail extends javax.swing.JFrame {
         harvestLabel.setText("Berat Panen:");
         weightAmount.setText(Integer.toString(animal.getWeight()));
         harvestAmount.setText(Integer.toString(animal.getWeightToHarvest()));
-        nameLabel.setText(object.getName());
+        nameLabel.setText(object.getNameParsed());
         imageLabel.setIcon(new ImageIcon(animal.getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
         if (!animal.isInstantHarvest() && animal.getWeight() < animal.getWeightToHarvest()) {
             panenButton.setEnabled(false);
@@ -102,8 +103,6 @@ public class PopUpDetail extends javax.swing.JFrame {
 
         roundedPane1 = new gui.RoundedPane();
         imageLabel = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        effectTable = new javax.swing.JTable();
         harvestLabel = new javax.swing.JLabel();
         backButton = new gui.ButtonRounded();
         weightLabel = new javax.swing.JLabel();
@@ -111,6 +110,14 @@ public class PopUpDetail extends javax.swing.JFrame {
         nameLabel = new javax.swing.JLabel();
         weightAmount = new javax.swing.JLabel();
         harvestAmount = new javax.swing.JLabel();
+        buttonRounded1 = new gui.ButtonRounded();
+        buttonRounded2 = new gui.ButtonRounded();
+        buttonRounded3 = new gui.ButtonRounded();
+        buttonRounded4 = new gui.ButtonRounded();
+        caccelerate = new gui.ButtonRounded();
+        cdelay = new gui.ButtonRounded();
+        cprotect = new gui.ButtonRounded();
+        ctrap = new gui.ButtonRounded();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 255));
@@ -121,28 +128,6 @@ public class PopUpDetail extends javax.swing.JFrame {
         roundedPane1.setRoundBottomRight(30);
         roundedPane1.setRoundTopLeft(30);
         roundedPane1.setRoundTopRight(30);
-
-        effectTable.setBackground(new java.awt.Color(255, 255, 255));
-        effectTable.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        effectTable.setForeground(new java.awt.Color(0, 0, 0));
-        effectTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Item", "Jumlah"
-            }
-        ));
-        effectTable.setMaximumSize(new java.awt.Dimension(2147483647, 130));
-        effectTable.setMinimumSize(new java.awt.Dimension(30, 129));
-        effectTable.setRequestFocusEnabled(false);
-        effectTable.setRowHeight(22);
-        jScrollPane3.setViewportView(effectTable);
 
         harvestLabel.setText("jLabel1");
 
@@ -171,6 +156,32 @@ public class PopUpDetail extends javax.swing.JFrame {
 
         harvestAmount.setText("jLabel1");
 
+        buttonRounded1.setText("Accelerate");
+        buttonRounded1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRounded1ActionPerformed(evt);
+            }
+        });
+
+        buttonRounded2.setText("Delay");
+
+        buttonRounded3.setText("Protect");
+        buttonRounded3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRounded3ActionPerformed(evt);
+            }
+        });
+
+        buttonRounded4.setText("Trap");
+
+        caccelerate.setText("0");
+
+        cdelay.setText("0");
+
+        cprotect.setText("0");
+
+        ctrap.setText("0");
+
         javax.swing.GroupLayout roundedPane1Layout = new javax.swing.GroupLayout(roundedPane1);
         roundedPane1.setLayout(roundedPane1Layout);
         roundedPane1Layout.setHorizontalGroup(
@@ -181,27 +192,37 @@ public class PopUpDetail extends javax.swing.JFrame {
                     .addGroup(roundedPane1Layout.createSequentialGroup()
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(roundedPane1Layout.createSequentialGroup()
                         .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(18, 18, 18)
+                        .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(roundedPane1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(buttonRounded1, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                                    .addComponent(buttonRounded2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(buttonRounded3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(buttonRounded4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(32, 32, 32)
                                 .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(roundedPane1Layout.createSequentialGroup()
-                                        .addComponent(weightLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(weightAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(roundedPane1Layout.createSequentialGroup()
-                                        .addComponent(harvestLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(harvestAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(roundedPane1Layout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addComponent(panenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 16, Short.MAX_VALUE))))
+                                    .addComponent(caccelerate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cdelay, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cprotect, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ctrap, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(roundedPane1Layout.createSequentialGroup()
+                                    .addComponent(weightLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(weightAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(roundedPane1Layout.createSequentialGroup()
+                                    .addComponent(harvestLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(harvestAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(30, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedPane1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(157, 157, 157))
         );
         roundedPane1Layout.setVerticalGroup(
             roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,6 +233,9 @@ public class PopUpDetail extends javax.swing.JFrame {
                     .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(roundedPane1Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(roundedPane1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(weightLabel)
@@ -220,15 +244,25 @@ public class PopUpDetail extends javax.swing.JFrame {
                         .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(harvestLabel)
                             .addComponent(harvestAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(panenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
-                    .addGroup(roundedPane1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonRounded1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(caccelerate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonRounded2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cdelay, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonRounded3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cprotect, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonRounded4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ctrap, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(panenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -254,17 +288,44 @@ public class PopUpDetail extends javax.swing.JFrame {
 
     private void panenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_panenButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("Harvesttt!!!");
+        if (!parent.getOwner().isActiveDeckFull()) {
+            try {
+                parent.getOwner().harvestField(parent.getPosition());
+                parent.getsParent().refreshActiveDeck();
+                parent.getsParent().changeFieldToPlayer();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(parent.getsParent(), "Erorr...", "Warning", JOptionPane.WARNING_MESSAGE);
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(parent.getsParent(), "Tidak dapat memanen. Deck aktif penuh.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        parent.getsParent().setEnabled(true);
+        this.dispose();
     }//GEN-LAST:event_panenButtonActionPerformed
+
+    private void buttonRounded1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRounded1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonRounded1ActionPerformed
+
+    private void buttonRounded3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRounded3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonRounded3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.ButtonRounded backButton;
-    private javax.swing.JTable effectTable;
+    private gui.ButtonRounded buttonRounded1;
+    private gui.ButtonRounded buttonRounded2;
+    private gui.ButtonRounded buttonRounded3;
+    private gui.ButtonRounded buttonRounded4;
+    private gui.ButtonRounded caccelerate;
+    private gui.ButtonRounded cdelay;
+    private gui.ButtonRounded cprotect;
+    private gui.ButtonRounded ctrap;
     private javax.swing.JLabel harvestAmount;
     private javax.swing.JLabel harvestLabel;
     private javax.swing.JLabel imageLabel;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel nameLabel;
     private gui.ButtonRounded panenButton;
     private gui.RoundedPane roundedPane1;

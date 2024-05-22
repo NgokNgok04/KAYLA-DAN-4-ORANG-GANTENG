@@ -48,7 +48,6 @@ public class Herbivore extends Animal{
         if (product.getOrigin() != Product.PRODUCT_PLANT) {
             throw new GameException("Herbivore can only eat Animal Product");
         }
-        product.setActive(false);
         setWeight(getWeight() + product.getAddedWeight());
     }
 }
