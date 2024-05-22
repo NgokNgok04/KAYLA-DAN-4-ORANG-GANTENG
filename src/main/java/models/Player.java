@@ -253,6 +253,9 @@ public class Player {
     }
 
     public void placeProduct(Product product,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
+        if(fieldTarget!=field){
+            throw new GameException("Can't place product to enemy's field");
+        }
         Animal target = (Animal)fieldTarget.get(pos.convertPairToIdx());
         target.eat(product);
     }
