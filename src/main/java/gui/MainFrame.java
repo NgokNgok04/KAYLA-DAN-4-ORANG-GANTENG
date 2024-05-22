@@ -121,7 +121,7 @@ public class MainFrame extends javax.swing.JFrame {
         for (GameObject thing : game.getCurPlayer().getActiveDeck()) {
             deck.get(i).setObject(thing);
             deck.get(i).setOwner(game.getCurPlayer());
-            System.out.println(deck.get(i).getObject().isActive());
+//            System.out.println(deck.get(i).getObject().isActive());
             i++;
         }
     }

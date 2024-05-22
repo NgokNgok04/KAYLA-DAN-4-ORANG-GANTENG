@@ -20,7 +20,7 @@ public class Player {
         for (int i = 0; i < 6; i++)  {
             activeDeck.add(new Accelerate());
             activeDeck.get(i).setActive(false);
-            System.out.println(field.get(i).isActive());
+//            System.out.println(field.get(i).isActive());
         }
         this.deckSlot = 40;
     }

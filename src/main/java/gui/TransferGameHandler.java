@@ -99,6 +99,7 @@ public class TransferGameHandler extends TransferHandler {
                         animal.eat(food);
                         source.getOwner().removeCardInDeck(source.getPosition().getSecond());
                         source.getsParent().refreshActiveDeck();
+                        target.updateNameLabel();
                         return true;
                     } catch (GameException e) {
                         JOptionPane.showMessageDialog(source.getsParent(), "Jenis makanan tidak sesuai.", "Warning", JOptionPane.WARNING_MESSAGE);

@@ -134,8 +134,12 @@ public class CardItem extends JPanel {
         imageLabel.setMaximumSize(new Dimension(113, 95));
     }
 
+    public void updateNameLabel(){
+        nameLabel.setText(object.getNameCard(true));
+    }
     public void refreshData() {
 //        System.out.println("Masukk");
+        System.out.println(object.getName() + " " + getField());
         if (!object.isActive()) {
 //            System.out.println("Kosong");
             imageLabel.setIcon(new ImageIcon(icons.Icon.NOTHING.getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
@@ -143,15 +147,22 @@ public class CardItem extends JPanel {
             return;
         }
         if (getField() == FIELD_CARD) {
+
             if (object instanceof Plant plant && (plant.getAge() >= plant.getAgeToHarvest() || plant.isInstantHarvest())) {
                 imageLabel.setIcon(new ImageIcon(plant.getProduct().getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
-                nameLabel.setText(plant.getProduct().getNameParsed());
+                nameLabel.setText(plant.getProduct().getNameParsed() + " (READY)");
                 return;
             }
+
+            nameLabel.setText(object.getNameCard(true));
+
+        } else {
+            nameLabel.setText(object.getNameCard(false));
         }
-        System.out.println("Active Baby");
+//        System.out.println("Active Baby");
         imageLabel.setIcon(new ImageIcon(object.getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
-        nameLabel.setText(object.getNameParsed());
+
+
 //        System.out.println("Settled");
     }
 
@@ -245,10 +256,7 @@ public class CardItem extends JPanel {
         roundedPane1.setLayout(roundedPane1Layout);
         roundedPane1Layout.setHorizontalGroup(
             roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roundedPane1Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         roundedPane1Layout.setVerticalGroup(
