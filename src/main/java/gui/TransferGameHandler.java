@@ -3,6 +3,7 @@ package gui;
 import java.awt.datatransfer.*;
 import java.io.IOException;
 import javax.swing.*;
+import javax.xml.stream.FactoryConfigurationError;
 
 import gamexception.GameException;
 import models.*;
@@ -55,50 +56,135 @@ public class TransferGameHandler extends TransferHandler {
         }
         if (source.getField() == CardItem.FIELD_CARD && target.isSwap()) {
             // TODO : add swap field from player
-            if (source.getOwner() != null) {
-                System.out.println("Swaping");
-                source.getOwner().swapCardInField(source.getPosition(), target.getPosition());
-            }
+            // Swap posisi pada FIELD
+            System.out.println("Swaping");
+            source.getOwner().swapCardInField(source.getPosition(), target.getPosition());
             source.setObject(target.getObject());
             target.setObject(gameObject);
             return true;
         } else if (source.getField() == CardItem.DECK_CARD){
-            if (source.getOwner() == target.getOwner() && gameObject instanceof LivingThing thing && !target.getObject().isActive()) {
-                int posInDeck = source.getPosition().getSecond();
+            // Melakukan penanaman
+            if (gameObject instanceof LivingThing thing) {
+                if (source.getOwner() != target.getOwner()) {
+                    JOptionPane.showMessageDialog(source.getsParent(), "Tidak dapat dilakukan pada ladang lawan.", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return false;
+                }
+                if (target.getObject().isActive()) {
+                    JOptionPane.showMessageDialog(source.getsParent(), "Tidak bisa, sudah terisi soalnya.", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return false;
+                }
                 target.getOwner().addCardInField((LivingThing) GameContext.createObject(gameObject.getName()), target.getPosition());
-                target.setObject(thing);
+                target.setObject(target.getOwner().getFieldItem(target.getPosition().convertPairToIdx()));
                 try {
-                    source.getOwner().removeCardInDeck(posInDeck);
+                    source.getOwner().removeCardInDeck(source.getPosition().convertPairToIdx());
                     source.getsParent().refreshActiveDeck();
-                    return true;
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (Exception ee) {
+                    ee.printStackTrace();
+                    JOptionPane.showMessageDialog(source.getsParent(), "Errorrr..", "Warning", JOptionPane.WARNING_MESSAGE);
                     return false;
                 }
             }
-            if (gameObject instanceof Product food && target.getObject() instanceof Animal animal && animal.isActive()) {
-                try {
-                    animal.eat(food);
-                    source.removeObject();
-                    if (source.getOwner() != null) {
-                        source.getOwner().removeCardInDeck(source.getPosition().getFirst()); // getFirst is the index, getSecond is always 0
-                    }
-                    return true;
-                } catch (GameException e) {
-                    e.printMessage();
+            // Memberi makan
+            if (gameObject instanceof Product food) {
+                if (target.getOwner() != source.getOwner()) {
+                    JOptionPane.showMessageDialog(source.getsParent(), "Tidak dapat dilakukan pada ladang lawan.", "Warning", JOptionPane.WARNING_MESSAGE);
                     return false;
                 }
-            } else if (gameObject instanceof Item item && target.getObject().isActive()) {
-                if (item.getName().equals("INSTANT_HARVEST")) {
-                    item.useEffect((LivingThing) target.getObject());
-                    System.out.println("Auto Harvest");
-                    // TODO: auto harvest
+                if (target.getObject() instanceof Animal animal) {
+                    try {
+                        animal.eat(food);
+                        source.getOwner().removeCardInDeck(source.getPosition().getSecond());
+                        source.getsParent().refreshActiveDeck();
+                        return true;
+                    } catch (GameException e) {
+                        JOptionPane.showMessageDialog(source.getsParent(), "Jenis makanan tidak sesuai.", "Warning", JOptionPane.WARNING_MESSAGE);
+                        e.printStackTrace();
+                        return false;
+                    }
                 }
+                JOptionPane.showMessageDialog(source.getsParent(), "Heyy ini tanaman!.", "Warning", JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+            // Memakai item
+            if (gameObject instanceof Item item) {
+                if (item.getName().equals("DELAY") || item.getName().equals("DESTROY")) {
+                    if (source.getOwner() == target.getOwner()) {
+                        JOptionPane.showMessageDialog(source.getsParent(), "Pakai ke ladang lawan yaa...", "Warning", JOptionPane.WARNING_MESSAGE);
+                        return false;
+                    }
+                    item.useEffect((LivingThing) target.getObject());
+                    return true;
+                }
+                if (source.getOwner() != target.getOwner()) {
+                    JOptionPane.showMessageDialog(source.getsParent(), "Rugi dong kalau dipakai ke ladang lawan...", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return false;
+                }
+                if (item.getName().equals("INSTANT_HARVEST")) {
+                    try {
+                        source.getOwner().removeCardInDeck(source.getPosition().convertPairToIdx());
+                        item.useEffect((LivingThing) target.getObject());
+                        target.getOwner().harvestField(target.getPosition());
+                        target.getsParent().changeFieldToPlayer();
+                        source.getsParent().refreshActiveDeck();
+                        return true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(source.getsParent(), "Errorrr..", "Warning", JOptionPane.WARNING_MESSAGE);
+                        return false;
+                    }
+
+                }
+
                 item.useEffect((LivingThing) target.getObject());
-                target.refreshData();
-                source.removeObject();
+
+                try {
+                    source.getOwner().removeCardInDeck(source.getPosition().convertPairToIdx());
+                    source.getsParent().refreshActiveDeck();
+                } catch (Exception ee) {
+                    ee.printStackTrace();
+                    return false;
+                }
                 return true;
             }
+//            if (source.getOwner() == target.getOwner() && gameObject instanceof LivingThing thing && !target.getObject().isActive()) {
+//                int posInDeck = source.getPosition().getSecond();
+//                target.getOwner().addCardInField((LivingThing) GameContext.createObject(gameObject.getName()), target.getPosition());
+//                target.setObject(target.getOwner().getFieldItem(target.getPosition().convertPairToIdx()));
+//                target.getObject().setActive(true);
+//                System.out.println("Menanam =============== "+ target.getObject().isActive());
+//                try {
+//                    source.getOwner().removeCardInDeck(posInDeck);
+//                    source.getsParent().refreshActiveDeck();
+//                    return true;
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    return false;
+//                }
+//            }
+//            // Memberi makan
+//            if (gameObject instanceof Product food && target.getObject() instanceof Animal animal && animal.isActive()) {
+//                try {
+//                    animal.eat(food);
+//                    source.removeObject();
+//                    if (source.getOwner() != null) {
+//                        source.getOwner().removeCardInDeck(source.getPosition().getFirst()); // getFirst is the index, getSecond is always 0
+//                    }
+//                    return true;
+//                } catch (GameException e) {
+//                    e.printMessage();
+//                    return false;
+//                }
+//            } else if (gameObject instanceof Item item && target.getObject().isActive()) {
+//                if (item.getName().equals("INSTANT_HARVEST")) {
+//                    item.useEffect((LivingThing) target.getObject());
+//                    System.out.println("Auto Harvest");
+//                    // TODO: auto harvest
+//                }
+//                item.useEffect((LivingThing) target.getObject());
+//                target.refreshData();
+//                source.removeObject();
+//                return true;
+//            }
         }
 
         return false;

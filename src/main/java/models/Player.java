@@ -104,7 +104,7 @@ public class Player {
 
     public boolean isActiveDeckFull(){
         for(int i = 0; i < 6; i++){
-            if(this.activeDeck.get(i) == null){
+            if(!this.activeDeck.get(i).isActive()){
                 return false;
             }
         }
@@ -192,12 +192,12 @@ public class Player {
             if (!this.getFieldItem(idx).isInstantHarvest()){
                 if (this.getFieldItem(idx).getTypeObject().equals("ANIMAL")){
                     Animal animal = (Animal) this.getFieldItem(idx);
-                    if (animal.getWeight() < animal.getWeightToHarvest()){
+                    if (animal.getWeight() < animal.getWeightToHarvest() && !animal.isInstantHarvest()){
                         throw new GameException("Card is not harvestable");
                     }
                 } else{
                     Plant plant = (Plant) this.getFieldItem(idx);
-                    if (plant.getAge() < plant.getAgeToHarvest()){
+                    if (plant.getAge() < plant.getAgeToHarvest() && !plant.isInstantHarvest()){
                         throw new GameException("Card is not harvestable");
                     }
                 }

@@ -151,7 +151,7 @@ public class CardItem extends JPanel {
                 return;
             }
         }
-//        System.out.println("Active Baby");
+        System.out.println("Active Baby");
         imageLabel.setIcon(new ImageIcon(object.getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
         nameLabel.setText(object.getNameParsed());
 //        System.out.println("Settled");
@@ -170,22 +170,34 @@ public class CardItem extends JPanel {
     }
 
     public void addActionReader() {
-        if (getField()) {
             addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     // Add any additional actions to be performed on click
                     onClickActionPerformed(e);
                 }
             });
-        }
     }
     
     public void onClickActionPerformed(MouseEvent e) {
-        if (parent != null && object.isActive()) {
-            System.out.println("Card clicked: " + object.getName());
-            parent.setEnabled(false);
-            this.nameLabel.setText(object.getNameParsed());
-            new PopUpDetail(this).setVisible(true);
+        System.out.println("Object cliked "+object.isActive() + " name " + object.getName());
+        if (object.isActive()) {
+            if (getField() == FIELD_CARD){
+//                System.out.println("Card clicked: " + object.getName());
+                parent.setEnabled(false);
+                this.nameLabel.setText(object.getNameParsed());
+                new PopUpDetail(this).setVisible(true);
+            } else {
+                if (object instanceof Product product) {
+                    if (JOptionPane.showConfirmDialog(parent, "Yakin jual barang?") == JOptionPane.YES_OPTION){
+                        try {
+                            owner.sell(position.getSecond());
+                            parent.refreshActiveDeck();
+                        } catch (Exception exp) {
+                            JOptionPane.showMessageDialog(parent, "Maaf, terjadi error");
+                        }
+                    }
+                }
+            }
         }
     }
     
