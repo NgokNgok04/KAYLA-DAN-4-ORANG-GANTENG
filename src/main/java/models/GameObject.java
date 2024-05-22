@@ -1,8 +1,6 @@
 package models;
 
 import java.awt.Image;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class GameObject {
