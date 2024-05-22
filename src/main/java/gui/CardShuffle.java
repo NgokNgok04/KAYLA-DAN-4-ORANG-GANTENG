@@ -69,6 +69,8 @@ public class CardShuffle extends JPanel {
     public void refreshCard() {
         imageLabel.setIcon(new ImageIcon(object.getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), java.awt.Image.SCALE_SMOOTH)));
         nameLabel.setText(object.getNameParsed());
+        roundedPane1.setBackground(new Color(0.392f, 0.2f, 0.0431f, 0.97f));
+        picked = false;
     }
 
     /**
