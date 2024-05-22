@@ -26,6 +26,10 @@ public class MainFrame extends javax.swing.JFrame {
     private ArrayList<CardItem> field = new ArrayList<>();
     private ArrayList<CardItem> deck = new ArrayList<>();
 
+    private GameManager game;
+    private Player currPlayer;
+//    private Shop shop;
+
     /**
      * Creates new form NewJFrame
      */
@@ -33,7 +37,9 @@ public class MainFrame extends javax.swing.JFrame {
         backGround = Icon.BACKGROUND;
         initComponents();
         setLocationRelativeTo(null);
+        initGameManager();
         initiateCards();
+        refreshGame();
 //        initiateGame();
     }
 
@@ -78,8 +84,73 @@ public class MainFrame extends javax.swing.JFrame {
         deck.add(cardItem25);
         deck.add(cardItem26);
 
-        new CardShuffle();
+        for (int i = 0; i < 6; i++) {
+            deck.get(i).setPosition(new Pair<>(0, i%6));
+        }
 
+    }
+
+    public void initGameManager() {
+        this.game = new GameManager(new Player(), new Player());
+    }
+
+    public void refreshGame() {
+        int i = 0;
+        for (LivingThing thing : game.getCurPlayer().getField()) {
+            field.get(i).setObject(thing);
+            field.get(i).setOwner(game.getCurPlayer());
+            field.get(i).setSwap(true);
+            i++;
+        }
+        i = 0;
+        System.out.println("Current player: " + game.getCurPlayer());
+        for (GameObject thing : game.getCurPlayer().getActiveDeck()) {
+            deck.get(i).setObject(thing);
+            deck.get(i).setOwner(game.getCurPlayer());
+            System.out.println(deck.get(i).getObject().isActive());
+            i++;
+        }
+        shuffle();
+    }
+
+    public void refreshActiveDeck() {
+        int i = 0;
+        for (GameObject thing : game.getCurPlayer().getActiveDeck()) {
+            deck.get(i).setObject(thing);
+            deck.get(i).setOwner(game.getCurPlayer());
+            System.out.println(deck.get(i).getObject().isActive());
+            i++;
+        }
+    }
+
+    public void shuffle() {
+        this.setEnabled(false);
+        new ShuffleCard((ArrayList<GameObject>) game.getCurPlayer().shuffleCard(), game.getCurPlayer().getMaxShuflleCount(), this, game.getCurPlayer()).setVisible(true);
+    }
+
+    public void changeFieldToEnemy() {
+        int i = 0;
+        for (LivingThing thing : game.getEnemyPlayer().getField()) {
+            field.get(i).setObject(thing);
+            field.get(i).setOwner(game.getEnemyPlayer());
+            field.get(i).setSwap(false);
+            i++;
+        }
+    }
+
+    public void changeFieldToPlayer() {
+        int i = 0;
+        for (LivingThing thing : game.getCurPlayer().getField()) {
+            field.get(i).setObject(thing);
+            field.get(i).setOwner(game.getCurPlayer());
+            field.get(i).setSwap(true);
+            i++;
+        }
+    }
+
+    public void next() {
+        game.next();
+        refreshGame();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -342,6 +413,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
+        next();
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void pluginLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pluginLoadButtonActionPerformed
@@ -358,14 +430,26 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void shopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shopButtonActionPerformed
         // TODO add your handling code here:
+        System.out.println("Welcome to Shop");
+        this.setEnabled(false);
+        if (Shop.getInstance().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Toko sedang kosong");
+            this.setEnabled(true);
+            return;
+        }
+        new GameShop(game.getCurPlayer(), this).setVisible(true);
     }//GEN-LAST:event_shopButtonActionPerformed
 
     private void enemyFieldButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enemyFieldButton1ActionPerformed
         // TODO add your handling code here:
+        changeFieldToEnemy();
+        System.out.println("Ke Ladang Lawan");
     }//GEN-LAST:event_enemyFieldButton1ActionPerformed
 
     private void myFieldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myFieldButtonActionPerformed
         // TODO add your handling code here:
+        changeFieldToPlayer();
+        System.out.println("Balik");
     }//GEN-LAST:event_myFieldButtonActionPerformed
 
     private Image backGround;

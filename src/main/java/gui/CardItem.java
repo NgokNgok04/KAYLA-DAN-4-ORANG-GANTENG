@@ -45,7 +45,7 @@ public class CardItem extends JPanel {
         setTransferHandler(new TransferGameHandler());
     }
 
-    public CardItem(GameObject object, Player owner, boolean field, Pair<Integer, Integer> position, Component parent, boolean swap) {
+    public CardItem(GameObject object, Player owner, boolean field, Pair<Integer, Integer> position, MainFrame parent, boolean swap) {
         initComponents();
         initPreferredSize();
         this.owner = owner;
@@ -59,7 +59,7 @@ public class CardItem extends JPanel {
         setTransferHandler(new TransferGameHandler());
     }
 
-    public void setCardItem(GameObject object, Player owner, boolean field, Pair<Integer, Integer> position, Component parent, boolean swap) {
+    public void setCardItem(GameObject object, Player owner, boolean field, Pair<Integer, Integer> position, MainFrame parent, boolean swap) {
         initComponents();
         initPreferredSize();
         this.owner = owner;
@@ -95,12 +95,12 @@ public class CardItem extends JPanel {
     public void setField(boolean field) {
         this.field = field;
     }
-
-    public Component getsParent() {
+    
+    public MainFrame getsParent() {
         return parent;
     }
 
-    public void setParent(JFrame parent) {
+    public void setParent(MainFrame parent) {
         this.parent = parent;
     }
 
@@ -127,13 +127,13 @@ public class CardItem extends JPanel {
     }
 
     public void initPreferredSize() {
-        this.setSize(new Dimension(120, 168));
-        this.setPreferredSize(new Dimension(120, 168));
-        this.setMinimumSize(new Dimension(120, 168));
-        this.setMaximumSize(new Dimension(120, 168));
-        imageLabel.setSize(new Dimension(120, 168));
-        imageLabel.setPreferredSize(new Dimension(120, 168));
-        imageLabel.setMaximumSize(new Dimension(120, 168));
+        this.setSize(new Dimension(110, 140));
+        this.setPreferredSize(new Dimension(110,140));
+        this.setMinimumSize(new Dimension(110, 140));
+        this.setMaximumSize(new Dimension(110, 140));
+        imageLabel.setSize(new Dimension(113, 95));
+        imageLabel.setPreferredSize(new Dimension(113,95));
+        imageLabel.setMaximumSize(new Dimension(113, 95));
     }
 
     public void refreshData() {
@@ -141,19 +141,19 @@ public class CardItem extends JPanel {
         if (!object.isActive()) {
 //            System.out.println("Kosong");
             imageLabel.setIcon(new ImageIcon(icons.Icon.NOTHING.getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
-//            nameLabel.setText(" ");
+            nameLabel.setText(" ");
             return;
         }
         if (getField() == FIELD_CARD) {
             if (object instanceof Plant plant && (plant.getAge() >= plant.getAgeToHarvest() || plant.isInstantHarvest())) {
                 imageLabel.setIcon(new ImageIcon(plant.getProduct().getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
-//                nameLabel.setText(plant.getProduct().getNameParsed());
+                nameLabel.setText(plant.getProduct().getNameParsed());
                 return;
             }
         }
-//        System.out.println("Active Baby");
+        System.out.println("Active Baby");
         imageLabel.setIcon(new ImageIcon(object.getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
-//        nameLabel.setText(object.getNameParsed());
+        nameLabel.setText(object.getNameParsed());
 //        System.out.println("Settled");
     }
 
@@ -170,25 +170,37 @@ public class CardItem extends JPanel {
     }
 
     public void addActionReader() {
-        if (getField()) {
             addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     // Add any additional actions to be performed on click
                     onClickActionPerformed(e);
                 }
             });
-        }
     }
-
+    
     public void onClickActionPerformed(MouseEvent e) {
-        if (parent != null && object.isActive()) {
-            System.out.println("Card clicked: " + object.getName());
-            parent.setEnabled(false);
-//            this.nameLabel.setText(object.getNameParsed());
-            new PopUpDetail(this).setVisible(true);
+        System.out.println("Object cliked "+object.isActive() + " name " + object.getName());
+        if (object.isActive()) {
+            if (getField() == FIELD_CARD){
+//                System.out.println("Card clicked: " + object.getName());
+                parent.setEnabled(false);
+                this.nameLabel.setText(object.getNameParsed());
+                new PopUpDetail(this).setVisible(true);
+            } else {
+                if (object instanceof Product product) {
+                    if (JOptionPane.showConfirmDialog(parent, "Yakin jual barang?") == JOptionPane.YES_OPTION){
+                        try {
+                            owner.sell(position.getSecond());
+                            parent.refreshActiveDeck();
+                        } catch (Exception exp) {
+                            JOptionPane.showMessageDialog(parent, "Maaf, terjadi error");
+                        }
+                    }
+                }
+            }
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -198,20 +210,28 @@ public class CardItem extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        roundedPane1 = new gui.RoundedPane();
+        jPanel1 = new javax.swing.JPanel();
+        nameLabel = new javax.swing.JLabel();
         imageLabel = new javax.swing.JLabel();
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        setMaximumSize(new java.awt.Dimension(140, 168));
-        setMinimumSize(new java.awt.Dimension(140, 168));
-        setName(""); // NOI18N
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(140, 168));
         setLayout(new java.awt.BorderLayout());
 
-        imageLabel.setBackground(new java.awt.Color(118, 120, 116));
-        imageLabel.setMaximumSize(new java.awt.Dimension(120, 168));
-        imageLabel.setMinimumSize(new java.awt.Dimension(120, 168));
-        imageLabel.setPreferredSize(new java.awt.Dimension(120, 168));
+        roundedPane1.setBackground(new Color(0.392f, 0.2f, 0.0431f, 0.97f));
+        roundedPane1.setRoundBottomLeft(25);
+        roundedPane1.setRoundBottomRight(25);
+        roundedPane1.setRoundTopLeft(25);
+        roundedPane1.setRoundTopRight(25);
+
+        jPanel1.setOpaque(false);
+
+        nameLabel.setFont(new java.awt.Font("Segoe Print", 0, 10)); // NOI18N
+        nameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        nameLabel.setText("jLabel2");
+        jPanel1.add(nameLabel);
+
         imageLabel.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 imageLabelAncestorAdded(evt);
@@ -221,7 +241,27 @@ public class CardItem extends JPanel {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        add(imageLabel, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout roundedPane1Layout = new javax.swing.GroupLayout(roundedPane1);
+        roundedPane1.setLayout(roundedPane1Layout);
+        roundedPane1Layout.setHorizontalGroup(
+            roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedPane1Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
+            .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        roundedPane1Layout.setVerticalGroup(
+            roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedPane1Layout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        add(roundedPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void imageLabelAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_imageLabelAncestorAdded
@@ -231,10 +271,13 @@ public class CardItem extends JPanel {
     private boolean swap;
     private Pair<Integer, Integer> position;
     private Player owner;
-    private Component parent;
+    private MainFrame parent;
     private boolean field;
     private GameObject object;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel imageLabel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel nameLabel;
+    private gui.RoundedPane roundedPane1;
     // End of variables declaration//GEN-END:variables
 }
