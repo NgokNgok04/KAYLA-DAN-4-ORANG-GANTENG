@@ -138,7 +138,7 @@ public class TransferGameHandler extends TransferHandler {
                 if (!target.getObject().isActive()) {
                     JOptionPane.showMessageDialog(source.getsParent(), "Kartunya masih kosongg..", "Warning", JOptionPane.WARNING_MESSAGE);
                     return false;
-                }g
+                }
                 if (item.getName().equals("INSTANT_HARVEST")) {
                     try {
                         source.getOwner().removeCardInDeck(source.getPosition().convertPairToIdx());

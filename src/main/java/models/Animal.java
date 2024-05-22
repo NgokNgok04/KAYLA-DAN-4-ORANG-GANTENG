@@ -60,6 +60,6 @@ public abstract class Animal extends LivingThing{
 
     @Override
     public void delay() {
-        weight = weight > 5 ? weight - 5 : 0;
+        if (!isProtection()) weight = weight > 5 ? weight - 5 : 0;
     }
 }

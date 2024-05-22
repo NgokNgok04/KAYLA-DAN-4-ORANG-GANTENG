@@ -288,7 +288,6 @@ public class PopUpDetail extends javax.swing.JFrame {
 
     private void panenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_panenButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("Harvesttt!!!");
         if (!parent.getOwner().isActiveDeckFull()) {
             try {
                 parent.getOwner().harvestField(parent.getPosition());
