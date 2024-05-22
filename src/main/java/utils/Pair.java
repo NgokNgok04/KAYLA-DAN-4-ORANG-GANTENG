@@ -12,13 +12,21 @@ public class Pair<A,B> {
         char letterPart = token.charAt(0);
         String numberPart = token.substring(1);
 
-        int rowIndex = letterPart - 'A' + 1;
+        int rowIndex = letterPart - 'A';
         int colIndex = Integer.parseInt(numberPart);
 
         return new Pair<>(rowIndex, colIndex);
     }
 
+    public static String convertPairToToken(Pair<Integer, Integer> pair) {
+        int rowIndex = pair.getFirst();
+        int colIndex = pair.getSecond();
 
+        char letterPart = (char) ('A' + rowIndex);
+        String numberPart = Integer.toString(colIndex);
+
+        return letterPart +"0" +numberPart;
+    }
 
     public A getFirst(){
         return this.first;
@@ -39,8 +47,13 @@ public class Pair<A,B> {
             int colIdx = (Integer) this.second;
             return (rowIdx*4 + colIdx);
         }
-
         return -1;
+    }
+
+    public static Pair<Integer,Integer> convertIdxToPair(int idx){
+        int colIdx = idx % 4;
+        int rowIdx = Math.floorDiv(idx, 4);
+        return new Pair<Integer,Integer>(rowIdx, colIdx);
     }
 
 }
