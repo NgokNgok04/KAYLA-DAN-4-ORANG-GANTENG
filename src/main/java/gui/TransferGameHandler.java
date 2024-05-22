@@ -113,6 +113,14 @@ public class TransferGameHandler extends TransferHandler {
                         return false;
                     }
                     item.useEffect((LivingThing) target.getObject());
+                    source.getsParent().changeFieldToEnemy();
+                    try {
+                        source.getOwner().removeCardInDeck(source.getPosition().convertPairToIdx());
+                    } catch (Exception ee) {
+                        ee.printStackTrace();
+                        return false;
+                    }
+                    source.getsParent().refreshActiveDeck();
                     return true;
                 }
                 if (source.getOwner() != target.getOwner()) {
