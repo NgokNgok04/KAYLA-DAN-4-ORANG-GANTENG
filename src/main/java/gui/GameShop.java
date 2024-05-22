@@ -149,13 +149,14 @@ public class GameShop extends javax.swing.JFrame {
         // do buying item
         try {
             owner.buyCartRequest(cart);
-            parent.setEnabled(true);
             parent.refreshCoin();
-            this.dispose();
             parent.refreshActiveDeck();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Komposisi barang yang dibeli atau jumlah Uang tidak cukup.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
+        parent.setEnabled(true);
+        this.dispose();
+
     }//GEN-LAST:event_buyButtonActionPerformed
 
     private void buttonRounded1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRounded1ActionPerformed

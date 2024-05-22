@@ -111,7 +111,18 @@ public class MainFrame extends javax.swing.JFrame {
             i++;
         }
         refreshCoin();
+        refreshPlayer();
         shuffle();
+    }
+    
+    public void refreshPlayer() {
+        if (game.getCurPlayer() == game.getPlayer1()) {
+            playerOne.setBackground(new java.awt.Color(0.3f, 0.89f, 0.96f, 0.7f));
+            playerTwo.setBackground(new java.awt.Color(1.0f, 1.0f, 1.0f, 0.7f));
+        } else {
+            playerTwo.setBackground(new java.awt.Color(0.3f, 0.89f, 0.96f, 0.7f));
+            playerOne.setBackground(new java.awt.Color(1.0f, 1.0f, 1.0f, 0.7f));
+        }
     }
 
     public void refreshActiveDeck() {
@@ -210,9 +221,9 @@ public class MainFrame extends javax.swing.JFrame {
         cardItem26 = new gui.CardItem(new Trap(), null, CardItem.DECK_CARD, new Pair<Integer, Integer>(0, 0), this, false);
         roundedPane1 = new gui.RoundedPane();
         jLabel1 = new javax.swing.JLabel();
-        roundedPane2 = new gui.RoundedPane();
+        playerOne = new gui.RoundedPane();
         jLabel4 = new javax.swing.JLabel();
-        roundedPane4 = new gui.RoundedPane();
+        playerTwo = new gui.RoundedPane();
         jLabel5 = new javax.swing.JLabel();
         roundedPane3 = new gui.RoundedPane();
         player1Coin = new javax.swing.JLabel();
@@ -223,7 +234,6 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-
 
         jPanel1.setOpaque(false);
 
@@ -380,53 +390,53 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        roundedPane2.setBackground(new java.awt.Color(1.0f, 1.0f, 1.0f, 0.7f));
-        roundedPane2.setRoundBottomLeft(30);
-        roundedPane2.setRoundBottomRight(30);
-        roundedPane2.setRoundTopLeft(30);
-        roundedPane2.setRoundTopRight(30);
-        roundedPane2.setBordered(false);
+        playerOne.setBackground(new java.awt.Color(1.0f, 1.0f, 1.0f, 0.7f));
+        playerOne.setRoundBottomLeft(30);
+        playerOne.setRoundBottomRight(30);
+        playerOne.setRoundTopLeft(30);
+        playerOne.setRoundTopRight(30);
+        playerOne.setBordered(false);
 
         jLabel4.setText("Player 1");
 
-        javax.swing.GroupLayout roundedPane2Layout = new javax.swing.GroupLayout(roundedPane2);
-        roundedPane2.setLayout(roundedPane2Layout);
-        roundedPane2Layout.setHorizontalGroup(
-            roundedPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roundedPane2Layout.createSequentialGroup()
+        javax.swing.GroupLayout playerOneLayout = new javax.swing.GroupLayout(playerOne);
+        playerOne.setLayout(playerOneLayout);
+        playerOneLayout.setHorizontalGroup(
+            playerOneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(playerOneLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
-        roundedPane2Layout.setVerticalGroup(
-            roundedPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roundedPane2Layout.createSequentialGroup()
+        playerOneLayout.setVerticalGroup(
+            playerOneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(playerOneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        roundedPane4.setBackground(new java.awt.Color(1.0f, 1.0f, 1.0f, 0.7f));
-        roundedPane4.setRoundBottomLeft(30);
-        roundedPane4.setRoundBottomRight(30);
-        roundedPane4.setRoundTopLeft(30);
-        roundedPane4.setRoundTopRight(30);
-        roundedPane4.setBordered(false);
+        playerTwo.setBackground(new java.awt.Color(1.0f, 1.0f, 1.0f, 0.7f));
+        playerTwo.setRoundBottomLeft(30);
+        playerTwo.setRoundBottomRight(30);
+        playerTwo.setRoundTopLeft(30);
+        playerTwo.setRoundTopRight(30);
+        playerTwo.setBordered(false);
 
         jLabel5.setText("Player 2");
 
-        javax.swing.GroupLayout roundedPane4Layout = new javax.swing.GroupLayout(roundedPane4);
-        roundedPane4.setLayout(roundedPane4Layout);
-        roundedPane4Layout.setHorizontalGroup(
-            roundedPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roundedPane4Layout.createSequentialGroup()
+        javax.swing.GroupLayout playerTwoLayout = new javax.swing.GroupLayout(playerTwo);
+        playerTwo.setLayout(playerTwoLayout);
+        playerTwoLayout.setHorizontalGroup(
+            playerTwoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(playerTwoLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
-        roundedPane4Layout.setVerticalGroup(
-            roundedPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roundedPane4Layout.createSequentialGroup()
+        playerTwoLayout.setVerticalGroup(
+            playerTwoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(playerTwoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -447,8 +457,8 @@ public class MainFrame extends javax.swing.JFrame {
         roundedPane3Layout.setHorizontalGroup(
             roundedPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedPane3Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(player1Coin, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(player1Coin, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         roundedPane3Layout.setVerticalGroup(
@@ -526,8 +536,8 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(96, 96, 96)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(roundedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(roundedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(playerOne, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(playerTwo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(roundedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -573,11 +583,11 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(roundedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(roundedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(playerOne, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(roundedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(roundedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(playerTwo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(roundedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(5, 5, 5)
                         .addComponent(buttonRounded1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -689,11 +699,11 @@ public class MainFrame extends javax.swing.JFrame {
     private gui.ButtonRounded nextButton;
     private javax.swing.JLabel player1Coin;
     private javax.swing.JLabel player2Coin;
+    private gui.RoundedPane playerOne;
+    private gui.RoundedPane playerTwo;
     private gui.ButtonRounded pluginLoadButton;
     private gui.RoundedPane roundedPane1;
-    private gui.RoundedPane roundedPane2;
     private gui.RoundedPane roundedPane3;
-    private gui.RoundedPane roundedPane4;
     private gui.RoundedPane roundedPane5;
     private gui.ButtonRounded saveButton;
     private gui.ButtonRounded shopButton;
