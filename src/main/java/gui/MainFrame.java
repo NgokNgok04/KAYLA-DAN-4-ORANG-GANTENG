@@ -4,6 +4,7 @@
  */
 package gui;
 
+import gamexception.GameException;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -719,6 +720,15 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void pluginLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pluginLoadButtonActionPerformed
         // TODO add your handling code here:
+        try {
+            game.addPlugin("D:\\IF\\Semester4\\oop\\KAYLA-DAN-4-ORANG-GANTENG\\build\\libs\\YAMLFileLoader.jar");
+            models.FileLoader fileLoader =  game.getFileLoader("models.YAMLFileLoader");
+            fileLoader.save("src/main/java/app");
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+        
     }//GEN-LAST:event_pluginLoadButtonActionPerformed
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed

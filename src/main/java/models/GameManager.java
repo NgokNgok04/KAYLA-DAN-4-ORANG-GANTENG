@@ -105,15 +105,20 @@ public class GameManager {
         String fileName = path.getFileName().toString();
         String className = fileName.substring(0,fileName.lastIndexOf('.'));
         try{
-            URL jarURL = new URL("jar:file:"+jarDir+"!/");
-            try (URLClassLoader loader = new URLClassLoader(new URL[]{jarURL})) {
-                Class<?> loadedClass = loader.loadClass(className);
-                Class<?> interfaceClass = Class.forName(interfaceName);
+            File jarFile = new File(jarDir);
+            URL jarUrl = jarFile.toURI().toURL();
+            try (URLClassLoader loader = new URLClassLoader(new URL[]{jarUrl})) {
+                Class<?> loadedClass = loader.loadClass("models."+className);
+                Class<?> interfaceClass = Class.forName("models."+interfaceName);
                 if(!interfaceClass.isAssignableFrom(loadedClass)){
+                    System.out.println("KONTOLLLLLL");
                     throw new Exception("Plugin Loader tidak mengimplementasi Interface FileLoader!");
+                } else {
+                    System.out.println("KONTOLLLLLLasdasdasdasd");
                 }
                 listFileLoader.add((FileLoader)loadedClass.getDeclaredConstructor().newInstance());
             }catch (ClassNotFoundException e) {
+                e.printStackTrace();
                 throw new Exception("Class tidak ditemukan di jar file.");
             } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 throw new Exception("Gagal menginstansiasi class dari JAR file.");
@@ -125,6 +130,7 @@ public class GameManager {
         } catch (FileNotFoundException e) {
             throw new Exception("JAR file not found.");
         } catch (Exception e) {
+            e.printStackTrace();
             throw new Exception("An unexpected error occurred.");
         }
     }

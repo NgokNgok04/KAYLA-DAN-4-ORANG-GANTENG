@@ -1,0 +1,10 @@
+field: []
+deck_slot: 40
+count_active_field: 0
+gulden: 0
+count_active_deck: 4
+active_deck:
+- {name: SUSU, location: A01}
+- {name: DAGING_KUDA, location: B01}
+- {name: DAGING_KUDA, location: C01}
+- {name: INSTANT_HARVEST, location: D01}

@@ -23,14 +23,29 @@ dependencies {
     implementation 'org.yaml:snakeyaml:2.2'
 }
 
-
 jar {
     manifest {
-        attributes 'Main-Class' : 'app.Main'
+        attributes 'Main-Class': 'app.Main'
     }
 
     from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it)}
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+task yamlFileLoaderJar(type: Jar) {
+    archiveBaseName = 'YAMLFileLoader'
+    archiveVersion = ''
+    from sourceSets.main.output.classesDirs
+    include 'models/YAMLFileLoader.class'
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    manifest {
+        attributes(
+                'Implementation-Title': 'YAML File Loader',
+                'Implementation-Version': version
+        )
     }
 }
 
