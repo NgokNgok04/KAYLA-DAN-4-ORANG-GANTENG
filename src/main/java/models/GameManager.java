@@ -2,6 +2,7 @@ package models;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -100,45 +101,48 @@ public class GameManager {
         return getCurPlayer();    
     }
 
-    public void addPlugin(String jarDir) throws Exception{
+    public void addPlugin(String jarDir) throws Exception {
         Path path = Paths.get(jarDir);
         String fileName = path.getFileName().toString();
-        String className = fileName.substring(0,fileName.lastIndexOf('.'));
-        try{
+        String className = fileName.substring(0, fileName.lastIndexOf('.'));
+        try {
             File file = new File(jarDir);
             URL jarUrl = file.toURI().toURL();
             try (URLClassLoader loader = new URLClassLoader(new URL[]{jarUrl})) {
                 JarFile jarFile = new JarFile(jarDir);
                 Enumeration<JarEntry> entries = jarFile.entries();
-                while(entries.hasMoreElements()){
+                while (entries.hasMoreElements()) {
                     JarEntry entry = entries.nextElement();
-                    if(entry.isDirectory() && entry.getName().endsWith(".class")){
-                        String classPath = entry.getName().replace("/",".").replace(".class","");
-                        Class<?> loadedClass = loader.loadClass("models."+className);
-                        Class<?> interfaceClass = Class.forName("models."+interfaceName);
-                        if(!interfaceClass.isAssignableFrom(loadedClass)){
-                            throw new Exception("Plugin Loader tidak mengimplementasi Interface FileLoader!");
+                    if (!entry.isDirectory() && entry.getName().endsWith(".class")) {
+                        String classPath = entry.getName().replace("/", ".").replace(".class", "");
+                        System.out.println(classPath);
+                        Class<?> loadedClass = loader.loadClass(classPath);
+                        Class<?> interfaceClass = Class.forName("models.FileLoader");
+                        if (!interfaceClass.isAssignableFrom(loadedClass) || loadedClass.isInterface()) {
+                            continue;
                         }
+                        jarFile.close();
                         Method getExt = loadedClass.getDeclaredMethod("getExtension");
-                        FileLoader fileLoader = (FileLoader)loadedClass.getDeclaredConstructor().newInstance();
-                        listFileLoader.put((String)getExt.invoke(fileLoader),fileLoader);
+                        FileLoader fileLoader = (FileLoader) loadedClass.getDeclaredConstructor().newInstance();
+                        listFileLoader.put((String) getExt.invoke(fileLoader), fileLoader);
+                        return;
                     }
                 }
-            }catch (ClassNotFoundException e) {
-                e.printStackTrace();
-                throw new Exception("Class tidak ditemukan di jar file.");
+                jarFile.close();
+                throw new Exception("KONTOL");
+            } catch (ClassNotFoundException e) {
+                throw new Exception("Class not found in the jar file: " + e.getMessage(), e);
             } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                throw new Exception("Gagal menginstansiasi class dari JAR file.");
-            } catch (Exception e) {
-                throw new Exception("File yang dipilih tidak berekstensi .jar atau terjadi kesalahan lainnya.");
+                throw new Exception("Failed to instantiate class from JAR file: " + e.getMessage(), e);
+            } catch (IOException e) {
+                throw new Exception("IO error occurred while processing the JAR file: " + e.getMessage(), e);
             }
         } catch (MalformedURLException e) {
-            throw new Exception("Invalid JAR file URL.");
+            throw new Exception("Invalid JAR file URL: " + e.getMessage(), e);
         } catch (FileNotFoundException e) {
-            throw new Exception("JAR file not found.");
+            throw new Exception("JAR file not found: " + e.getMessage(), e);
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception("An unexpected error occurred.");
+            throw new Exception("An unexpected error occurred: " + e.getMessage(), e);
         }
     }
 }

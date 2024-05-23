@@ -33,7 +33,7 @@ jar {
     }
 }
 
-task fatYamlFileLoaderJar(type: Jar) {
+task YAMLFileLoaderJar(type: Jar) {
     archiveBaseName = 'YAMLFileLoader'
     archiveVersion = ''
 
@@ -51,12 +51,47 @@ task fatYamlFileLoaderJar(type: Jar) {
     // Include dependencies
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-
+    } {
+        // Add exclusions here
+        exclude 'META-INF/*.SF'
+        exclude 'META-INF/*.DSA'
+        exclude 'META-INF/*.RSA'
     }
 
     manifest {
         attributes(
                 'Implementation-Title': 'YAML File Loader',
+                'Implementation-Version': version
+        )
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+
+task JSONFileLoaderJar(type: Jar) {
+    archiveBaseName = 'JSONFileLoader'
+    archiveVersion = ''
+
+    // Include the YAMLFileLoader class
+    from(sourceSets.main.output) {
+        include 'models/**'
+        include 'utils/**' // Include utils if needed by YAMLFileLoader
+        include 'gamexception/**'
+        exclude 'models/YAMLFileLoader.class'
+        exclude 'models/TxtFileLoader.class'
+
+        eachFile { println it.relativePath }
+    }
+
+    // Include dependencies
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    manifest {
+        attributes(
+                'Implementation-Title': 'TXT File Loader',
                 'Implementation-Version': version
         )
     }
