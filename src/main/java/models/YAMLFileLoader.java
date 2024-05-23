@@ -41,6 +41,10 @@ public class YAMLFileLoader implements FileLoader{
         }
     }
 
+    public String getExtension(){
+        return "YAML";
+    }
+
     public void loadGameState(String filepath){
         GameManager game = GameManager.getInstance();
         Shop shop = Shop.getInstance();
