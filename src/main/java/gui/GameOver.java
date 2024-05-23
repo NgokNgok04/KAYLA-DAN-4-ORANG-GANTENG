@@ -7,6 +7,7 @@ package gui;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import models.GameManager;
+import models.Shop;
 
 /**
  *
@@ -143,6 +144,7 @@ public class GameOver extends javax.swing.JFrame {
         frame.setEnabled(true);
         game.reset();
         frame.refreshGame();
+        Shop.getInstance().resetShop();
         this.dispose();
     }//GEN-LAST:event_replayButtonActionPerformed
 
