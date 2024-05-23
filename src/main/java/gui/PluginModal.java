@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package gui;
 
@@ -8,13 +8,15 @@ package gui;
  *
  * @author Suthasoma
  */
-public class PluginFrame extends javax.swing.JPanel {
+public class PluginModal extends javax.swing.JFrame {
 
+    private MainFrame frame;
     /**
-     * Creates new form PluginFrame
+     * Creates new form PluginModal
      */
-    public PluginFrame() {
+    public PluginModal(MainFrame parent) {
         initComponents();
+        frame = parent;
     }
 
     /**
@@ -32,6 +34,8 @@ public class PluginFrame extends javax.swing.JPanel {
         uploadButton = new gui.ButtonRounded();
         statusUpload = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
         roundedPane1.setBackground(new java.awt.Color(1f, 0.8f, 0.8f, 0.8f));
         roundedPane1.setBordered(false);
         roundedPane1.setRoundBottomLeft(40);
@@ -40,6 +44,11 @@ public class PluginFrame extends javax.swing.JPanel {
         roundedPane1.setRoundTopRight(40);
 
         backButton.setText("Kembali");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 2, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -67,7 +76,7 @@ public class PluginFrame extends javax.swing.JPanel {
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(72, 72, 72)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         roundedPane1Layout.setVerticalGroup(
             roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,8 +95,8 @@ public class PluginFrame extends javax.swing.JPanel {
                 .addGap(20, 20, 20))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(roundedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -98,11 +107,19 @@ public class PluginFrame extends javax.swing.JPanel {
                 .addComponent(roundedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_uploadButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        frame.setEnabled(true);
+        this.dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

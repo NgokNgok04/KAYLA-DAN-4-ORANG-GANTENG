@@ -8,14 +8,16 @@ package gui;
  *
  * @author Suthasoma
  */
-public class SaveFrame extends javax.swing.JFrame {
+public class LoadModal extends javax.swing.JFrame {
 
+    private MainFrame frame;
     /**
-     * Creates new form SaveFrame
+     * Creates new form LoadFrame
      */
-    public SaveFrame() {
+    public LoadModal(MainFrame parent) {
         setUndecorated(true);
         initComponents();
+        frame = parent;
     }
 
     /**
@@ -38,8 +40,6 @@ public class SaveFrame extends javax.swing.JFrame {
         statusUpload = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-        setResizable(false);
 
         roundedPane1.setBackground(new java.awt.Color(1f, 0.8f, 0.8f, 0.8f));
         roundedPane1.setBordered(false);
@@ -49,6 +49,11 @@ public class SaveFrame extends javax.swing.JFrame {
         roundedPane1.setRoundTopRight(40);
 
         backButton.setText("Kembali");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 2, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -79,21 +84,19 @@ public class SaveFrame extends javax.swing.JFrame {
                         .addComponent(statusUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(uploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(roundedPane1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(choosenFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(folderName, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(roundedPane1Layout.createSequentialGroup()
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(72, 72, 72)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(roundedPane1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(roundedPane1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(listFormat, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(roundedPane1Layout.createSequentialGroup()
-                                .addComponent(choosenFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(folderName, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(listFormat, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         roundedPane1Layout.setVerticalGroup(
@@ -138,40 +141,11 @@ public class SaveFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_choosenFolderActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SaveFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SaveFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SaveFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SaveFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SaveFrame().setVisible(true);
-            }
-        });
-    }
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        frame.setEnabled(true);
+        this.dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.ButtonRounded backButton;
