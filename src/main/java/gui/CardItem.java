@@ -134,6 +134,9 @@ public class CardItem extends JPanel {
         imageLabel.setMaximumSize(new Dimension(113, 95));
     }
 
+    public void updateNameLabel() {
+        nameLabel.setText(object.getNameCard(true));
+    }
     public void refreshData() {
         if (!object.isActive()) {
             imageLabel.setIcon(new ImageIcon(icons.Icon.NOTHING.getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
@@ -143,12 +146,15 @@ public class CardItem extends JPanel {
         if (getField() == FIELD_CARD) {
             if (object instanceof Plant plant && (plant.getAge() >= plant.getAgeToHarvest() || plant.isInstantHarvest())) {
                 imageLabel.setIcon(new ImageIcon(plant.getProduct().getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
-                nameLabel.setText(plant.getProduct().getNameParsed());
+                nameLabel.setText(plant.getProduct().getNameParsed() + " (READY)");
                 return;
             }
+            nameLabel.setText(object.getNameCard(true));
+        } else {
+            nameLabel.setText(object.getNameCard(false));
         }
         imageLabel.setIcon(new ImageIcon(object.getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
-        nameLabel.setText(object.getNameParsed());
+//        nameLabel.setText(object.getNameParsed());
 //        System.out.println("Settled");
     }
 

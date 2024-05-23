@@ -98,6 +98,7 @@ public class TransferGameHandler extends TransferHandler {
                         animal.eat(food);
                         source.getOwner().removeCardInDeck(source.getPosition().getSecond());
                         source.getsParent().refreshActiveDeck();
+                        target.updateNameLabel();
                         return true;
                     } catch (GameException e) {
                         JOptionPane.showMessageDialog(source.getsParent(), "Jenis makanan tidak sesuai.", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -120,6 +121,7 @@ public class TransferGameHandler extends TransferHandler {
                         return false;
                     }
                     item.useEffect((LivingThing) target.getObject());
+                    target.updateNameLabel();
                     source.getsParent().changeFieldToEnemy();
                     try {
                         source.getOwner().removeCardInDeck(source.getPosition().convertPairToIdx());

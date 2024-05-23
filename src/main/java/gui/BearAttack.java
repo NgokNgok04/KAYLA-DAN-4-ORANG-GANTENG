@@ -76,7 +76,7 @@ public class BearAttack extends Thread{
             timer.setForeground(Color.RED);
             timeAttack-=0.1;
             try {
-                Thread.sleep(100);
+                Thread.sleep(90);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 break;
@@ -105,5 +105,6 @@ public class BearAttack extends Thread{
         for (Pair<Integer, Integer> pair : cardPosition) {
             targetCards.get(pair.convertPairToIdx()).setNormalCard();
         }
+        parent.bearAttackDone();
     }
 }

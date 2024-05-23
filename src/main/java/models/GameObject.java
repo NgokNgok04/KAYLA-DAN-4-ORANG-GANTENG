@@ -81,6 +81,21 @@ public class GameObject {
         return name.replace("_", " ");
     }
 
+    public String getNameCard(boolean isFieldCard){
+        if (!isFieldCard){
+            return name.replace("_"," ");
+        } else {
+            if (typeObject.equals("ANIMAL")){
+                Animal animal = (Animal) this;
+                return name.replace("_"," ") + " " + animal.getWeight() + "/" + animal.getWeightToHarvest();
+            }  else if (typeObject.equals("PLANT")){
+                Plant plant = (Plant) this;
+                return name.replace("_"," ") + " " + plant.getAge() + "/" + plant.getAgeToHarvest();
+            } else {
+                return name.replace("_"," ");
+            }
+        }
+    }
     public void deactivate(){
         setActive(false);
     }
