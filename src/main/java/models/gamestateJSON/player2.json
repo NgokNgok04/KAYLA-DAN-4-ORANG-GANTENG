@@ -1,0 +1,69 @@
+{
+    "gulden": 500,
+    "deck_slot": 39,
+    "count_active_deck": 2,
+    "active_deck": [
+        {
+            "location": "A01",
+            "name": "BERUANG"
+        },
+        {
+            "location": "B01",
+            "name": "BERUANG"
+        }
+    ],
+    "count_active_field": 3,
+    "field": [
+        {
+            "location": "A01",
+            "name": "DOMBA",
+            "weight": 5,
+            "count_items": 3,
+            "items": [
+                {
+                    "name": "DELAY"
+                },
+                {
+                    "name": "ACCELERATE"
+                },
+                {
+                    "name": "ACCELERATE"
+                }
+            ]
+        },
+        {
+            "location": "A02",
+            "name": "HIU_DARAT",
+            "weight": 5,
+            "count_items": 3,
+            "items": [
+                {
+                    "name": "DELAY"
+                },
+                {
+                    "name": "DELAY"
+                },
+                {
+                    "name": "DELAY"
+                }
+            ]
+        },
+        {
+            "location": "B03",
+            "name": "HIU_DARAT",
+            "weight": 5,
+            "count_items": 3,
+            "items": [
+                {
+                    "name": "ACCELERATE"
+                },
+                {
+                    "name": "DELAY"
+                },
+                {
+                    "name": "DELAY"
+                }
+            ]
+        }
+    ]
+}

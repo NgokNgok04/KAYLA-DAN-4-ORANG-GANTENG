@@ -24,6 +24,9 @@ public class GameManager {
         player1 = new Player();
         player2 = new Player();
         listFileLoader = new ArrayList<>();
+        listFileLoader.add(new TxtFileLoader());
+        listFileLoader.add(new JSONFileLoader());
+        listFileLoader.add(new YAMLFileLoader());
     }
 
     public static GameManager getInstance(){

@@ -7,14 +7,13 @@ public class Pair<A,B> {
         this.first = first;
         this.second = second;
     }
-    
+
     public static Pair<Integer, Integer> convertTokenToPair(String token) {
         char letterPart = token.charAt(0);
         String numberPart = token.substring(1);
-
+        
         int rowIndex = letterPart - 'A';
-        int colIndex = Integer.parseInt(numberPart);
-
+        int colIndex = Integer.parseInt(numberPart)-1;
         return new Pair<>(rowIndex, colIndex);
     }
 
@@ -23,7 +22,7 @@ public class Pair<A,B> {
         int colIndex = pair.getSecond();
 
         char letterPart = (char) ('A' + rowIndex);
-        String numberPart = Integer.toString(colIndex);
+        String numberPart = Integer.toString(colIndex+1);
 
         return letterPart +"0" +numberPart;
     }
