@@ -23,30 +23,35 @@ dependencies {
     implementation 'org.yaml:snakeyaml:2.2'
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'app.Main'
+task fatYamlFileLoaderJar(type: Jar) {
+    archiveBaseName = 'yaml-file-loader'
+    archiveVersion = version
+
+    // Include the YAMLFileLoader class
+    from(sourceSets.main.output) {
+        include 'models/**'
+        include 'utils/**' // Include utils if needed by YAMLFileLoader
+        include 'gamexception/**'
+        exclude 'models/TxtFileLoader.class'
+        exclude 'models/JSONFileLoader.class'
+
+        eachFile { println it.relativePath }
     }
 
+    // Include dependencies
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-}
 
-task yamlFileLoaderJar(type: Jar) {
-    archiveBaseName = 'YAMLFileLoader'
-    archiveVersion = ''
-    from sourceSets.main.output.classesDirs
-    include 'models/YAMLFileLoader.class'
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
+
     manifest {
         attributes(
                 'Implementation-Title': 'YAML File Loader',
                 'Implementation-Version': version
         )
     }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 test {
