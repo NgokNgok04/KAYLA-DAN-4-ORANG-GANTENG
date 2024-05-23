@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package gui;
-
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,6 +13,7 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
+import icons.Icon;
 /**
  *
  * @author Suthasoma
@@ -107,9 +110,13 @@ public class ButtonRounded extends JButton{
         colorClick = new Color(152, 184, 144);
         borderColor = new Color(30, 136, 56);
         setContentAreaFilled(false);
+        setHorizontalTextPosition(JButton.CENTER);
+        setVerticalTextPosition(JButton.CENTER);
         setFocusPainted(false);
         setBackground(color);
-        
+        setBackgroundImg(Icon.BUTTON1);
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         setBorder(null);
         
         addMouseListener( new MouseAdapter() {
@@ -121,23 +128,23 @@ public class ButtonRounded extends JButton{
 
             @Override
             public void mouseExited(MouseEvent me) {
-                setBackground(color);
+                setBackgroundImg(Icon.BUTTON1);
                 over = false;
 
             }
 
             @Override
             public void mousePressed(MouseEvent me) {
-                setBackground(colorClick);
+                setBackgroundImg(Icon.BUTTON2);
             }
 
             @Override
             public void mouseReleased(MouseEvent me) {
-                if (over) {
-                    setBackground(colorOver);
-                } else {
-                    setBackground(color);
-                }
+                setBackgroundImg(Icon.BUTTON1);
+            }
+
+            public void mouseClicked(MouseEvent me){
+                setBackgroundImg(Icon.BUTTON2);
             }
         });
     }
@@ -148,16 +155,29 @@ public class ButtonRounded extends JButton{
     private Color colorClick;
     private Color borderColor;
     private int radius = 20;
+    private Image backgroundImage;
 
     @Override
-    protected void paintComponent(Graphics grphcs) {
-        Graphics2D g2 = (Graphics2D) grphcs;
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        //  Paint Border
-//        g2.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
-        g2.setColor(getBackground());
-        //  Border set 2 Pix
-        g2.fillRoundRect(2, 2, getWidth() - 4, getHeight() - 4, radius-3, radius-3);
-        super.paintComponent(grphcs);
+
+        if (backgroundImage != null) {
+            g2.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
+
+        g2.setColor(getForeground());
+        g2.setFont(getFont());
+        FontMetrics fm = g2.getFontMetrics();
+        Rectangle r = getBounds();
+        String text = getText();
+        int x = (r.width - fm.stringWidth(text)) / 2;
+        int y = (r.height - fm.getHeight()) / 2 + fm.getAscent();
+        g2.drawString(text, x, y);
+    }
+
+    public void setBackgroundImg(Image image){
+        backgroundImage = image;
+        repaint();
     }
 }
