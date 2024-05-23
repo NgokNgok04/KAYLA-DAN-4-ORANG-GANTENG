@@ -27,6 +27,8 @@ public class GameManager {
         player1 = new Player();
         player2 = new Player();
         listFileLoader = new ArrayList<>();
+        listFileLoader.add(new TxtFileLoader());
+        listFileLoader.add(new JSONFileLoader());
     }
 
     public static GameManager getInstance(){
@@ -147,12 +149,64 @@ public class GameManager {
         // } catch (Exception e) {
         //     e.printStackTrace();
         // }
-        FileLoader loader = game.getFileLoader("models.TxtFileLoader");
+        FileLoader loader = game.getFileLoader("models.JSONFileLoader");
         try {
-            loader.load("src/main/java/models/gamestate/");
-            loader.save("src/main/java/models/tes");
+            loader.load("src/main/java/models/gamestateJSON/");
+            loader.save("src/main/java/models/tes/");
+            loader.load("src/main/java/models/tes/");
+            loader.load("src/main/java/models/tes/");
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // Shop shop = Shop.getInstance();
+        // List<Pair<String,Integer>> items = shop.getItemsReady();
+        // System.out.println(items.size());
+        // for(Pair<String,Integer> item:items){
+        //     System.out.println(item.getFirst());
+        //     System.out.println(item.getSecond());
+        // }
+
+        // Player p = game.getPlayer1();
+        // System.out.println(p.getMoney());
+        // List<GameObject> objs = p.getActiveDeck();
+        // for(GameObject obj:objs){
+        //     if(!obj.isActive()){
+        //         continue;
+        //     }
+        //     System.out.println(obj.getName());
+        // }
+        // List<LivingThing> livs = p.getField();
+        // for(LivingThing liv:livs){
+        //     if(!liv.isActive()){
+        //         continue;
+        //     }
+        //     System.out.println(liv.getName());
+        //     System.out.println(liv.getItems().size());
+        //     for(Item item:liv.getItems()){
+        //         System.out.println(item.getName());
+        //     }
+        // }
+
+        // Player p2 = game.getPlayer2();
+        // List<LivingThing> livsS = p2.getField();
+        // List<GameObject> ob = p2.getActiveDeck();
+        // for(GameObject obj:ob){
+        //     if(!obj.isActive()){
+        //         continue;
+        //     }
+        //     System.out.println(obj.getName());
+        // }
+        
+        // for(int i=0;i<livsS.size();i++){
+        //     if(!livsS.get(i).isActive()){
+        //         continue;
+        //     }
+        //     System.out.println(livsS.get(i).getName());
+        //     System.out.println(Pair.convertPairToToken(Pair.convertIdxToPair(i)));
+        //     System.out.println(livsS.get(i).getItems().size());
+        //     for(Item item:livsS.get(i).getItems()){
+        //         System.out.println(item.getName());
+        //     }
+        // }
     }
 }

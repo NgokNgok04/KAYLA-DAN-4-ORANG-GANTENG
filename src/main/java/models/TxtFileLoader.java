@@ -155,7 +155,8 @@ public class TxtFileLoader implements FileLoader{
                     if(!deck.get(i).isActive()){
                         continue;
                     }
-                    writer.write("A0"+(i+1)+" ");
+                    char row = 'A'+1;
+                    writer.write(row+"01 ");
                     writer.write(deck.get(i).getName()+"\n");
                 } 
 
