@@ -1,0 +1,15 @@
+field:
+- name: DOMBA
+  weight: 5
+  location: A02
+  items:
+  - {name: PROTECT}
+  - {name: DELAY}
+  - {name: PROTECT}
+  count_items: 3
+deck_slot: 39
+count_active_field: 1
+gulden: 500
+count_active_deck: 1
+active_deck:
+- {name: BERUANG, location: A01}

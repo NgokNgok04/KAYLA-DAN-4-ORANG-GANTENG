@@ -1,0 +1,13 @@
+current_turn: 1
+count_items: 5
+shop:
+  - name: "SIRIP_HIU"
+    quantity: 5
+  - name: "SUSU"
+    quantity: 2
+  - name: "DAGING_DOMBA"
+    quantity: 3
+  - name: "DAGING_KUDA"
+    quantity: 10
+  - name: "DAGING_BERUANG"
+    quantity: 1
