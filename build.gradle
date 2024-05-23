@@ -36,6 +36,7 @@ jar {
 
 test {
     useJUnitPlatform()
+    finalizedBy tasks.jacocoTestReport
 }
 
 jacoco {
@@ -43,10 +44,18 @@ jacoco {
 }
 
 jacocoTestReport {
+    dependsOn test
     reports {
         xml.required = true
         csv.required = false
         html.required = true
         html.outputLocation = layout.buildDirectory.dir('reports/jacoco/test/html')
     }
+    classDirectories.setFrom(files(classDirectories.files.collect {
+        fileTree(dir: it, exclude: [
+                'sun/util/resources/**', // Exclude problematic system classes
+                'jdk/internal/**'       // Exclude other internal JDK classes
+        ])
+    }))
+
 }
