@@ -70,13 +70,13 @@ public class BearAttack extends Thread{
         for (Pair<Integer, Integer> pair : cardPosition) {
             targetCards.get(pair.convertPairToIdx()).setTargetedCard();
         }
-        double timeAttack = (double) rand.nextInt(30,61);
+        double timeAttack = (double) rand.nextInt(5,10);
         while (!Thread.currentThread().isInterrupted() && timeAttack > 0) {
             timer.setText("Ladang Anda diserang, sisa waktu pemindahan: "+String.format("%.1f", timeAttack)+" detik");
             timer.setForeground(Color.RED);
             timeAttack-=0.1;
             try {
-                Thread.sleep(90);
+                Thread.sleep(95);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 break;

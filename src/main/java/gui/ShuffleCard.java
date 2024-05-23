@@ -9,6 +9,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import models.*;
 
+import javax.swing.*;
+
 /**
  *
  * @author Suthasoma
@@ -25,6 +27,8 @@ public class ShuffleCard extends javax.swing.JFrame {
     public ShuffleCard(ArrayList<GameObject> cards, int max, MainFrame parent, Player owner) {
         this.parent = parent;
         this.owner = owner;
+        ImageIcon icon = new ImageIcon(getClass().getResource("/logos/icon.png"));
+        setIconImage(icon.getImage());
         initComponents();
         setLocationRelativeTo(parent);
         setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f));

@@ -41,6 +41,12 @@ public class GameManager {
         }
         return null;
     }
+    
+    public void reset() {
+        curTurn = 1;
+        player1 = new Player();
+        player2 = new Player();
+    }
 
     public Player getPlayer1(){
         return player1;
@@ -117,39 +123,6 @@ public class GameManager {
             throw new Exception("JAR file not found.");
         } catch (Exception e) {
             throw new Exception("An unexpected error occurred.");
-        }
-    }
-
-    public static void main(String[] args) {
-        GameManager game = GameManager.getInstance();
-        // Shop shop = Shop.getInstance();
-        // shop.addItem("SIRIP_HIU", 10);
-        // shop.addItem("SUSU", 5);
-
-        // Player p = game.getCurPlayer();
-        // Product product = (Product)GameContext.createObject("SUSU");
-        // Item item = (Item)GameContext.createObject("ACCELERATE");
-        // Carnivore hiu = (Carnivore)GameContext.createObject("HIU_DARAT");
-        // item.useEffect(hiu);
-        // try {
-        //     p.addCardInDeck(product, 1);
-        //     p.addCardInField(hiu, new Pair<Integer,Integer>(0, 2));
-        // } catch (GameException e) {
-        //     e.printStackTrace();
-        // }
-        // System.out.println(hiu.getItems().size());
-        // FileLoader loader = game.getFileLoader("models.TxtFileLoader");
-        // try {
-        //     loader.save("src/main/java/models/gamestate");
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
-        FileLoader loader = game.getFileLoader("models.TxtFileLoader");
-        try {
-            loader.load("src/main/java/models/gamestate/");
-            loader.save("src/main/java/models/tes");
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

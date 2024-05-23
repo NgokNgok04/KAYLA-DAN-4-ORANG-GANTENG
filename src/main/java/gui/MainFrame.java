@@ -6,7 +6,7 @@ package gui;
 
 import java.awt.*;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import java.util.Random;
 
 import icons.Icon;
@@ -35,13 +35,13 @@ public class MainFrame extends javax.swing.JFrame {
         backGround = Icon.BACKGROUND;
         initComponents();
         setLocationRelativeTo(null);
+        ImageIcon icon = new ImageIcon(getClass().getResource("/logos/icon.png"));
+        setIconImage(icon.getImage());
         initGameManager();
         initiateCards();
         refreshGame();
         clock = new ClockTime(clockLabel);
         clock.start();
-//        field.get(10).setTargetedCard();
-//        initiateGame();
     }
 
     public void initiateCards() {
@@ -175,8 +175,13 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void next() {
-        game.next();
-        refreshGame();
+        if (game.next() == null) {
+//            TODO: game ending and recreate
+            this.setEnabled(false);
+            new GameOver(game, this).setVisible(true);
+        } else {
+            refreshGame();
+        }
     }
 
     public void setAllEnabled(boolean enabled) {

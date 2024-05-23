@@ -7,8 +7,6 @@ import models.*;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        
-        new MainFrame().setVisible(true);
-
+        new StartFrame().setVisible(true);
     }
 }

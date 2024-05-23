@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import models.Player;
 import models.Product;
 import java.util.List;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import models.Shop;
 import utils.Pair;
@@ -33,6 +33,8 @@ public class GameShop extends javax.swing.JFrame {
         this.owner = owner;
         this.parent = parent;
         this.shop = Shop.getInstance();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/logos/icon.png"));
+        setIconImage(icon.getImage());
         initComponents();
         setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f));
         this.setLocationRelativeTo(parent);

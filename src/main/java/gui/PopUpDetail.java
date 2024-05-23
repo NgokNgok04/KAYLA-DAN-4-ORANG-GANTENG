@@ -22,6 +22,8 @@ public class PopUpDetail extends javax.swing.JFrame {
      * Creates new form PopUpDetail
      */
     public PopUpDetail(CardItem parent) {
+        ImageIcon icon = new ImageIcon(getClass().getResource("/logos/icon.png"));
+        setIconImage(icon.getImage());
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.parent = parent;
