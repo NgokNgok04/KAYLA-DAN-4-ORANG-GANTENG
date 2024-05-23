@@ -51,9 +51,8 @@ public class Pair<A,B> {
     }
 
     public static Pair<Integer,Integer> convertIdxToPair(int idx){
-        int colIdx = idx % 4;
-        int rowIdx = Math.floorDiv(idx, 4);
+        int colIdx = idx % 5;
+        int rowIdx = Math.floorDiv(idx, 5);
         return new Pair<Integer,Integer>(rowIdx, colIdx);
     }
-
 }

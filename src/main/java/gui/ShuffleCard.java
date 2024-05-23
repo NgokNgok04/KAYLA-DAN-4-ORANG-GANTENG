@@ -191,6 +191,7 @@ public class ShuffleCard extends javax.swing.JFrame {
         owner.updateSelectedDeck(cardList);
         parent.refreshActiveDeck();
         parent.setEnabled(true);
+        parent.bearAttack();
         this.dispose();
     }//GEN-LAST:event_nextButtonActionPerformed
 

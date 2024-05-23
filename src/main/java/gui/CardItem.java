@@ -196,6 +196,14 @@ public class CardItem extends JPanel {
             }
         }
     }
+
+    public void setNormalCard() {
+        roundedPane1.setBackground(new Color(0.392f, 0.2f, 0.0431f, 0.97f));
+    }
+
+    public void setTargetedCard() {
+        roundedPane1.setBackground(new Color(1.0f, 0.02f, 0.01f, 0.97f));
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.

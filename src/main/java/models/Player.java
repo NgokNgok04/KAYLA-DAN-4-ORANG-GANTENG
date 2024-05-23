@@ -28,7 +28,7 @@ public class Player {
         this.deckSlot = 40;
     }
 
-    public int getMaxShuflleCount() {
+    public synchronized int getMaxShuflleCount() {
         int count = 0;
         for (int i = 0 ; i < 6; i++)  {
             if (!activeDeck.get(i).isActive()) count++;
@@ -52,7 +52,7 @@ public class Player {
         this.deckSlot = player.deckSlot;
     }
 
-    public void resetPlayer(){
+    public synchronized void resetPlayer(){
         for(GameObject obj:activeDeck){
             obj.setActive(false);
         }
@@ -65,7 +65,7 @@ public class Player {
         return this.money;
     }
 
-    public LivingThing getFieldItem(int idx){
+    public LivingThing getFieldItem(int idx) {
         return this.getField().get(idx);
     }
 
@@ -81,7 +81,7 @@ public class Player {
         return this.activeDeck;
     }
 
-    public int getCountActiveCard(){
+    public synchronized int getCountActiveCard(){
         int count = 0;
         for(GameObject obj: activeDeck){
             if(obj.isActive()){
@@ -91,7 +91,7 @@ public class Player {
         return count;
     }
 
-    public int getCountActiveField(){
+    public synchronized int getCountActiveField(){
         int count = 0;
         for(LivingThing liv: field){
             if(liv.isActive()){
@@ -105,31 +105,31 @@ public class Player {
         return this.deckSlot;
     }
 
-    public void setMoney(int money){
+    public synchronized void setMoney(int money){
         this.money = money;
     }
 
-    public void setFieldElement(LivingThing object,int idx){
+    public synchronized void setFieldElement(LivingThing object,int idx){
         this.field.set(idx, object);
     }
 
-    public void setField(List<LivingThing> field){
+    public synchronized void setField(List<LivingThing> field){
         this.field = new ArrayList<>(field);
     }
 
-    public void setActiveDeckItem(GameObject card, int idx){
+    public synchronized void setActiveDeckItem(GameObject card, int idx){
         this.activeDeck.set(idx,card);
     }
 
-    public void setActiveDeck(List<GameObject> activeDeck){
+    public synchronized void setActiveDeck(List<GameObject> activeDeck){
         this.activeDeck = new ArrayList<>(activeDeck);
     }
 
-    public void setDeckSlot(int slot){
+    public synchronized void setDeckSlot(int slot){
         deckSlot = slot;
     }
 
-    public boolean isActiveDeckFull(){
+    public synchronized boolean isActiveDeckFull(){
         for(int i = 0; i < 6; i++){
             if(!this.activeDeck.get(i).isActive()){
                 return false;
@@ -138,7 +138,7 @@ public class Player {
         return true;
     }
 
-    public int findEmptyActiveDeckItem() throws GameException{
+    public synchronized int findEmptyActiveDeckItem() throws GameException{
         for(int i = 0; i < 6; i++){
             if(!this.activeDeck.get(i).isActive()){
                 return i;
@@ -159,7 +159,7 @@ public class Player {
         return resultShuffle;
     }
 
-    public void updateSelectedDeck(List<GameObject> selected){
+    public synchronized void updateSelectedDeck(List<GameObject> selected){
         for(GameObject obj:selected){
             try {
                 int idx = findEmptyActiveDeckItem();
@@ -170,17 +170,17 @@ public class Player {
         }
     }
 
-    public void addCardInField(LivingThing card, Pair<Integer,Integer> pos){
+    public synchronized void addCardInField(LivingThing card, Pair<Integer,Integer> pos){
         int idx = pos.convertPairToIdx();
         this.setFieldElement(card, idx);
     }
 
-    public void removeCardInField(Pair<Integer,Integer> pos){
+    public synchronized void removeCardInField(Pair<Integer,Integer> pos){
         int idx = pos.convertPairToIdx();
         field.get(idx).setActive(false);
     }
 
-    public void swapCardInField(Pair<Integer,Integer> posStart, Pair<Integer,Integer> posAfter){
+    public synchronized void swapCardInField(Pair<Integer,Integer> posStart, Pair<Integer,Integer> posAfter){
         int idxStart = posStart.convertPairToIdx();
         int idxAfter = posAfter.convertPairToIdx();
 
@@ -191,15 +191,17 @@ public class Player {
         this.setFieldElement(cardStart, idxAfter);
     }
 
-    public void addCardInDeck(GameObject card, int idx) throws GameException{
+    public synchronized void addCardInDeck(GameObject card, int idx) throws GameException{
         if (this.getActiveDeck().get(idx).isActive()){
+            notifyAll();
             throw new GameException("Index you want to add Card not empty");
         } else {
             this.setActiveDeckItem(card, idx);
         }
+        notifyAll();
     }
 
-    public void removeCardInDeck(int idx) throws GameException{
+    public synchronized void removeCardInDeck(int idx) throws GameException{
         GameObject obj = getActiveDeckItem(idx);
         if (!obj.isActive()){
             throw new GameException("Index you want to remove Card is empty");
@@ -207,7 +209,7 @@ public class Player {
         getActiveDeck().get(idx).deactivate();
     }
 
-    public void harvestField(Pair<Integer,Integer> pos) throws GameException{
+    public synchronized void harvestField(Pair<Integer,Integer> pos) throws GameException{
         int idx = pos.convertPairToIdx();
         if (!this.getFieldItem(idx).isActive()){
             throw new GameException("Cant harvest a Empty Card");
@@ -233,7 +235,7 @@ public class Player {
         }
     }
 
-    public List<Pair<String,Integer>> convertCartGUI(List<Product> cart){
+    public synchronized List<Pair<String,Integer>> convertCartGUI(List<Product> cart){
         List<String> validCartName = new ArrayList<>();
         List<Integer> validQuantity = new ArrayList<>();
 
@@ -255,7 +257,7 @@ public class Player {
         return validCart;
     }
 
-    public void buyCartRequest(List<Product> cartStack)throws GameException{
+    public synchronized void buyCartRequest(List<Product> cartStack)throws GameException{
         List<Pair<String,Integer>> cart = convertCartGUI(cartStack);
         Shop shop = Shop.getInstance();
         int total = 0;
@@ -274,14 +276,14 @@ public class Player {
         money -= total;
     }
 
-    public void buy(String name,int quantity) throws GameException{
+    public synchronized void buy(String name,int quantity) throws GameException{
         Shop shop = Shop.getInstance();        
         int idxResultBuy = findEmptyActiveDeckItem();
         addCardInDeck(new Product(name), idxResultBuy);
         shop.removeItem(name, quantity);
     }
 
-    public void sell(int idx) throws GameException{
+    public synchronized void sell(int idx) throws GameException{
         Shop shop = Shop.getInstance();
 
         Product product = (Product) this.getActiveDeckItem(idx);
@@ -291,7 +293,7 @@ public class Player {
         removeCardInDeck(idx);
     }
 
-    public void placeItem(Item item,Pair<Integer,Integer> pos, List<LivingThing> fieldTarget) throws GameException{
+    public synchronized void placeItem(Item item,Pair<Integer,Integer> pos, List<LivingThing> fieldTarget) throws GameException{
         if(fieldTarget!=field && (item.getName().equals("DESTROY") || item.getName().equals("DELAY"))){
             throw new GameException("Can't place items other than Destroy and Delay to enemy's field");
         }
@@ -307,7 +309,7 @@ public class Player {
         target.addItem(item);
     }
 
-    public void placeProduct(Product product,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
+    public synchronized void placeProduct(Product product,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
         if(fieldTarget!=field){
             throw new GameException("Can't place product to enemy's field");
         }
@@ -322,7 +324,7 @@ public class Player {
         addCardInField((LivingThing)living, pos);
     }
 
-    public void placeDeckToField(int idx,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
+    public synchronized void placeDeckToField(int idx,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
         GameObject itemDeck = activeDeck.get(idx);
         if(itemDeck instanceof LivingThing living){
             placeLiving(living, pos, fieldTarget);
@@ -332,6 +334,7 @@ public class Player {
             placeItem((Item)itemDeck, pos, fieldTarget);
         }
         removeCardInDeck(idx);
+        notifyAll();
     }
 
 

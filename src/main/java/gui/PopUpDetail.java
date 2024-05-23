@@ -296,7 +296,7 @@ public class PopUpDetail extends javax.swing.JFrame {
                 parent.getsParent().changeFieldToPlayer();
                 System.out.println(parent.getPosition().getFirst()+", "+parent.getPosition().getSecond()+": "+parent.getObject().getName());
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(parent.getsParent(), "Erorr...", "Warning", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(parent.getsParent(), "Kartu yang dipanen sudah menghilang...clear", "Warning", JOptionPane.WARNING_MESSAGE);
                 e.printStackTrace();
             }
         } else {

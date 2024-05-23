@@ -56,8 +56,9 @@ public class GameObject {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public synchronized void setActive(boolean active) {
         this.active = active;
+        notifyAll();
     }
 
     public Image getImage() {
