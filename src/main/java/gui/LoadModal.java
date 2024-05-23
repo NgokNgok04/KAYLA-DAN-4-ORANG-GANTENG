@@ -4,6 +4,13 @@
  */
 package gui;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import models.GameManager;
+
 /**
  *
  * @author Suthasoma
@@ -11,13 +18,22 @@ package gui;
 public class LoadModal extends javax.swing.JFrame {
 
     private MainFrame frame;
+    private String folderPath;
+    private GameManager game;
+    private boolean loadSucceed = false;
     /**
      * Creates new form LoadFrame
      */
     public LoadModal(MainFrame parent) {
         setUndecorated(true);
+        game = GameManager.getInstance();
+        this.frame = frame;
         initComponents();
         frame = parent;
+        this.setLocationRelativeTo(frame);
+        this.setBackground(new Color(0f,0f,0f,0f));
+        String[] formats = game.getExtensions();
+        listFormat.setModel(new javax.swing.DefaultComboBoxModel<>(formats));
     }
 
     /**
@@ -32,7 +48,7 @@ public class LoadModal extends javax.swing.JFrame {
         roundedPane1 = new gui.RoundedPane();
         backButton = new gui.ButtonRounded();
         jLabel1 = new javax.swing.JLabel();
-        uploadButton = new gui.ButtonRounded();
+        loadButton = new gui.ButtonRounded();
         jLabel2 = new javax.swing.JLabel();
         listFormat = new javax.swing.JComboBox<>();
         choosenFolder = new gui.ButtonRounded();
@@ -41,7 +57,7 @@ public class LoadModal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        roundedPane1.setBackground(new java.awt.Color(1f, 0.8f, 0.8f, 0.8f));
+        roundedPane1.setBackground(new java.awt.Color(0.6f, 0.8f, 1.0f, 0.85f));
         roundedPane1.setBordered(false);
         roundedPane1.setRoundBottomLeft(40);
         roundedPane1.setRoundBottomRight(40);
@@ -59,7 +75,12 @@ public class LoadModal extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Save");
 
-        uploadButton.setText("Upload");
+        loadButton.setText("Load");
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Format");
 
@@ -82,7 +103,7 @@ public class LoadModal extends javax.swing.JFrame {
                     .addGroup(roundedPane1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(statusUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(uploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(roundedPane1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(choosenFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,7 +136,7 @@ public class LoadModal extends javax.swing.JFrame {
                     .addComponent(choosenFolder, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addComponent(folderName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(uploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(statusUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
@@ -139,13 +160,48 @@ public class LoadModal extends javax.swing.JFrame {
 
     private void choosenFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choosenFolderActionPerformed
         // TODO add your handling code here:
+        JFileChooser folderChooser = new JFileChooser();
+        folderChooser.setDialogTitle("Pilih folder penyimpanan");
+        folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        folderChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+        folderChooser.setPreferredSize(new Dimension(800, 600));
+        int option = folderChooser.showOpenDialog(this);
+        
+        if (option == JFileChooser.APPROVE_OPTION) {
+            java.io.File chosenFile = folderChooser.getSelectedFile();
+            folderPath = chosenFile.getAbsolutePath();
+            folderName.setText(folderPath);
+        }
     }//GEN-LAST:event_choosenFolderActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         frame.setEnabled(true);
+        if (loadSucceed) {
+            frame.refreshActiveDeck();
+            frame.changeFieldToPlayer();
+        }
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
+        // TODO add your handling code here:
+        if (folderPath.equals("")) {
+            JOptionPane.showMessageDialog(this, "Folder belum dipilih atau tidak valid");
+        } else {
+            String type = (String) listFormat.getSelectedItem();
+            try {
+                game.getFileLoader(type).load(folderPath);
+                statusUpload.setForeground(Color.GREEN);
+                statusUpload.setText("State berhasil diload lekk");
+                loadSucceed = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                statusUpload.setForeground(Color.red);
+                statusUpload.setText("State gagal diload lekk");
+            }
+        }
+    }//GEN-LAST:event_loadButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.ButtonRounded backButton;
@@ -154,8 +210,8 @@ public class LoadModal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JComboBox<String> listFormat;
+    private gui.ButtonRounded loadButton;
     private gui.RoundedPane roundedPane1;
     private javax.swing.JLabel statusUpload;
-    private gui.ButtonRounded uploadButton;
     // End of variables declaration//GEN-END:variables
 }

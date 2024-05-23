@@ -719,15 +719,21 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void pluginLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pluginLoadButtonActionPerformed
-        // TODO add your handling code here:      
+        // TODO add your handling code here:    
+        this.setEnabled(false);
+        new PluginModal(this).setVisible(true);
     }//GEN-LAST:event_pluginLoadButtonActionPerformed
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         // TODO add your handling code here:
+        this.setEnabled(false);
+        new LoadModal(this).setVisible(true);
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+        this.setEnabled(false);
+        new SaveModal(this).setVisible(true);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void shopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shopButtonActionPerformed

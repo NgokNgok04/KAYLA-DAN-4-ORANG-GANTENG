@@ -4,8 +4,11 @@
  */
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import models.GameManager;
 
 /**
@@ -26,8 +29,10 @@ public class SaveModal extends javax.swing.JFrame {
         game = GameManager.getInstance();
         this.frame = frame;
         initComponents();
-//        String[] formats = new String[];
-//        listFormat.setModel(a);
+        this.setLocationRelativeTo(frame);
+        this.setBackground(new Color(0f,0f,0f,0f));
+        String[] formats = game.getExtensions();
+        listFormat.setModel(new javax.swing.DefaultComboBoxModel<>(formats));
     }
 
     /**
@@ -42,7 +47,7 @@ public class SaveModal extends javax.swing.JFrame {
         roundedPane1 = new gui.RoundedPane();
         backButton = new gui.ButtonRounded();
         jLabel1 = new javax.swing.JLabel();
-        uploadButton = new gui.ButtonRounded();
+        saveButton = new gui.ButtonRounded();
         jLabel2 = new javax.swing.JLabel();
         listFormat = new javax.swing.JComboBox<>();
         choosenFolder = new gui.ButtonRounded();
@@ -53,7 +58,7 @@ public class SaveModal extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        roundedPane1.setBackground(new java.awt.Color(1f, 0.8f, 0.8f, 0.8f));
+        roundedPane1.setBackground(new java.awt.Color(0.6f, 0.8f, 1.0f, 0.85f));
         roundedPane1.setBordered(false);
         roundedPane1.setRoundBottomLeft(40);
         roundedPane1.setRoundBottomRight(40);
@@ -71,7 +76,12 @@ public class SaveModal extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Save");
 
-        uploadButton.setText("Upload");
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Format");
 
@@ -94,7 +104,7 @@ public class SaveModal extends javax.swing.JFrame {
                     .addGroup(roundedPane1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(statusUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(uploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(roundedPane1Layout.createSequentialGroup()
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(72, 72, 72)
@@ -129,7 +139,7 @@ public class SaveModal extends javax.swing.JFrame {
                     .addComponent(choosenFolder, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addComponent(folderName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(uploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(statusUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
@@ -156,6 +166,7 @@ public class SaveModal extends javax.swing.JFrame {
         JFileChooser folderChooser = new JFileChooser();
         folderChooser.setDialogTitle("Pilih folder penyimpanan");
         folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        folderChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
         folderChooser.setPreferredSize(new Dimension(800, 600));
         int option = folderChooser.showOpenDialog(this);
         
@@ -172,6 +183,24 @@ public class SaveModal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+        if (folderPath.equals("")) {
+            JOptionPane.showMessageDialog(this, "Folder belum dipilih atau tidak valid");
+        } else {
+            String type = (String) listFormat.getSelectedItem();
+            try {
+                game.getFileLoader(type).save(folderPath);
+                statusUpload.setForeground(Color.GREEN);
+                statusUpload.setText("State berhasil disimpan lekk");
+            } catch (Exception e) {
+                e.printStackTrace();
+                statusUpload.setForeground(Color.red);
+                statusUpload.setText("State gagal disimpan lekk");
+            }
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.ButtonRounded backButton;
@@ -181,7 +210,7 @@ public class SaveModal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JComboBox<String> listFormat;
     private gui.RoundedPane roundedPane1;
+    private gui.ButtonRounded saveButton;
     private javax.swing.JLabel statusUpload;
-    private gui.ButtonRounded uploadButton;
     // End of variables declaration//GEN-END:variables
 }
