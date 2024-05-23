@@ -73,7 +73,7 @@ public class LoadModal extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 2, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Save");
+        jLabel1.setText("Load");
 
         loadButton.setText("Load");
         loadButton.addActionListener(new java.awt.event.ActionListener() {

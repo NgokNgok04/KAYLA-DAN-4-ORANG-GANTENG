@@ -87,6 +87,11 @@ task JSONFileLoaderJar(type: Jar) {
     // Include dependencies
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }{
+        // Add exclusions here
+        exclude 'META-INF/*.SF'
+        exclude 'META-INF/*.DSA'
+        exclude 'META-INF/*.RSA'
     }
 
     manifest {

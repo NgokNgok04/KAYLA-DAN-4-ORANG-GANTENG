@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import models.GameManager;
 
@@ -146,7 +147,19 @@ public class PluginModal extends javax.swing.JFrame {
 
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("try to upload");
+        if (folderPath.equals("")) {
+            JOptionPane.showMessageDialog(this, "File nya mana lekkk");
+        } else {
+            try {
+                game.addPlugin(folderPath);
+                statusUpload.setForeground(Color.GREEN);
+                statusUpload.setText("Mantap lekk! Plugin sukses ditambahkan..");
+            } catch (Exception e) {
+                statusUpload.setForeground(Color.RED);
+                statusUpload.setText("Waduh lekk! Pluginnya ga valid..");
+                e.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_uploadButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

@@ -36,6 +36,7 @@ public class MainFrame extends javax.swing.JFrame {
         backGround = Icon.BACKGROUND;
         initComponents();
         setLocationRelativeTo(null);
+        setVisible(true);
         ImageIcon icon = new ImageIcon(getClass().getResource("/logos/icon.png"));
         setIconImage(icon.getImage());
         initGameManager();
@@ -151,8 +152,8 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void shuffle() {
-        this.setEnabled(false);
         new ShuffleCard((ArrayList<GameObject>) game.getCurPlayer().shuffleCard(), game.getCurPlayer().getMaxShuflleCount(), this, game.getCurPlayer()).setVisible(true);
+        this.setEnabled(false);
     }
 
     public void changeFieldToEnemy() {
