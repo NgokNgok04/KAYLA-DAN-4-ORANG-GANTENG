@@ -36,6 +36,10 @@ public class TxtFileLoader implements FileLoader{
         }
     }
 
+    public String getExtension(){
+        return "TXT";
+    }
+
     public void loadGameState(Scanner reader){
         GameManager game = GameManager.getInstance();
         game.setCurTurn(Integer.parseInt(reader.nextLine()));

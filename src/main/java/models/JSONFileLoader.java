@@ -35,11 +35,9 @@ public class JSONFileLoader implements FileLoader{
             return false;
         }
     }
-    public static void printStringDetails(String str) {
-        System.out.println("String: '" + str + "' Length: " + str.length());
-        for (int i = 0; i < str.length(); i++) {
-            System.out.println("Character at index " + i + ": '" + str.charAt(i) + "' Unicode: " + (int) str.charAt(i));
-        }
+
+    public String getExtension(){
+        return "JSON";
     }
 
     public String[] getNonBlank(String[] parsed) {

@@ -3,30 +3,30 @@ package models;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class GameManager {
     private static GameManager instance;
     private int curTurn;
     private Player player1;
     private Player player2;
-    private List<FileLoader> listFileLoader;
+    private Map<String,FileLoader> listFileLoader;
     private final String interfaceName = "FileLoader";
 
     private GameManager(){
         curTurn = 1;
         player1 = new Player();
         player2 = new Player();
-        listFileLoader = new ArrayList<>();
-        listFileLoader.add(new TxtFileLoader());
-//        listFileLoader.add(new JSONFileLoader());
-//        listFileLoader.add(new YAMLFileLoader());
+        listFileLoader = new HashMap<>();
+        listFileLoader.put("TXT", new TxtFileLoader());
     }
 
     public static GameManager getInstance(){
@@ -37,12 +37,7 @@ public class GameManager {
     }
 
     public FileLoader getFileLoader(String name){
-        for(FileLoader fileLoader: listFileLoader){
-            if(fileLoader.getClass().getName().equals(name)){
-                return fileLoader;
-            }
-        }
-        return null;
+        return listFileLoader.get(name);
     }
     
     public void reset() {
@@ -105,18 +100,25 @@ public class GameManager {
         String fileName = path.getFileName().toString();
         String className = fileName.substring(0,fileName.lastIndexOf('.'));
         try{
-            File jarFile = new File(jarDir);
-            URL jarUrl = jarFile.toURI().toURL();
+            File file = new File(jarDir);
+            URL jarUrl = file.toURI().toURL();
             try (URLClassLoader loader = new URLClassLoader(new URL[]{jarUrl})) {
-                Class<?> loadedClass = loader.loadClass("models."+className);
-                Class<?> interfaceClass = Class.forName("models."+interfaceName);
-                if(!interfaceClass.isAssignableFrom(loadedClass)){
-                    System.out.println("KONTOLLLLLL");
-                    throw new Exception("Plugin Loader tidak mengimplementasi Interface FileLoader!");
-                } else {
-                    System.out.println("KONTOLLLLLLasdasdasdasd");
+                JarFile jarFile = new JarFile(jarDir);
+                Enumeration<JarEntry> entries = jarFile.entries();
+                while(entries.hasMoreElements()){
+                    JarEntry entry = entries.nextElement();
+                    if(entry.isDirectory() && entry.getName().endsWith(".class")){
+                        String classPath = entry.getName().replace("/",".").replace(".class","");
+                        Class<?> loadedClass = loader.loadClass("models."+className);
+                        Class<?> interfaceClass = Class.forName("models."+interfaceName);
+                        if(!interfaceClass.isAssignableFrom(loadedClass)){
+                            throw new Exception("Plugin Loader tidak mengimplementasi Interface FileLoader!");
+                        }
+                        Method getExt = loadedClass.getDeclaredMethod("getExtension");
+                        FileLoader fileLoader = (FileLoader)loadedClass.getDeclaredConstructor().newInstance();
+                        listFileLoader.put((String)getExt.invoke(fileLoader),fileLoader);
+                    }
                 }
-                listFileLoader.add((FileLoader)loadedClass.getDeclaredConstructor().newInstance());
             }catch (ClassNotFoundException e) {
                 e.printStackTrace();
                 throw new Exception("Class tidak ditemukan di jar file.");
