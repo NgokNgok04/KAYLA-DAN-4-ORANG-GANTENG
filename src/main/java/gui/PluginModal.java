@@ -4,6 +4,13 @@
  */
 package gui;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import models.GameManager;
+
 /**
  *
  * @author Suthasoma
@@ -11,12 +18,18 @@ package gui;
 public class PluginModal extends javax.swing.JFrame {
 
     private MainFrame frame;
+    private String folderPath = "";
+    private GameManager game;
     /**
      * Creates new form PluginModal
      */
     public PluginModal(MainFrame parent) {
+        game = GameManager.getInstance();
+        setUndecorated(true);
         initComponents();
         frame = parent;
+        this.setLocationRelativeTo(frame);
+        this.setBackground(new Color(0f,0f,0f,0f));
     }
 
     /**
@@ -33,6 +46,8 @@ public class PluginModal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         uploadButton = new gui.ButtonRounded();
         statusUpload = new javax.swing.JLabel();
+        fileChoose = new gui.ButtonRounded();
+        fileName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,21 +76,35 @@ public class PluginModal extends javax.swing.JFrame {
             }
         });
 
+        fileChoose.setText("Choose File");
+        fileChoose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileChooseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout roundedPane1Layout = new javax.swing.GroupLayout(roundedPane1);
         roundedPane1.setLayout(roundedPane1Layout);
         roundedPane1Layout.setHorizontalGroup(
             roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundedPane1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(roundedPane1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(statusUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(uploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(roundedPane1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(statusUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(uploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(roundedPane1Layout.createSequentialGroup()
+                                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 72, 72)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(roundedPane1Layout.createSequentialGroup()
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(28, 28, 28)
+                        .addComponent(fileChoose, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(fileName, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         roundedPane1Layout.setVerticalGroup(
@@ -88,7 +117,11 @@ public class PluginModal extends javax.swing.JFrame {
                     .addGroup(roundedPane1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fileChoose, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fileName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(uploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -113,6 +146,7 @@ public class PluginModal extends javax.swing.JFrame {
 
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
         // TODO add your handling code here:
+        System.out.println("try to upload");
     }//GEN-LAST:event_uploadButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -121,9 +155,29 @@ public class PluginModal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void fileChooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooseActionPerformed
+        // TODO add your handling code here:
+        JFileChooser folderChooser = new JFileChooser();
+        folderChooser.setDialogTitle("Pilih folder penyimpanan");
+        folderChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        folderChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("jar-file", "jar");
+        folderChooser.setFileFilter(filter);
+        folderChooser.setPreferredSize(new Dimension(800, 600));
+        int option = folderChooser.showOpenDialog(this);
+        
+        if (option == JFileChooser.APPROVE_OPTION) {
+            java.io.File chosenFile = folderChooser.getSelectedFile();
+            folderPath = chosenFile.getAbsolutePath();
+            fileName.setText(folderPath);
+        }
+    }//GEN-LAST:event_fileChooseActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.ButtonRounded backButton;
+    private gui.ButtonRounded fileChoose;
+    private javax.swing.JLabel fileName;
     private javax.swing.JLabel jLabel1;
     private gui.RoundedPane roundedPane1;
     private javax.swing.JLabel statusUpload;
