@@ -39,6 +39,12 @@ public final class Shop {
         return availableItem.get(idx).getFirst();
     }
 
+    public void resetShop() {
+        for (Pair<Product,Integer> pair : availableItem){
+            pair.setSecond(0);
+        }
+    }
+
     public Product getItem(String name){
         for(int i = 0; i < availableItem.size(); i++){
             if(getItem(i).getName().equals(name)){
