@@ -20,7 +20,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-        Product bearer = (Product) GameContext.getGameObject("DAGING_KUDA");
+        Product bearer = (Product) GameContext.createObject("DAGING_KUDA");
         Product bear = new Product(bearer);
         iconLabel.setIcon(new ImageIcon(bear.getImage().getScaledInstance(iconLabel.getWidth(), iconLabel.getHeight(), Image.SCALE_SMOOTH)));
         nameLabel.setText(bear.getName()+" -- " + bear.getTypeObject());

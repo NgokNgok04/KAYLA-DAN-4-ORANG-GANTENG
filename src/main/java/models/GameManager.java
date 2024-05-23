@@ -29,6 +29,7 @@ public class GameManager {
         listFileLoader = new ArrayList<>();
         listFileLoader.add(new TxtFileLoader());
         listFileLoader.add(new JSONFileLoader());
+        listFileLoader.add(new YAMLFileLoader());
     }
 
     public static GameManager getInstance(){
@@ -149,12 +150,12 @@ public class GameManager {
         // } catch (Exception e) {
         //     e.printStackTrace();
         // }
-        FileLoader loader = game.getFileLoader("models.JSONFileLoader");
+        FileLoader loader = game.getFileLoader("models.YAMLFileLoader");
         try {
-            loader.load("src/main/java/models/gamestateJSON/");
-            loader.save("src/main/java/models/tes/");
             loader.load("src/main/java/models/tes/");
-            loader.load("src/main/java/models/tes/");
+            loader.save("src/main/java/models/tess/");
+            // loader.load("src/main/java/models/tes/");
+            // loader.load("src/main/java/models/tes/");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -181,6 +182,8 @@ public class GameManager {
         //         continue;
         //     }
         //     System.out.println(liv.getName());
+        //     System.out.println(liv.getName());
+        //     System.out.println(((Animal)liv).getWeight());
         //     System.out.println(liv.getItems().size());
         //     for(Item item:liv.getItems()){
         //         System.out.println(item.getName());
