@@ -46,6 +46,11 @@ public class GameManager {
         player2 = new Player();
     }
 
+    public String[] getExtensions(){
+        Set<String> exts = listFileLoader.keySet();
+        return exts.toArray(new String[exts.size()]);
+    }
+
     public Player getPlayer1(){
         return player1;
     }

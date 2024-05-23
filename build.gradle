@@ -24,8 +24,8 @@ dependencies {
 }
 
 task fatYamlFileLoaderJar(type: Jar) {
-    archiveBaseName = 'yaml-file-loader'
-    archiveVersion = version
+    archiveBaseName = 'YAMLFileLoader'
+    archiveVersion = ''
 
     // Include the YAMLFileLoader class
     from(sourceSets.main.output) {
