@@ -59,6 +59,7 @@ public class Player {
         for(LivingThing liv:field){
             liv.setActive(false);
         }
+        this.setMoney(0);
     }
 
     public int getMoney(){
@@ -293,22 +294,6 @@ public class Player {
         removeCardInDeck(idx);
     }
 
-    public synchronized void placeItem(Item item,Pair<Integer,Integer> pos, List<LivingThing> fieldTarget) throws GameException{
-        if(fieldTarget!=field && (item.getName().equals("DESTROY") || item.getName().equals("DELAY"))){
-            throw new GameException("Can't place items other than Destroy and Delay to enemy's field");
-        }
-        if(fieldTarget==field && (item.getName().equals("DESTROY") || item.getName().equals("DELAY"))){
-            throw new GameException("Can't place Destroy and Delay to your own field");
-        }
-
-        if(item.getName().equals("INSTANT_HARVEST")){
-            harvestField(pos);
-        }
-
-        LivingThing target = fieldTarget.get(pos.convertPairToIdx());
-        target.addItem(item);
-    }
-
     public synchronized void placeProduct(Product product,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
         if(fieldTarget!=field){
             throw new GameException("Can't place product to enemy's field");
@@ -323,19 +308,5 @@ public class Player {
         }
         addCardInField((LivingThing)living, pos);
     }
-
-    public synchronized void placeDeckToField(int idx,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
-        GameObject itemDeck = activeDeck.get(idx);
-        if(itemDeck instanceof LivingThing living){
-            placeLiving(living, pos, fieldTarget);
-        }else if(itemDeck instanceof Product product){
-            placeProduct(product, pos, fieldTarget);
-        }else{
-            placeItem((Item)itemDeck, pos, fieldTarget);
-        }
-        removeCardInDeck(idx);
-        notifyAll();
-    }
-
 
 }
