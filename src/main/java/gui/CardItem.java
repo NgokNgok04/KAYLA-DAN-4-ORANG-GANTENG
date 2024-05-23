@@ -15,6 +15,7 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.TransferHandler;
@@ -120,6 +121,14 @@ public class CardItem extends JPanel {
         this.swap = swap;
     }
 
+    public JLabel getImageLabel(){
+        return imageLabel;
+    }
+
+    public JLabel getNameLabel(){
+        return nameLabel;
+    }
+
     public void removeObject() {
         setObject(new Herbivore("SAPI"));
         this.object.setActive(false);
@@ -137,9 +146,7 @@ public class CardItem extends JPanel {
     }
 
     public void refreshData() {
-//        System.out.println("Masukk");
         if (!object.isActive()) {
-//            System.out.println("Kosong");
             imageLabel.setIcon(new ImageIcon(icons.Icon.NOTHING.getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
             nameLabel.setText(" ");
             return;
@@ -154,7 +161,6 @@ public class CardItem extends JPanel {
         System.out.println("Active Baby");
         imageLabel.setIcon(new ImageIcon(object.getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
         nameLabel.setText(object.getNameParsed());
-//        System.out.println("Settled");
     }
 
     public void addDragListener() {
@@ -273,7 +279,7 @@ public class CardItem extends JPanel {
     private Player owner;
     private MainFrame parent;
     private boolean field;
-    private GameObject object;
+    private GameObject  object;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel imageLabel;
     private javax.swing.JPanel jPanel1;

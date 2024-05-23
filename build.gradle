@@ -36,7 +36,7 @@ jar {
 
 test {
     useJUnitPlatform()
-    finalizedBy tasks.jacocoTestReport
+    finalizedBy jacocoTestReport
 }
 
 jacoco {

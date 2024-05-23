@@ -2,8 +2,7 @@ package icons;
 
 import gui.CardItem;
 import gui.MainFrame;
-import models.Herbivore;
-import models.Plant;
+import models.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +31,6 @@ public class CardItemTest {
         frame.pack();
         frame.setVisible(true);
         robot = new Robot();
-//        robot.setAutoDelay(50);
     }
 
     @AfterEach
@@ -70,8 +68,87 @@ public class CardItemTest {
     }
 
     @Test
+    public void TestGetObject(){
+        GameObject obj = new Carnivore();
+        carditem.setObject(obj);
+        assertSame(carditem.getObject(),obj);
+    }
+
+    @Test
+    public void TestSetObject(){
+        GameObject obj = new Plant("BIJI_JAGUNG");
+        carditem.setObject(obj);
+        assertSame(carditem.getObject(),obj);
+    }
+
+    @Test
+    public void TestGetOwner(){
+        Player mockPlayer = new Player();
+        carditem.setOwner(mockPlayer);
+        assertEquals(carditem.getOwner(),mockPlayer);
+    }
+
+    @Test
+    public void TestSetOwner(){
+        Player mockPlayer = new Player();
+        carditem.setOwner(mockPlayer);
+        assertEquals(carditem.getOwner(),mockPlayer);
+    }
+
+    @Test
+    public void TestGetField(){
+        carditem.setField(CardItem.FIELD_CARD);
+        assertEquals(carditem.getField(),CardItem.FIELD_CARD);
+    }
+
+    @Test
+    public void TestSetField(){
+        carditem.setField(CardItem.DECK_CARD);
+        assertEquals(carditem.getField(),CardItem.DECK_CARD);
+    }
+
+    @Test
+    public void TestGetParent(){
+        MainFrame mockMainFrame = new MainFrame();
+        carditem.setParent(mockMainFrame);
+        assertEquals(carditem.getsParent(),mockMainFrame);
+    }
+
+    @Test
+    public void TestSetParent(){
+        MainFrame mockMainFrame = new MainFrame();
+        carditem.setParent(mockMainFrame);
+        assertEquals(carditem.getsParent(),mockMainFrame);
+    }
+
+    @Test
+    public void TestGetPosition(){
+        carditem.setPosition(new Pair<Integer,Integer>(1, 2));
+        assertEquals(carditem.getPosition().getFirst(), 1);
+        assertEquals(carditem.getPosition().getSecond(), 2);
+    }
+
+    @Test
+    public void TestSetPosition(){
+        carditem.setPosition(new Pair<Integer,Integer>(0, 0));
+        assertEquals(carditem.getPosition().getFirst(), 0);
+        assertEquals(carditem.getPosition().getSecond(), 0);
+    }
+
+    @Test
+    public void TestIsSwap(){
+        carditem.setSwap(false);
+        assertFalse(carditem.isSwap());
+    }
+
+    @Test
+    public void TestSetSwap(){
+        carditem.setSwap(true);
+        assertTrue(carditem.isSwap());
+    }
+
+    @Test
     public void TestRemoveObject(){
-        // CardItem cardItem = new CardItem();
         Herbivore herbivore = new Herbivore("SAPI");
         carditem.setObject(herbivore);
         assertEquals(herbivore, carditem.getObject());
