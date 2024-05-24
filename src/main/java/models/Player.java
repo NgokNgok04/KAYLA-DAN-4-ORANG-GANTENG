@@ -306,12 +306,11 @@ public class Player {
             harvestField(pos);
         }
 
-        LivingThing liv = getFieldItem(pos.convertPairToIdx());
-        if(!liv.isActive()){
+        LivingThing target = fieldTarget.get(pos.convertPairToIdx());
+        if(!target.isActive()){
             throw new GameException("Belum ada makhluk hidup");
         }
 
-        LivingThing target = fieldTarget.get(pos.convertPairToIdx());
         target.addItem(item);
     }
 
@@ -319,11 +318,11 @@ public class Player {
         if(fieldTarget!=field){
             throw new GameException("Can't place product to enemy's field");
         }
-        LivingThing liv = getFieldItem(pos.convertPairToIdx());
+        LivingThing liv = fieldTarget.get(pos.convertPairToIdx());
         if(!liv.isActive()){
             throw new GameException("Belum ada makhluk hidup");
         }
-        Animal target = (Animal)fieldTarget.get(pos.convertPairToIdx());
+        Animal target = (Animal)liv;
         target.eat(product);
     }
 
@@ -331,11 +330,11 @@ public class Player {
         if(fieldTarget!=this.field){
             throw new GameException("Can't place Living Things to Enemey's field");
         }
-        LivingThing liv = (LivingThing) GameContext.createObject(getFieldItem(pos.convertPairToIdx()).getName());
-        if(liv.isActive()){
+        LivingThing target = fieldTarget.get(pos.convertPairToIdx());
+        if(target.isActive()){
             throw new GameException("Sudah ada makhluk hidup");
         }
-        addCardInField(liv, pos);
+        addCardInField((LivingThing)GameContext.createObject(target.getName()), pos);
     }
 
     public synchronized void placeDeckToField(int idx,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
