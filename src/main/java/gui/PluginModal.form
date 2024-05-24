@@ -39,7 +39,7 @@
     <Container class="gui.RoundedPane" name="roundedPane1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new java.awt.Color(1f, 0.8f, 0.8f, 0.8f)" type="code"/>
+          <Connection code="new java.awt.Color(0.6f, 0.8f, 1.0f, 0.85f)" type="code"/>
         </Property>
         <Property name="bordered" type="boolean" value="false"/>
         <Property name="roundBottomLeft" type="int" value="40"/>
@@ -53,7 +53,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Component id="statusUpload" min="-2" pref="311" max="-2" attributes="0"/>
@@ -67,7 +67,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="fileChoose" min="-2" pref="82" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="fileName" max="32767" attributes="0"/>
+                          <Component id="fileName" min="-2" pref="348" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="20" max="32767" attributes="0"/>

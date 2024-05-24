@@ -52,7 +52,7 @@ public class PluginModal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        roundedPane1.setBackground(new java.awt.Color(1f, 0.8f, 0.8f, 0.8f));
+        roundedPane1.setBackground(new java.awt.Color(0.6f, 0.8f, 1.0f, 0.85f));
         roundedPane1.setBordered(false);
         roundedPane1.setRoundBottomLeft(40);
         roundedPane1.setRoundBottomRight(40);
@@ -90,7 +90,7 @@ public class PluginModal extends javax.swing.JFrame {
             roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundedPane1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(roundedPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(roundedPane1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(statusUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -102,7 +102,7 @@ public class PluginModal extends javax.swing.JFrame {
                     .addGroup(roundedPane1Layout.createSequentialGroup()
                         .addComponent(fileChoose, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(fileName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(fileName, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         roundedPane1Layout.setVerticalGroup(
