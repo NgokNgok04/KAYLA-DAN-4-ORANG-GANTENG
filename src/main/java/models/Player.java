@@ -295,23 +295,24 @@ public class Player {
     }
 
     public synchronized void placeItem(Item item,Pair<Integer,Integer> pos, List<LivingThing> fieldTarget) throws GameException{
-        if(fieldTarget!=field && (item.getName().equals("DESTROY") || item.getName().equals("DELAY"))){
+        if(fieldTarget!=field && !(item.getName().equals("DESTROY") || item.getName().equals("DELAY"))){
             throw new GameException("Can't place items other than Destroy and Delay to enemy's field");
         }
         if(fieldTarget==field && (item.getName().equals("DESTROY") || item.getName().equals("DELAY"))){
             throw new GameException("Can't place Destroy and Delay to your own field");
         }
-
+        LivingThing target = fieldTarget.get(pos.convertPairToIdx());
         if(item.getName().equals("INSTANT_HARVEST")){
+            item.useEffect(target);
             harvestField(pos);
+            return;
         }
 
-        LivingThing target = fieldTarget.get(pos.convertPairToIdx());
         if(!target.isActive()){
             throw new GameException("Belum ada makhluk hidup");
         }
 
-        item.useEffect(target);;
+        item.useEffect(target);
     }
 
     public synchronized void placeProduct(Product product,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
