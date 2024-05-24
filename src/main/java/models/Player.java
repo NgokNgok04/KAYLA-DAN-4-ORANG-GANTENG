@@ -331,11 +331,11 @@ public class Player {
         if(fieldTarget!=this.field){
             throw new GameException("Can't place Living Things to Enemey's field");
         }
-        LivingThing liv = getFieldItem(pos.convertPairToIdx());
+        LivingThing liv = (LivingThing) GameContext.createObject(getFieldItem(pos.convertPairToIdx()).getName());
         if(liv.isActive()){
             throw new GameException("Sudah ada makhluk hidup");
         }
-        addCardInField((LivingThing)living, pos);
+        addCardInField(liv, pos);
     }
 
     public synchronized void placeDeckToField(int idx,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
