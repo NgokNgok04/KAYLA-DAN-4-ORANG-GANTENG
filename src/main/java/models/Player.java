@@ -167,6 +167,7 @@ public class Player {
             }catch (GameException e){
                 e.printStackTrace();
             }
+            deckSlot -= selected.size();
         }
     }
 

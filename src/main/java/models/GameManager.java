@@ -126,7 +126,6 @@ public class GameManager {
                     }
                 }
                 jarFile.close();
-                throw new Exception("KONTOL");
             } catch (ClassNotFoundException e) {
                 throw new Exception("Class not found in the jar file: " + e.getMessage(), e);
             } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
