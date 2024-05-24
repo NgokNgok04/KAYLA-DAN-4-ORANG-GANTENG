@@ -63,25 +63,32 @@ public class TransferGameHandler extends TransferHandler {
             return true;
         } else if (source.getField() == CardItem.DECK_CARD){
             // Melakukan penanaman
-            if (gameObject instanceof LivingThing thing) {
-                if (source.getOwner() != target.getOwner()) {
-                    JOptionPane.showMessageDialog(source.getsParent(), "Tidak dapat dilakukan pada ladang lawan.", "Warning", JOptionPane.WARNING_MESSAGE);
-                    return false;
-                }
-                if (target.getObject().isActive()) {
-                    JOptionPane.showMessageDialog(source.getsParent(), "Tidak bisa, sudah terisi soalnya.", "Warning", JOptionPane.WARNING_MESSAGE);
-                    return false;
-                }
-                target.getOwner().addCardInField((LivingThing) GameContext.createObject(gameObject.getName()), target.getPosition());
-                target.setObject(target.getOwner().getFieldItem(target.getPosition().convertPairToIdx()));
-                try {
-                    source.getOwner().removeCardInDeck(source.getPosition().convertPairToIdx());
-                    source.getsParent().refreshActiveDeck();
-                } catch (Exception ee) {
-                    ee.printStackTrace();
-                    JOptionPane.showMessageDialog(source.getsParent(), "Errorrr..", "Warning", JOptionPane.WARNING_MESSAGE);
-                    return false;
-                }
+//            if (gameObject instanceof LivingThing thing) {
+//                if (source.getOwner() != target.getOwner()) {
+//                    JOptionPane.showMessageDialog(source.getsParent(), "Tidak dapat dilakukan pada ladang lawan.", "Warning", JOptionPane.WARNING_MESSAGE);
+//                    return false;
+//                }
+//                if (target.getObject().isActive()) {
+//                    JOptionPane.showMessageDialog(source.getsParent(), "Tidak bisa, sudah terisi soalnya.", "Warning", JOptionPane.WARNING_MESSAGE);
+//                    return false;
+//                }
+//                target.getOwner().addCardInField((LivingThing) GameContext.createObject(gameObject.getName()), target.getPosition());
+//                target.setObject(target.getOwner().getFieldItem(target.getPosition().convertPairToIdx()));
+//                try {
+//                    source.getOwner().removeCardInDeck(source.getPosition().convertPairToIdx());
+//                    source.getsParent().refreshActiveDeck();
+//                } catch (Exception ee) {
+//                    ee.printStackTrace();
+//                    JOptionPane.showMessageDialog(source.getsParent(), "Errorrr..", "Warning", JOptionPane.WARNING_MESSAGE);
+//                    return false;
+//                }
+//            }
+            try{
+                source.getOwner().placeDeckToField(source.getPosition().convertPairToIdx(), target.getPosition(), target.getOwner().getField());
+                source.getsParent().changeFieldToPlayer();
+                source.getsParent().refreshActiveDeck();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(source.getsParent(), e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
             }
             // Memberi makan
             if (gameObject instanceof Product food) {
