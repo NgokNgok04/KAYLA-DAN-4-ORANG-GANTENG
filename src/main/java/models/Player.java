@@ -296,10 +296,10 @@ public class Player {
 
     public synchronized void placeItem(Item item,Pair<Integer,Integer> pos, List<LivingThing> fieldTarget) throws GameException{
         if(fieldTarget!=field && !(item.getName().equals("DESTROY") || item.getName().equals("DELAY"))){
-            throw new GameException("Can't place items other than Destroy and Delay to enemy's field");
+            throw new GameException("Tidak bisa memasang item selain destroy dan delay ke ladang musuh lek.... ");
         }
         if(fieldTarget==field && (item.getName().equals("DESTROY") || item.getName().equals("DELAY"))){
-            throw new GameException("Can't place Destroy and Delay to your own field");
+            throw new GameException("Loh!? Mau nyerang ladang sendiri lek?....");
         }
         LivingThing target = fieldTarget.get(pos.convertPairToIdx());
         if(item.getName().equals("INSTANT_HARVEST")){
@@ -309,7 +309,7 @@ public class Player {
         }
 
         if(!target.isActive()){
-            throw new GameException("Belum ada makhluk hidup");
+            throw new GameException("Belum ada makhluk hidup lek....");
         }
 
         item.useEffect(target);
@@ -317,11 +317,14 @@ public class Player {
 
     public synchronized void placeProduct(Product product,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
         if(fieldTarget!=field){
-            throw new GameException("Can't place product to enemy's field");
+            throw new GameException("Tidak bisa memasang produk di ladang lawan loo lek....");
         }
         LivingThing liv = fieldTarget.get(pos.convertPairToIdx());
         if(!liv.isActive()){
-            throw new GameException("Belum ada makhluk hidup");
+            throw new GameException("Belum ada makhluk hidup lek....");
+        }
+        if(liv instanceof Plant){
+            throw new GameException("Tanaman tidak bisa dikasih makan lek....");
         }
         Animal target = (Animal)liv;
         target.eat(product);
@@ -329,11 +332,11 @@ public class Player {
 
     public void placeLiving(LivingThing living,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
         if(fieldTarget!=this.field){
-            throw new GameException("Can't place Living Things to Enemey's field");
+            throw new GameException("Serius lekk mau buat makhluk hidup di ladang lawan?!...");
         }
         LivingThing target = fieldTarget.get(pos.convertPairToIdx());
         if(target.isActive()){
-            throw new GameException("Sudah ada makhluk hidup");
+            throw new GameException("Udah ada makhluk hidup loh le disituu...");
         }
         addCardInField((LivingThing)GameContext.createObject(living.getName()), pos);
     }
