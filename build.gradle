@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'jacoco'
 }
 
 group = 'app'
@@ -19,8 +20,11 @@ sourceSets {
 
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation 'org.yaml:snakeyaml:2.2'
+    testImplementation 'org.mockito:mockito-core:4.6.1'
 }
 
 jar {
@@ -102,4 +106,30 @@ task JSONFileLoaderJar(type: Jar) {
 
 test {
     useJUnitPlatform()
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        csv.required = false
+        html.required = true
+        html.outputLocation = layout.buildDirectory.dir('reports/jacoco/test/html')
+    }
+    classDirectories.setFrom(files(classDirectories.files.collect {
+        fileTree(dir: it, exclude: [
+                'sun/util/resources/**', // Exclude problematic system classes
+                'jdk/internal/**'       // Exclude other internal JDK classes
+        ])
+    }))
+
 }
