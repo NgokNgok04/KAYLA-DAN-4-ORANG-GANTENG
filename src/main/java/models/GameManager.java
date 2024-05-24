@@ -102,9 +102,6 @@ public class GameManager {
     }
 
     public void addPlugin(String jarDir) throws Exception {
-        Path path = Paths.get(jarDir);
-        String fileName = path.getFileName().toString();
-        String className = fileName.substring(0, fileName.lastIndexOf('.'));
         try {
             File file = new File(jarDir);
             URL jarUrl = file.toURI().toURL();
