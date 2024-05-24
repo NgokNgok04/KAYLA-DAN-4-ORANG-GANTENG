@@ -306,6 +306,11 @@ public class Player {
             harvestField(pos);
         }
 
+        LivingThing liv = getFieldItem(pos.convertPairToIdx());
+        if(!liv.isActive()){
+            throw new GameException("Belum ada makhluk hidup");
+        }
+
         LivingThing target = fieldTarget.get(pos.convertPairToIdx());
         target.addItem(item);
     }
@@ -314,6 +319,10 @@ public class Player {
         if(fieldTarget!=field){
             throw new GameException("Can't place product to enemy's field");
         }
+        LivingThing liv = getFieldItem(pos.convertPairToIdx());
+        if(!liv.isActive()){
+            throw new GameException("Belum ada makhluk hidup");
+        }
         Animal target = (Animal)fieldTarget.get(pos.convertPairToIdx());
         target.eat(product);
     }
@@ -321,6 +330,10 @@ public class Player {
     public void placeLiving(LivingThing living,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
         if(fieldTarget!=this.field){
             throw new GameException("Can't place Living Things to Enemey's field");
+        }
+        LivingThing liv = getFieldItem(pos.convertPairToIdx());
+        if(liv.isActive()){
+            throw new GameException("Sudah ada makhluk hidup");
         }
         addCardInField((LivingThing)living, pos);
     }
@@ -335,7 +348,6 @@ public class Player {
             placeItem((Item)itemDeck, pos, fieldTarget);
         }
         removeCardInDeck(idx);
-        notifyAll();
     }
 
 
