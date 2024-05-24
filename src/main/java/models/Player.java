@@ -311,7 +311,7 @@ public class Player {
             throw new GameException("Belum ada makhluk hidup");
         }
 
-        target.addItem(item);
+        item.useEffect(target);;
     }
 
     public synchronized void placeProduct(Product product,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
@@ -334,7 +334,7 @@ public class Player {
         if(target.isActive()){
             throw new GameException("Sudah ada makhluk hidup");
         }
-        addCardInField((LivingThing)GameContext.createObject(target.getName()), pos);
+        addCardInField((LivingThing)GameContext.createObject(living.getName()), pos);
     }
 
     public synchronized void placeDeckToField(int idx,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
