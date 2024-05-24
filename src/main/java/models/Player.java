@@ -168,6 +168,7 @@ public class Player {
                 e.printStackTrace();
             }
         }
+        setDeckSlot(getDeckSlot()-selected.size());
     }
 
     public synchronized void addCardInField(LivingThing card, Pair<Integer,Integer> pos){

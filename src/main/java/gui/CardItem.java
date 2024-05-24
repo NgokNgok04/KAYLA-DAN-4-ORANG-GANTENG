@@ -155,7 +155,6 @@ public class CardItem extends JPanel {
         }
         imageLabel.setIcon(new ImageIcon(object.getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH)));
 //        nameLabel.setText(object.getNameParsed());
-//        System.out.println("Settled");
     }
 
     public void addDragListener() {
@@ -180,12 +179,11 @@ public class CardItem extends JPanel {
     }
     
     public void onClickActionPerformed(MouseEvent e) {
-        System.out.println("Object cliked "+object.isActive() + " name " + object.getName());
+        System.out.println("Object cliked "+object.isActive() + ", name " + object.getName() +", field " + field);
         if (object.isActive()) {
             if (getField() == FIELD_CARD){
-//                System.out.println("Card clicked: " + object.getName());
                 parent.setEnabled(false);
-                this.nameLabel.setText(object.getNameParsed());
+//                this.nameLabel.setText(object.getNameParsed());
                 new PopUpDetail(this).setVisible(true);
             } else {
                 if (object instanceof Product product) {

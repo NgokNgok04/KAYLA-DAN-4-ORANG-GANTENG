@@ -115,7 +115,6 @@ public class GameManager {
                     JarEntry entry = entries.nextElement();
                     if (!entry.isDirectory() && entry.getName().endsWith(".class")) {
                         String classPath = entry.getName().replace("/", ".").replace(".class", "");
-                        System.out.println(classPath);
                         Class<?> loadedClass = loader.loadClass(classPath);
                         Class<?> interfaceClass = Class.forName("models.FileLoader");
                         if (!interfaceClass.isAssignableFrom(loadedClass) || loadedClass.isInterface()) {

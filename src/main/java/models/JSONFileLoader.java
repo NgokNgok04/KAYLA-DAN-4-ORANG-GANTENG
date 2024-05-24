@@ -90,9 +90,6 @@ public class JSONFileLoader implements FileLoader{
             String name="";
             for(int j=0;j<2;j++){
                 String[] item = getNonBlank(reader.nextLine().split("[\",:\\s]+"));
-                // for(String ite:item){
-                //     System.out.println(ite);
-                // }
                 if(item[0].equals("location")){
                     idx = item[1].charAt(0)-'A'; 
                 }else if(item[0].equals("name")){
@@ -114,9 +111,6 @@ public class JSONFileLoader implements FileLoader{
         for(int i=0;i<countItems;i++){
             reader.nextLine();
             String[] item = getNonBlank(reader.nextLine().split("[\",:\\s]+"));
-            // for(String ite:item){
-            //     System.out.println(ite);
-            // }
             if(item[1].equals("ACCELERATE")||item[1].equals("DELAY")){
                 liv.addItem((Item)GameContext.createObject(item[1]));
             }else{

@@ -163,8 +163,8 @@ public class GameShop extends javax.swing.JFrame {
 
     private void buttonRounded1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRounded1ActionPerformed
         // TODO add your handling code here:
-        this.dispose();
         parent.setEnabled(true);
+        this.dispose();
     }//GEN-LAST:event_buttonRounded1ActionPerformed
 
     public void addProductCart(Product product) {

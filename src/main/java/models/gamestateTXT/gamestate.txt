@@ -1,4 +1,0 @@
-1
-2
-SIRIP_HIU 10
-SUSU 5
