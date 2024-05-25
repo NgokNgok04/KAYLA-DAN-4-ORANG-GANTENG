@@ -37,22 +37,6 @@ jar {
     }
 }
 
-//jar {
-//    manifest {
-//        attributes 'Main-Class' : 'app.Main'
-//    }
-//    duplicatesStrategy = DuplicatesStrategy.EXCLUDE // Add this line
-//
-//    from(sourceSets.main.output) {
-//        exclude 'models/YAMLFileLoader.class'
-//        exclude 'models/JSONFileLoader.class'
-//    }
-//
-//    from {
-//        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it)}
-//    }
-//}
-
 task YAMLFileLoaderJar(type: Jar) {
     archiveBaseName = 'YAMLFileLoader'
     archiveVersion = ''
