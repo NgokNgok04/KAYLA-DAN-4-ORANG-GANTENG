@@ -1,0 +1,21 @@
+field:
+- name: DOMBA
+  weight: 10
+  location: A01
+  items: []
+  count_items: 0
+- name: BIJI_STROBERI
+  location: A02
+  items: []
+  age: 0
+  count_items: 0
+- name: BIJI_LABU
+  location: A03
+  items: []
+  age: 0
+  count_items: 0
+deck_slot: 36
+count_active_field: 3
+gulden: 0
+count_active_deck: 0
+active_deck: []
