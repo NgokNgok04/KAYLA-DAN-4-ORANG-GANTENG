@@ -157,7 +157,7 @@ public class YAMLFileLoader implements FileLoader{
         Yaml yaml = new Yaml();
         try{
             obj.createNewFile();
-            try(FileWriter writer = new FileWriter(obj)){
+            try(FileWriter writer = new FileWriter(obj,false)){
                 yaml.dump(data,writer);
             };
         }catch(IOException e){
@@ -232,7 +232,7 @@ public class YAMLFileLoader implements FileLoader{
         Yaml yaml = new Yaml();
         try{
             obj.createNewFile();
-            try(FileWriter writer = new FileWriter(obj)){
+            try(FileWriter writer = new FileWriter(obj,false)){
                 yaml.dump(data,writer);
             };
         }catch(IOException e){

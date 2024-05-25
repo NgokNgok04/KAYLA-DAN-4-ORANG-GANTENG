@@ -60,7 +60,7 @@ public class GameContext {
         List<String> listObjectName = new ArrayList<>(OBJECT_TYPE.keySet());
         do{
             randomGM = random.nextInt(OBJECT_TYPE.size());
-        }while(listObjectName.get(randomGM)=="BERUANG");
+        }while(listObjectName.get(randomGM)=="BERUANG"||listObjectName.get(randomGM)=="DAGING_BERUANG");
 
         return createObject(listObjectName.get(randomGM));
     }

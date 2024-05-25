@@ -125,7 +125,7 @@ public class TxtFileLoader implements FileLoader{
         Shop shop = Shop.getInstance();
         try{
             obj.createNewFile();
-            try(FileWriter writer = new FileWriter(obj)){
+            try(FileWriter writer = new FileWriter(obj,false)){
                 writer.write(game.getCurTurn()+"\n");
 
                 int nItems = shop.getCountItemsReady();
@@ -146,7 +146,7 @@ public class TxtFileLoader implements FileLoader{
         File obj = filePath.toFile();
         try{
             obj.createNewFile();
-            try(FileWriter writer = new FileWriter(obj)){
+            try(FileWriter writer = new FileWriter(obj,false)){
                 writer.write(player.getMoney()+"\n");
                 writer.write(player.getDeckSlot()+"\n");
 
