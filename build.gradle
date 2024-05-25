@@ -106,30 +106,27 @@ task JSONFileLoaderJar(type: Jar) {
 
 test {
     useJUnitPlatform()
-}
-
-test {
-    useJUnitPlatform()
     finalizedBy jacocoTestReport
 }
 
 jacoco {
-    toolVersion = "0.8.7"
+    toolVersion = "0.8.12" // Update this to a newer version if available
 }
 
 jacocoTestReport {
     dependsOn test
     reports {
-        xml.required = true
-        csv.required = false
-        html.required = true
+        xml.required.set(true)
+        csv.required.set(false)
         html.outputLocation = layout.buildDirectory.dir('reports/jacoco/test/html')
     }
-    classDirectories.setFrom(files(classDirectories.files.collect {
-        fileTree(dir: it, exclude: [
-                'sun/util/resources/**', // Exclude problematic system classes
-                'jdk/internal/**'       // Exclude other internal JDK classes
-        ])
-    }))
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'sun/security/ec/**', // Exclude the problematic package
+                    // Add more exclusions if needed
+            ])
+        }))
+    }
 
 }

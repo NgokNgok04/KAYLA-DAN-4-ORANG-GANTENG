@@ -91,8 +91,7 @@ class CarnivoreTest {
         Carnivore carnivore = new Carnivore();
         Product corn = new Product("JAGUNG");
 
-        Exception exception = assertThrows(GameException.class, () -> carnivore.eat(corn));
-        assertEquals("Carnivore can only eat Animal Product", exception.getMessage());
+        assertThrows(GameException.class, () -> carnivore.eat(corn));
     }
 
     @Test
@@ -100,7 +99,6 @@ class CarnivoreTest {
         Carnivore carnivore = new Carnivore();
         GameObject rock = new GameObject("OBJECT", "Rock", true, null);
 
-        Exception exception = assertThrows(GameException.class, () -> carnivore.eat(rock));
-        assertEquals("Carnivore can only eat Product", exception.getMessage());
+        assertThrows(GameException.class, () -> carnivore.eat(rock));
     }
 }

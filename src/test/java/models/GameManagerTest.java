@@ -2,13 +2,9 @@ package models;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.File;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import models.GameManager;
-import models.Plant;
+import java.io.File;
 
 public class GameManagerTest {
     private GameManager game;
@@ -115,7 +111,7 @@ public class GameManagerTest {
             if (testJar.exists()) {
                 game.addPlugin(jarPath);
                 // assertNotNull(game.getFileLoader("JSON"));
-            } 
+            }
         } catch (Exception e) {
             e.printStackTrace();
             fail("Exception should not be thrown while adding a plugin: " + e.getMessage());
