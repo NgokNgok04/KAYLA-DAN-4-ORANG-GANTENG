@@ -235,6 +235,7 @@ public class JSONFileLoader implements FileLoader{
         try{
             writer.write("\"count_active_field\": "+countActiveField+",\n");
             writer.write("\"field\": [\n");
+            int counter = 0;
             for(int i=0;i<countFieldSize;i++){
                 if(!player.getField().get(i).isActive()){
                     continue;
@@ -267,10 +268,11 @@ public class JSONFileLoader implements FileLoader{
                 }
                 writer.write("]\n");
                 writer.write("}");
-                if(i<countActiveField-1){
+                if(counter<countActiveField-1){
                     writer.write(",");
                 }
                 writer.write("\n");
+                counter++;
             }
             writer.write("]\n");
         }catch(IOException e){

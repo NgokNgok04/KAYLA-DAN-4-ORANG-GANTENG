@@ -124,11 +124,15 @@ public class MainFrame extends javax.swing.JFrame {
     public void refreshGame() {
         changeFieldToPlayer();
         refreshActiveDeck();
-        turnNumber.setText(Integer.toString(game.getCurTurn()));
+        updateTurn();
         refreshCoin();
         refreshPlayer();
         refreshDeckCount();
         shuffle();
+    }
+
+    public void updateTurn() {
+        turnNumber.setText(Integer.toString(game.getCurTurn()));
     }
     
     public void refreshDeckCount() {

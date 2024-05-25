@@ -12,8 +12,8 @@ public class Pair<A,B> {
         char letterPart = token.charAt(0);
         String numberPart = token.substring(1);
         
-        int rowIndex = letterPart - 'A';
-        int colIndex = Integer.parseInt(numberPart)-1;
+        int colIndex = letterPart - 'A';
+        int rowIndex = Integer.parseInt(numberPart)-1;
         return new Pair<>(rowIndex, colIndex);
     }
 
@@ -21,8 +21,8 @@ public class Pair<A,B> {
         int rowIndex = pair.getFirst();
         int colIndex = pair.getSecond();
 
-        char letterPart = (char) ('A' + rowIndex);
-        String numberPart = Integer.toString(colIndex+1);
+        char letterPart = (char) ('A' + colIndex);
+        String numberPart = Integer.toString(rowIndex+1);
 
         return letterPart +"0" +numberPart;
     }
