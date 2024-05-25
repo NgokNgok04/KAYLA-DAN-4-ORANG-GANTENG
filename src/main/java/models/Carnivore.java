@@ -30,10 +30,10 @@ public class Carnivore extends Animal{
     @Override
     public void eat(GameObject eatable) throws GameException{
         if (!(eatable instanceof Product product)) {
-            throw new GameException("Carnivore can only eat Product");
+            throw new GameException("Heyy, apa ituu.. Karnivor mana bisa makan lek...");
         }
         if (product.getOrigin() != Product.PRODUCT_ANIMAL) {
-            throw new GameException("Carnivore can only eat Animal Product");
+            throw new GameException("Karnivora hanya bisa makan produk hewan loh lek...");
         }
 //        product.setActive(false);
         setWeight(getWeight() + product.getAddedWeight());
