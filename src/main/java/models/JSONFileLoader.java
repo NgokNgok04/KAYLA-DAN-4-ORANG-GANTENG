@@ -58,7 +58,7 @@ public class JSONFileLoader implements FileLoader{
             String[] parsed = getNonBlank(reader.nextLine().split("[,:\\s\"]+"));
             if(parsed[0].equals("current_turn")){;
                 game.setCurTurn(Integer.parseInt(parsed[1]));
-            }else if(parsed[0].equals("count_items")){
+            }else if(parsed[0].equals("count_shop_items")){
                 int count_items = Integer.parseInt(parsed[1]);
                 reader.nextLine();
                 for(int j=0;j<count_items;j++){
@@ -173,8 +173,9 @@ public class JSONFileLoader implements FileLoader{
 
     public void load(String dirpath) throws Exception{
         GameManager game = GameManager.getInstance();
-        Shop shop = Shop.getInstance();
-        shop.resetShop();
+       Shop shop = Shop.getInstance();
+       shop.resetShop();
+
         if(!isValid(dirpath)){
             throw new Exception("State Files Invalid");
         }
