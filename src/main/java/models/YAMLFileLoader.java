@@ -138,7 +138,7 @@ public class YAMLFileLoader implements FileLoader{
 
         Map<String,Object> data = new HashMap<>();
         data.put("current_turn", game.getCurTurn());
-        data.put("count_items", shop.getCountItemsReady());
+        data.put("count_shop_items", shop.getCountItemsReady());
         
         List<Map<String,Object>> shopItems = new ArrayList<>();
         ArrayList<Pair<String,Integer>> items = shop.getItemsReady();
