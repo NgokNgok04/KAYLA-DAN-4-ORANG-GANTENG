@@ -2,7 +2,9 @@ package gui;
 
 import java.awt.datatransfer.*;
 import java.io.IOException;
+import java.util.Objects;
 import javax.swing.*;
+import icons.Icon;
 import javax.xml.stream.FactoryConfigurationError;
 
 import gamexception.GameException;
@@ -64,11 +66,26 @@ public class TransferGameHandler extends TransferHandler {
         } else if (source.getField() == CardItem.DECK_CARD){
             // Melakukan penanaman
             try{
-                source.getOwner().placeDeckToField(source.getPosition().convertPairToIdx(), target.getPosition(), target.getOwner().getField());
+                boolean status = source.getOwner().placeDeckToField(source.getPosition().convertPairToIdx(), target.getPosition(), target.getOwner().getField());
+                LivingThing pohon = null;
+                if(status){
+                    pohon = target.getOwner().getFieldItem(target.getPosition().convertPairToIdx());
+                    String name = pohon.getName();
+                    if(name.equals("BIJI_JAGUNG")){
+                        pohon.setImage(Icon.CORN_TREE);
+                    }else if(name.equals("BIJI_LABU")){
+                        pohon.setImage(Icon.PUMPKIN_TREE);
+                    }else{
+                        pohon.setImage(Icon.STRAWBERRY_TREE);
+                    }
+                }
                 if(source.getOwner()!=target.getOwner()){
                     source.getsParent().changeFieldToEnemy();
                 }else{
                     source.getsParent().changeFieldToPlayer();
+                }
+                if(pohon!=null){
+                    ((CardItem)pohon.getParent()).refreshData();
                 }
                 source.getsParent().refreshActiveDeck();
                 return true;

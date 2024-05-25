@@ -341,16 +341,21 @@ public class Player {
         addCardInField((LivingThing)GameContext.createObject(living.getName()), pos);
     }
 
-    public synchronized void placeDeckToField(int idx,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
+    public synchronized boolean placeDeckToField(int idx,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
         GameObject itemDeck = activeDeck.get(idx);
+        boolean isTanaman = false;
         if(itemDeck instanceof LivingThing living){
             placeLiving(living, pos, fieldTarget);
+            if(living instanceof Plant){
+                isTanaman = true;
+            }
         }else if(itemDeck instanceof Product product){
             placeProduct(product, pos, fieldTarget);
         }else{
             placeItem((Item)itemDeck, pos, fieldTarget);
         }
         removeCardInDeck(idx);
+        return isTanaman;
     }
 
 
