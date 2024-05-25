@@ -43,10 +43,10 @@ public class Herbivore extends Animal{
     @Override
     public void eat(GameObject eatable) throws GameException {
         if (!(eatable instanceof Product product)) {
-            throw new GameException("Herbivore can only eat Product");
+            throw new GameException("Heyyy, apa ituu.... Herbivora hanya bisa makan produk loh lekk...");
         }
         if (product.getOrigin() != Product.PRODUCT_PLANT) {
-            throw new GameException("Herbivore can only eat Animal Product");
+            throw new GameException("Herbivora hanya bisa makan produk tanaman lek....");
         }
         setWeight(getWeight() + product.getAddedWeight());
     }
