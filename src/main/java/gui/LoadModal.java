@@ -181,6 +181,9 @@ public class LoadModal extends javax.swing.JFrame {
             frame.refreshActiveDeck();
             frame.changeFieldToPlayer();
             frame.refreshCoin();
+            frame.refreshDeckCount();
+            frame.refreshPlayer();
+            frame.updateTurn();
         }
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
