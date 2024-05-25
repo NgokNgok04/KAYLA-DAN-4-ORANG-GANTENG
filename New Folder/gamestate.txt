@@ -1,0 +1,4 @@
+4
+2
+SIRIP_HIU 2
+TELUR 1

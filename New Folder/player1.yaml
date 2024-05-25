@@ -1,0 +1,16 @@
+field:
+- name: KUDA
+  weight: 3
+  location: A02
+  items: []
+  count_items: 0
+- name: BIJI_LABU
+  location: B02
+  items: []
+  age: 1
+  count_items: 0
+deck_slot: 32
+count_active_field: 2
+gulden: 500
+count_active_deck: 0
+active_deck: []

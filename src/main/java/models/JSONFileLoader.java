@@ -173,6 +173,8 @@ public class JSONFileLoader implements FileLoader{
 
     public void load(String dirpath) throws Exception{
         GameManager game = GameManager.getInstance();
+        Shop shop = Shop.getInstance();
+        shop.resetShop();
         if(!isValid(dirpath)){
             throw new Exception("State Files Invalid");
         }

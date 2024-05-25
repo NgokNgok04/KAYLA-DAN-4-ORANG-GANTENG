@@ -1,0 +1,22 @@
+field:
+- name: BIJI_STROBERI
+  location: A01
+  items: []
+  age: 2
+  count_items: 0
+- name: DOMBA
+  weight: 10
+  location: A02
+  items: []
+  count_items: 0
+- name: BIJI_JAGUNG
+  location: B02
+  items: []
+  age: 0
+  count_items: 0
+deck_slot: 32
+count_active_field: 3
+gulden: 550
+count_active_deck: 1
+active_deck:
+- {name: LABU, location: C01}

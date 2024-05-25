@@ -1,0 +1,14 @@
+{
+"current_turn": 4,
+"count_shop_items": 2,
+"shop": [
+{
+"name": "SIRIP_HIU",
+"quantity": 2
+},
+{
+"name": "TELUR",
+"quantity": 1
+}
+]
+}
