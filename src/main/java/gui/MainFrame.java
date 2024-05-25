@@ -6,10 +6,17 @@ package gui;
 
 import gamexception.GameException;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.util.Random;
-
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import icons.Icon;
 import java.util.Objects;
 import javax.imageio.ImageIO;
@@ -42,8 +49,21 @@ public class MainFrame extends javax.swing.JFrame {
         initGameManager();
         initiateCards();
         refreshGame();
+        playSound("/music/game-music.wav");
         clock = new ClockTime(clockLabel);
         clock.start();
+    }
+
+    public void playSound(String filePath) {
+        try {
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(getClass().getResource(filePath));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
     }
 
     public void initiateCards() {
