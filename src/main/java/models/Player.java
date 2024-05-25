@@ -311,7 +311,7 @@ public class Player {
             throw new GameException("Belum ada makhluk hidup");
         }
 
-        target.addItem(item);
+        item.useEffect(target);
     }
 
     public synchronized void placeProduct(Product product,Pair<Integer,Integer> pos,List<LivingThing> fieldTarget) throws GameException{
