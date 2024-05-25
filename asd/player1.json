@@ -1,0 +1,26 @@
+{
+"gulden": 500,
+"deck_slot": 32,
+"count_active_deck": 0,
+"active_deck": [
+],
+"count_active_field": 2,
+"field": [
+{
+"location": "A02",
+"name": "KUDA",
+"weight": "3",
+"count_items": "0",
+"items": [
+]
+},
+{
+"location": "B02",
+"name": "BIJI_LABU",
+"age": "1",
+"count_items": "0",
+"items": [
+]
+}
+]
+}

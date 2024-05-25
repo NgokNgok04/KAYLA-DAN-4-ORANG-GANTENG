@@ -1,0 +1,38 @@
+{
+"gulden": 550,
+"deck_slot": 32,
+"count_active_deck": 1,
+"active_deck": [
+{
+"location": "C01",
+"name": "LABU"
+}
+],
+"count_active_field": 3,
+"field": [
+{
+"location": "A01",
+"name": "BIJI_STROBERI",
+"age": "2",
+"count_items": "0",
+"items": [
+]
+},
+{
+"location": "A02",
+"name": "DOMBA",
+"weight": "10",
+"count_items": "0",
+"items": [
+]
+},
+{
+"location": "B02",
+"name": "BIJI_JAGUNG",
+"age": "0",
+"count_items": "0",
+"items": [
+]
+}
+]
+}
