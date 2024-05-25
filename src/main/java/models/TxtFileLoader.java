@@ -62,7 +62,7 @@ public class TxtFileLoader implements FileLoader{
         for(int i=0;i<nActive;i++){
             String[] parsedLine = reader.nextLine().split(" ");
             try{
-                int idx = Pair.convertTokenToPair(parsedLine[0]).getFirst();
+                int idx = Pair.convertTokenToPair(parsedLine[0]).getSecond();
                 GameObject obj = GameContext.createObject(parsedLine[1]);
                 player.addCardInDeck(obj, idx);
             }catch(GameException e){
@@ -173,7 +173,7 @@ public class TxtFileLoader implements FileLoader{
                     if(!player.getField().get(i).isActive()){
                         continue;
                     }
-                    writer.write(Pair.convertPairToToken(Pair.convertIdxToPair(idx))+" ");
+                    writer.write(Pair.convertPairToToken(Pair.convertIdxToPair(i))+" ");
                     writer.write(field.get(i).getName()+" ");
                     if(field.get(i) instanceof Animal animal){
                         writer.write(animal.getWeight()+" ");

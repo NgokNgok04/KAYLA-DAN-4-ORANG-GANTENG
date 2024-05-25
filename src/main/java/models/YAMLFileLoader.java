@@ -74,7 +74,7 @@ public class YAMLFileLoader implements FileLoader{
 
             List<Map<String, String>> activeDeck = (List<Map<String, String>>) data.get("active_deck");
             for (Map<String, String> obj : activeDeck) {
-                int idx = Pair.convertTokenToPair(obj.get("location")).getFirst();
+                int idx = Pair.convertTokenToPair(obj.get("location")).getSecond();
                 System.out.println(obj.get("location"));
                 GameObject deckObj = GameContext.createObject(obj.get("name"));
                 player.addCardInDeck(deckObj, idx);
