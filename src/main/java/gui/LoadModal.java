@@ -180,6 +180,7 @@ public class LoadModal extends javax.swing.JFrame {
         if (loadSucceed) {
             frame.refreshActiveDeck();
             frame.changeFieldToPlayer();
+            frame.refreshCoin();
         }
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed

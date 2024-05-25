@@ -198,7 +198,7 @@ public class JSONFileLoader implements FileLoader{
         Shop shop = Shop.getInstance();
         try{
             obj.createNewFile();
-            try(FileWriter writer = new FileWriter(obj)){
+            try(FileWriter writer = new FileWriter(obj,false)){
                 writer.write("{\n");
                 writer.write("\"current_turn\": ");
                 writer.write(game.getCurTurn()+",\n");
@@ -311,7 +311,7 @@ public class JSONFileLoader implements FileLoader{
         File obj = filePath.toFile();
         try{
             obj.createNewFile();
-            try(FileWriter writer = new FileWriter(obj)){
+            try(FileWriter writer = new FileWriter(obj,false)){
                 writer.write("{\n");
                 writer.write("\"gulden\": ");
                 writer.write(player.getMoney()+",\n");

@@ -35,6 +35,10 @@ public class Icon {
     public static Image PLAYER2 = getImage("player2.jpg");
     public static Image NOTHING = getImage("nothing.png");
     public static Image BACKGROUND = getImage("background.png");
+    public static Image CORN_TREE = getImage("corn_tree.png");
+    public static Image PUMPKIN_TREE = getImage("pumpkin_tree.png");
+    public static Image STRAWBERRY_TREE = getImage("strawberry_tree.png");
+
 
     private static Image getImage(String path) {
         try {
